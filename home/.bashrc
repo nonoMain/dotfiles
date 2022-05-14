@@ -7,12 +7,12 @@
 # Description:
 # bash configuration
 
-# colors
-DEFAULT="\033[0m"
-BLUE="\033[01;34m"
-YELLOW="\033[0;33m"
-GREEN="\033[0;32m"
-RED="\033[0;31m"
+# colors \[\033[COLORm\]
+DEFAULT="\[\033[0m\]"
+BLUE="\[\033[0;34m\]"
+YELLOW="\[\033[0;33m\]"
+GREEN="\[\033[0;32m\]"
+RED="\[\033[0;31m\]"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -169,6 +169,7 @@ extract ()
 # tools
 alias e='$EDITOR'
 alias tmux='tmux -u' # tell tmux to use utf-8
+alias btop='btop --utf-force' # tell btop to use utf-8
 # colors
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -211,6 +212,12 @@ PS_DIR="${BLUE}\W"
 PS_DIR_ARROW="${GREEN}→"
 PS_GIT_BRANCH="${GREEN}\$(ps1_git_branch)"
 
-PS_FULL="${BLUE}┌[${PS_INFO}${BLUE}] ${PS_DIR_ARROW} ${PS_DIR} ${PS_GIT_BRANCH}\n${BLUE}└$ "
+# l is ┌
+# m is └
+PS_SYM1='\[\e(0\]l\[\e(B\]'
+PS_SYM2='\[\e(0\]m\[\e(B\]'
 
+
+PS_FULL="${BLUE}${PS_SYM1}[${PS_INFO}${BLUE}] ${PS_DIR_ARROW} ${PS_DIR} ${PS_GIT_BRANCH}\n${BLUE}${PS_SYM2}$ "
 PS1="${PS_FULL}${DEFAULT}"
+
