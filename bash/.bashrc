@@ -208,7 +208,7 @@ PS_USER="${DEFAULT}\u"
 PS_HOST="${DEFAULT}\h"
 PS_INFO="${PS_USER}${RED}@${PS_HOST}"
 
-PS_DIR="${BLUE}\W"
+PS_DIR="${BLUE}\w"
 PS_DIR_ARROW="${GREEN}→"
 PS_GIT_BRANCH="${GREEN}\$(ps1_git_branch)"
 

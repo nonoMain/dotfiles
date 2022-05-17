@@ -1,0 +1,70 @@
+priority 1
+extends text
+
+snippet #! "#!/usr/bin/env python" b
+#!/usr/bin/env python
+$0
+endsnippet
+
+snippet ifmain "ifmain" b
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	${1:main()}
+endsnippet
+
+snippet for "for loop" b
+for ${1:item} in ${2:iterable}:
+	${3:pass}
+endsnippet
+
+snippet while "while loop" b
+while ${1:condition}:
+	${3:pass}
+endsnippet
+
+snippet switch "switch" b
+match ${1:item}
+	case ${2:state}
+		$0
+endsnippet
+
+snippet case "[switch] case" b
+case ${1:state}
+	$0
+endsnippet
+
+snippet if "If" b
+if ${1:condition}:
+	${2:pass}
+endsnippet
+
+snippet ifelse "If / Else" b
+if ${1:condition}:
+	${2:pass}
+else:
+	${3:pass}
+endsnippet
+
+snippet ifelifelse "If / Elif / Else" b
+if ${1:condition}:
+	${2:pass}
+elif ${3:condition}:
+	${4:pass}
+else:
+	${5:pass}
+endsnippet
+
+snippet try "Try / Except" b
+try:
+	${1:pass}
+except ${2:Exception} as ${3:e}:
+	${4:raise $3}
+endsnippet
+
+snippet tryelse "Try / Except / Else" b
+try:
+	${1:pass}
+except ${2:Exception} as ${3:e}:
+	${4:raise $3}
+else:
+	${5:pass}
+endsnippet

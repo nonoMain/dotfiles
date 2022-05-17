@@ -1,0 +1,54 @@
+priority 1
+extends text
+
+snippet #! "#!/usr/bin/env (!env)" b
+#!/usr/bin/env -S ${1:bash} -e
+endsnippet
+
+snippet /case|sw(itch)?/ "case .. esac (case)" rb
+case ${1:word} in
+	${2:pattern} )
+		$0;;
+esac
+endsnippet
+
+snippet while "while ... (done)" b
+while ${2:[[ ${1:condition} ]]}; do
+	$0
+done
+endsnippet
+
+snippet func "function() {...}" b
+${1:function} () {
+	$0
+}
+endsnippet
+
+snippet if "if" b
+if ${2:[ ${1:condition} ]}; then
+	$0
+fi
+endsnippet
+
+snippet elif "elif" b
+elif ${2:[[ ${1:condition} ]]}; then
+	$0
+endsnippet
+
+snippet until "until ... (done)" b
+until ${2:[[ ${1:condition} ]]}; do
+	$0
+done
+endsnippet
+
+snippet for "for" b
+for (( i = 0; i < ${1:10}; i++ )); do
+	$0
+done
+endsnippet
+
+snippet forin "for .. in" b
+for ${1:i}${2/.+/ in /}${2:words}; do
+	$0
+done
+endsnippet

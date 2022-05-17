@@ -1,0 +1,14 @@
+priority 1
+extends text
+
+snippet ifexists "Global check" b
+if !exists("g:${1:MyUltraImportantVar}")
+	let g:$1 = ${2:"${3:<tab>}"}
+endif
+endsnippet
+
+snippet func "function" b
+function! ${1:function_name}($2)
+	${3:" code}
+endfunction
+endsnippet
