@@ -1,2 +1,3 @@
 # nvim
 nvim/.config/nvim/autoload/plugged/*
+vim/.vim/autoload/plugged/*
