@@ -171,6 +171,7 @@ extract ()
 alias e='$EDITOR'
 alias tmux='tmux -u' # tell tmux to use utf-8
 alias btop='btop --utf-force' # tell btop to use utf-8
+alias lg='lazygit'
 # colors
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
