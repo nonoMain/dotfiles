@@ -2,5 +2,5 @@
 
 .PHONY: all
 all:
-	stow */ --adopt
+	stow */ --adopt --target=${HOME}
 	git reset --hard
