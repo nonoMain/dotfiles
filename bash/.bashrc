@@ -52,9 +52,13 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # ls
-alias ls='ls --color=auto'
 alias ll='ls -alF'
+alias ls='ls --color=auto'
 alias la='ls -A'
+# lsd
+if does_command_exist "lsd"; then
+	alias ll='lsd -alF'
+fi
 
 # shorts
 alias cdprev='cd $OLD_PWD'

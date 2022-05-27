@@ -2,6 +2,11 @@
 
 ## functions
 
+does_command_exist ()
+{
+	hash "$1" > /dev/null 2>&1
+}
+
 press_to_confirm ()
 {
 	echo
