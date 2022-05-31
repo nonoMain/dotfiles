@@ -50,7 +50,11 @@ alias tree='tree -AC'
 alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
-
+# shorts
+alias cdprev='cd $OLD_PWD'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias cls='clear'
 # ls
 alias ll='ls -alF'
 alias ls='ls --color=auto'
@@ -59,13 +63,10 @@ alias la='ls -A'
 if does_command_exist "lsd"; then
 	alias ll='lsd -alF'
 fi
+if does_command_exist "figlet"; then
+	alias asciiCalendar='watch -n 1 "date '+%D%n%T' | figlet -k"'
+fi
 
-# shorts
-alias cdprev='cd $OLD_PWD'
-alias ..='cd ../'
-alias ...='cd ../../'
-
-alias cls='clear'
 
 #util aliases
 # cd into nvim swap dircetory
