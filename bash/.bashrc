@@ -40,8 +40,6 @@ source ~/.useful_functions
 ## Alias
 # tools
 alias e='$EDITOR'
-alias tmux='tmux -u' # tell tmux to use utf-8
-alias btop='btop --utf-force' # tell btop to use utf-8
 alias lg='lazygit'
 # colors
 alias grep='grep --color=auto'
