@@ -342,8 +342,8 @@ colors:
     black:   '#181818'
     red:     '#ab4642'
     green:   '#a1b56c'
-    yellow:  '#f7ca88'
-    blue:    '#7cafc2'
+    yellow:  '#f0c674'
+    blue:    '#61afef'
     magenta: '#ba8baf'
     cyan:    '#86c1b9'
     white:   '#d8d8d8'
@@ -358,6 +358,7 @@ colors:
     magenta: '#ba8baf'
     cyan:    '#86c1b9'
     white:   '#f8f8f8'
+
 
 # Bell
 #
