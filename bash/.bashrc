@@ -323,9 +323,18 @@ ps1_fancy ()
 		ps_line1+="${B_BLACK}${RED} ✘:$last_return ${NC}"
 	fi
 	ps_line1+="${BOLD}${B_BLACK}${WHITE} ${USER} ${NC}"
-	ps_line1+="${B_GREY}${BLACK}${right_arrow_sharp}${NC}"
-	ps_line1+="${BOLD}${B_GREY}${WHITE} ${HOSTNAME} ${NC}"
-	ps_line1+="${B_BLUE}${GREY}${right_arrow_sharp}${NC}"
+	case $HOSTNAME in
+		*server*)
+			ps_line1+="${B_RED}${BLACK}${right_arrow_sharp}${NC}"
+			ps_line1+="${BOLD}${B_RED}${WHITE} ${HOSTNAME} ${NC}"
+			ps_line1+="${B_BLUE}${RED}${right_arrow_sharp}${NC}"
+			;;
+		*)
+			ps_line1+="${B_GREY}${BLACK}${right_arrow_sharp}${NC}"
+			ps_line1+="${BOLD}${B_GREY}${WHITE} ${HOSTNAME} ${NC}"
+			ps_line1+="${B_BLUE}${GREY}${right_arrow_sharp}${NC}"
+			;;
+	esac
 	ps_line1+="${BOLD}${B_BLUE}${BLACK} ${path} ${NC}"
 	ps_line1+="${BLUE}$right_arrow_sharp${NC}"
 	if [ ! -z "$(parse_git_branch)" ]; then
