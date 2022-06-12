@@ -5,6 +5,9 @@
 " Faster way to ESC from insert mode:
 	inoremap jk <ESC>
 
+" Term shortcuts:
+	tnoremap jk <C-\><C-n>
+
 " Keeping the cursor centered when moving between matches:
 	nnoremap n nzz
 	nnoremap N Nzz
