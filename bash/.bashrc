@@ -215,10 +215,8 @@ alias rm='rm -i'
 # e.g r ssh will repeat the last command that started with 'ssh'
 alias r='fc -s'
 
-alias cdprev='cd $OLD_PWD'
 alias ..='cd ../'
 alias ...='cd ../../'
-alias cls='clear'
 # ls
 alias ll='ls -alF'
 alias ls='ls --color=auto'
@@ -231,7 +229,7 @@ if does_command_exist "figlet"; then
 	alias asciiCalendar='watch -n 1 "date '+%D%n%T' | figlet -k"'
 fi
 
-# cd into directories
+alias cdprev='cd $OLD_PWD'
 alias cdintonvimswap='cd $HOME/.local/share/nvim/swap/'
 # workspaces (mainly for java)
 alias deleteJavaWorkspace='rm -rf ~/workspaces/java'
