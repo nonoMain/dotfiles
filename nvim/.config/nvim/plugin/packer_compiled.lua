@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["darkplus.nvim"] = {
+    loaded = true,
+    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
+    url = "https://github.com/lunarvim/darkplus.nvim"
+  },
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
@@ -109,14 +114,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain/plugins/nvim-treesitter\frequire\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
 -- Config for: playground
 time([[Config for playground]], true)
 try_loadstring("\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain/plugins/nvim-treesitter-playground\frequire\0", "config", "playground")
 time([[Config for playground]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain/plugins/nvim-treesitter\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 if should_profile then save_profiles() end
 
 end)

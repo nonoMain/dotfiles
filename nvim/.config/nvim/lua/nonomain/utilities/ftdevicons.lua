@@ -1,42 +1,5 @@
 local M = {}
 
-M.enabled = false
-
-M.kind_icons = {
-	Text = "",
-	Method = "",
-	Function = "",
-	Constructor = "",
-	Field = "",
-	Variable = "",
-	Class = "ﴯ",
-	Interface = "",
-	Module = "",
-	Property = "ﰠ",
-	Unit = "塞",
-	Value = "",
-	Enum = "",
-	Keyword = "",
-	Snippet = "",
-	Color = "",
-	File = "",
-	Reference = "",
-	Folder = "",
-	EnumMember = "",
-	Constant = "",
-	Struct = "פּ",
-	Event = "",
-	Operator = "",
-	TypeParameter = "",
-}
-
-M.setLspSymbols = function()
-	local kinds = vim.lsp.protocol.CompletionItemKind
-	for i, kind in ipairs(kinds) do
-		kinds[i] = M.kind_icons[kind] .. ' ' .. kind or kind
-	end
-end
-
 M.extentionSymbols = {}
 M.extentionSymbols['ai']                      = ''
 M.extentionSymbols['awk']                     = ''
@@ -187,7 +150,12 @@ M.filenameSymbols['_gvimrc']                  = ''
 M.filenameSymbols['license']                  = ''
 M.filenameSymbols['license.md']               = ''
 M.filenameSymbols['license.markdown']         = ''
+M.filenameSymbols['LICENSE']                  = ''
+M.filenameSymbols['LICENSE.md']               = ''
+M.filenameSymbols['LICENSE.markdown']         = ''
 M.filenameSymbols['makefile']                 = ''
+M.filenameSymbols['Makefile']                 = ''
+M.filenameSymbols['MAKEFILE']                 = ''
 M.filenameSymbols['mix.lock']                 = ''
 M.filenameSymbols['node_modules']             = ''
 M.filenameSymbols['procfile']                 = ''
@@ -205,24 +173,15 @@ M.directorySymbols['closed']                  = ''
 M.directorySymbols['linked']                  = ''
 
 M.getFilenameSymbol = function(filename)
-	if M.enabled then
 		return M.filenameSymbols[filename]
-	end
-	return nil
 end
 
 M.getExtentionSymbol = function(extention)
-	if M.enabled then
 		return M.extentionSymbols[extention]
-	end
-	return nil
 end
 
 M.getDirectorySymbol = function(state)
-	if M.enabled then
 		return M.directorySymbols[state]
-	end
-	return nil
 end
 
 return M

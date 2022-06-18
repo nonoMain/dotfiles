@@ -1,0 +1,36 @@
+# Default snippets
+priority 0
+
+snippet filename "file name"
+`!v expand("%:t")`
+endsnippet
+
+snippet date "current date"
+`!v strftime("%d/%m/%y")`
+endsnippet
+
+snippet time "current time"
+`!v strftime("%H:%M:%S")`
+endsnippet
+
+snippet datetime "current date & time"
+`!v strftime("%d/%m/%y %H:%M:%S")`
+endsnippet
+
+snippet doc "document the current file" b
+@doc
+@filename ${1: `!v expand("%:t")`}
+@Author:${2: `!v expand("$USER")`}
+last updated: `!v strftime("%d/%m/%y %H:%M:%S")`
+@desc
+$2
+@todo
+$3
+endsnippet
+
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet

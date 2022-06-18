@@ -5,4 +5,3 @@ if not status_ok then
 	return
 end
 keymap('n', '<f10>', ':TSHighlightCapturesUnderCursor<CR>', opts)
-

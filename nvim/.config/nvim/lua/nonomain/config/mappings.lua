@@ -12,7 +12,7 @@ local keymap = vim.api.nvim_set_keymap
 
 -- use jk to exit faster
 keymap('i', 'jk', '<ESC>', opts)
-keymap('t', 'jk', '<C-\\><C-N>', opts)
+keymap('t', 'jk', '<C-\\><C-N>', term_opts)
 
 --Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
@@ -44,3 +44,11 @@ keymap('v', 'P', '\"_dP', opts) -- paste without overwriting the register
 -- so another way is always handy
 keymap('n', '<A-a>', '<C-a>', opts)
 keymap('n', '<A-x>', '<C-x>', opts)
+keymap('v', '<A-a>', '<C-a>', opts)
+keymap('v', '<A-x>', '<C-x>', opts)
+
+-- Resize with arrows
+keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)

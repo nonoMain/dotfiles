@@ -37,7 +37,7 @@ return require('packer').startup(function(use)
 
 		use {
 			"neovim/nvim-lspconfig",            -- nvim-lsp support
-			"williamboman/nvim-lsp-installer",  -- install-lsp cross platform
+			"williamboman/nvim-lsp-installer",  -- install lsp servers (cross platform)
 		}
 		use {
 			'nvim-treesitter/nvim-treesitter',  -- treesitter (1)
@@ -50,6 +50,8 @@ return require('packer').startup(function(use)
 		}
 
 		use 'norcalli/nvim-colorizer.lua'       -- coloring codes inside neovim
+
+		use "lunarvim/darkplus.nvim"
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins

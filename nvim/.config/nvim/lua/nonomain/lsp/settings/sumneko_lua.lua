@@ -1,7 +1,4 @@
-local server_path = vim.fn.stdpath('data') .. '/lsp_servers/sumneko_lua'
-local server_binary = server_path .. '/extension/server/bin/lua-language-server'
 return {
-	cmd = {server_binary},
 	single_file_support = true,
 	settings = {
 		Lua = {
