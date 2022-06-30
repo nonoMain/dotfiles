@@ -69,11 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["darkplus.nvim"] = {
-    loaded = true,
-    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
-    url = "https://github.com/lunarvim/darkplus.nvim"
-  },
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
@@ -107,6 +102,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-treesitter/playground"
   },
   ultisnips = {
+    config = { "\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31nonomain/plugins/ultisnips\frequire\0" },
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/ultisnips",
     url = "https://github.com/SirVer/ultisnips"
@@ -118,6 +114,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for playground]], true)
 try_loadstring("\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain/plugins/nvim-treesitter-playground\frequire\0", "config", "playground")
 time([[Config for playground]], false)
+-- Config for: ultisnips
+time([[Config for ultisnips]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31nonomain/plugins/ultisnips\frequire\0", "config", "ultisnips")
+time([[Config for ultisnips]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain/plugins/nvim-treesitter\frequire\0", "config", "nvim-treesitter")

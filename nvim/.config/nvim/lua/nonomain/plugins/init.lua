@@ -33,7 +33,10 @@ packer.init {
 return require('packer').startup(function(use)
 		use 'wbthomason/packer.nvim'            -- packer.alzheimer? (needed)
 
-		use 'SirVer/ultisnips'                  -- snippets
+		use {
+			'SirVer/ultisnips',                  -- snippets
+			config = function() require 'nonomain/plugins/ultisnips' end,
+		}
 
 		use {
 			"neovim/nvim-lspconfig",            -- nvim-lsp support
@@ -50,8 +53,6 @@ return require('packer').startup(function(use)
 		}
 
 		use 'norcalli/nvim-colorizer.lua'       -- coloring codes inside neovim
-
-		use "lunarvim/darkplus.nvim"
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
