@@ -3,9 +3,10 @@ vim.env.MYVIMRCFOLDER = vim.fn.fnamemodify(vim.env.MYVIMRC, ':p:h')
 vim.g.devicons = true                             -- devicons and such
 require 'nonomain/config/options'                 -- settings
 require 'nonomain/config/mappings'                -- keymaps
-require 'nonomain/config/netrw'                   -- nicer togglable netrw (<leader>e)
                                                   -- UTILS --
 require 'nonomain/utilities/maximize'             -- un/maximize windows (<leader>m)
+require 'nonomain/utilities/netrw'                -- nicer togglable netrw (<leader>e)
+require 'nonomain/utilities/terminal'             -- nicer togglable terminal (<leader>t)
 require 'nonomain/utilities/ftdevicons'
 require 'nonomain/utilities/statusline'.enable()  -- my own statusline
 require 'nonomain/utilities/tabline'.enable()     -- my own tabline

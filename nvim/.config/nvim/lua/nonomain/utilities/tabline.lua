@@ -1,5 +1,6 @@
 local fn = vim.fn
 local diagnostic = vim.diagnostic
+local utils = require('nonomain/utilities/utils')
 local ftdevicons = require('nonomain/utilities/ftdevicons')
 local M = {}
 
@@ -110,8 +111,10 @@ M.generateLabel = function(tab, is_active)
 	if vim.g.devicons then
 		if path == '' then
 			symbols.ftsymbol = ftdevicons.default_extentionSymbol
+		elseif utils.is_dir(path) then
+			symbols.ftsymbol = ftdevicons.default_directorySymbol
 		else
-			symbols.ftsymbol = ftdevicons.getFilenameSymbol(fn.fnamemodify(path, ':t')) or ftdevicons.getExtentionSymbol(fn.fnamemodify(path, ':e')) or ftdevicons.getDirectorySymbol('closed')
+			symbols.ftsymbol = ftdevicons.getFilenameSymbol(fn.fnamemodify(path, ':t')) or ftdevicons.getExtentionSymbol(fn.fnamemodify(path, ':e')) or ftdevicons.default_extentionSymbol
 		end
 	else
 		symbols.ftsymbol = ''

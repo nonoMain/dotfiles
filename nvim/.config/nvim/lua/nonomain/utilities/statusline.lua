@@ -61,7 +61,7 @@ M.ActiveLine = function()
 	M.highlights.accent = '%#StatusLine#'
 	M.highlights.normal = '%#StatusLineNC#'
 	M.highlights.seperator = '%#StatusLineSep#'
-	local stl = M.highlights.accent .. ' ' .. M.getGitBranch() .. ' '
+	local stl = M.highlights.accent .. ' ' .. 'b:%n' .. ' ' .. M.getGitBranch() .. ' '
 	stl = stl .. M.highlights.seperator .. M.signs.LeftSep
 	stl = stl .. M.highlights.normal .. '%=%f %h%w%m%r%=' .. M.getBufferDiagnostics()
 	stl = stl .. M.highlights.seperator .. M.signs.RightSep
@@ -76,7 +76,7 @@ M.statusline = function()
 	vim.wo.statusline = '%!v:lua.require\'nonomain.utilities.statusline\'.ActiveLine()'
 end
 M.statuslineNC = function()
-	local stl = M.getGitBranch() .. ' ' .. '%=%f %h%w%m%r%=%-6.(%l,%c%V%) %P '
+	local stl = ' ' .. 'b:%n' .. ' ' .. M.getGitBranch() .. ' ' .. '%=%f %h%w%m%r%=%-6.(%l,%c%V%) %P '
 	local comp_stl = ' ' .. stl
 	vim.wo.statusline = comp_stl
 end

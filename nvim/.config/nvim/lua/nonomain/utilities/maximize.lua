@@ -24,4 +24,6 @@ end
 
 keymap('n', '<leader>m', '<cmd>lua require(\'nonomain/utilities/maximize\').toggle()<CR>', opts)
 
-return M
+return {
+	toggle = M.toggle,
+}

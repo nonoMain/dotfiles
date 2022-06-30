@@ -1,24 +1,22 @@
--- Netrw settings
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 1
-
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 local api = vim.api
 local M = {};
 
 M.toggle = function()
-	if vim.bo.filetype == 'netrw' then -- quit while browsing
-		api.nvim_command('Bwipeout')
+	if vim.bo.buftype == 'terminal' then -- quit while inside terminal
+		api.nvim_command('Bwipeout!')
 	else -- open the explorer
-		api.nvim_command('Explore')
+		api.nvim_command('terminal')
 		api.nvim_command('setlocal bufhidden=wipe')
+		api.nvim_command('setlocal nonumber')
+		api.nvim_command('setlocal norelativenumber')
 		api.nvim_command('setlocal nocursorcolumn')
 		api.nvim_command('setlocal colorcolumn=""')
 	end
 end
 
-keymap('n', '<leader>e', '<cmd>lua require(\'nonomain/utilities/netrw\').toggle()<CR>', opts)
+keymap('n', '<leader>t', '<cmd>lua require(\'nonomain/utilities/terminal\').toggle()<CR>', opts)
 
 return {
 	toggle = M.toggle,
