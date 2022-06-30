@@ -1,5 +1,4 @@
 local fn = vim.fn
-local api = vim.api
 local diagnostic = vim.diagnostic
 local ftdevicons = require('nonomain/utilities/ftdevicons')
 local M = {}
@@ -30,6 +29,15 @@ else
 	M.signs.RightSep = ''
 end
 
+M.insertTab = function(tabnr, line)
+	if #line == 0 then return '' end
+	return '%' .. tabnr .. 'T' .. line .. '%T'
+end
+M.insertCloseSign = function(tabnr, line)
+	if #line == 0 then return '' end
+	return '%' .. tabnr .. 'X' .. line .. '%X'
+end
+
 M.getBufferPath = function(tabnr)
 	local bufnr = fn.tabpagebuflist(tabnr)[fn.tabpagewinnr(tabnr)]
 	return fn.bufname(bufnr)
@@ -53,8 +61,9 @@ M.getBufferTitle = function(tabnr)
 end
 
 M.getActiveBuf = function(tabnr)
-	local window = api.nvim_tabpage_get_win(tabnr)
-	return api.nvim_win_get_buf(window)
+	local window = fn.tabpagewinnr(tabnr)
+	return fn.tabpagebuflist(tabnr)[window]
+
 end
 
 M.getBufferDiagnostics = function(tabnr, is_active)
@@ -91,7 +100,6 @@ M.generateLabel = function(tab, is_active)
 	local title = M.getBufferTitle(tab.tabnr)
 	local symbols = {}
 	local highlights = {}
-	highlights.done = '%#TabLineFill#'
 	if is_active then
 		highlights.hint = '%#TabLineSelHint#'
 	else
@@ -122,8 +130,9 @@ M.generateLabel = function(tab, is_active)
 		highlights.ftsymbol = '%#TablineftdeviconsInactive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
 		symbols.labelSymbol = M.signs.InactiveTabSymbol
 	end
-	local label = highlights.hint .. windowCount .. ' ' .. highlights.ftsymbol .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. M.getBufferDiagnostics(tab.tabnr) .. highlights.symbol .. symbols.labelSymbol
-	return highlights.seperator .. M.signs.LeftSep .. label .. highlights.seperator .. M.signs.RightSep .. highlights.done
+	local label = highlights.hint .. windowCount .. ' ' .. highlights.ftsymbol .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. M.getBufferDiagnostics(tab.tabnr, is_active) .. highlights.symbol .. M.insertCloseSign(tab.tabnr, symbols.labelSymbol)
+	local comp_lable = highlights.seperator .. M.signs.LeftSep .. label .. highlights.seperator .. M.signs.RightSep
+	return M.insertTab(tab.tabnr, comp_lable)
 end
 
 M.getOS = function()
@@ -163,19 +172,14 @@ M.generateTabline = function()
 	-- generate lables
 	for _, tab in pairs(tabs) do
 		if tab.tabnr == current_tab then
-			local ok, value = pcall(M.generateLabel, tab, true)
-			if ok then
-				tabline = tabline .. value
-			end
+			tabline = tabline .. M.generateLabel(tab, true)
 		else
-			local ok, value = pcall(M.generateLabel, tab, false)
-			if ok then
-				tabline = tabline .. value
-			end
+			tabline = tabline .. M.generateLabel(tab, false)
 		end
 	end
 	-- end of the tabline
-	tabline = tabline .. '%=% %#Accent# ' .. M.getOS() .. ' '
+	tabline = tabline .. '%=%#TabLineFill#'
+	tabline = tabline .. '%#Accent# ' .. M.getOS() .. ' '
 	return tabline
 end
 
