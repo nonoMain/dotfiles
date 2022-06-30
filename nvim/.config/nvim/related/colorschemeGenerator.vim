@@ -259,21 +259,35 @@ let s:BaseColorscheme.DiagnosticSignHint                     = { 'FG':s:CP.HintS
 let s:FtdeviconsColorscheme = {}
 let s:FtdeviconsColorscheme.ftdeviconsBrown       = { 'FG':'#875F5F' }
 let s:FtdeviconsColorscheme.ftdeviconsAqua        = { 'FG':'#5FFFD7' }
-let s:FtdeviconsColorscheme.ftdeviconsBlue        = { 'FG':'#005f87' }
-let s:FtdeviconsColorscheme.ftdeviconsDarkBlue    = { 'FG':'#005fd7' }
+let s:FtdeviconsColorscheme.ftdeviconsBlue        = { 'FG':'#005F87' }
+let s:FtdeviconsColorscheme.ftdeviconsDarkBlue    = { 'FG':'#005FD7' }
 let s:FtdeviconsColorscheme.ftdeviconsPurple      = { 'FG':'#875F87' }
-let s:FtdeviconsColorscheme.ftdeviconsRed         = { 'FG':'#af0000' }
+let s:FtdeviconsColorscheme.ftdeviconsRed         = { 'FG':'#AF0000' }
 let s:FtdeviconsColorscheme.ftdeviconsYellow      = { 'FG':'#FFD700' }
 let s:FtdeviconsColorscheme.ftdeviconsOrange      = { 'FG':'#FFAF5F' }
 let s:FtdeviconsColorscheme.ftdeviconsPink        = { 'FG':'#FF5F87' }
 let s:FtdeviconsColorscheme.ftdeviconsSalmon      = { 'FG':'#D75F5F' }
 let s:FtdeviconsColorscheme.ftdeviconsGreen       = { 'FG':'#87AF5F' }
 let s:FtdeviconsColorscheme.ftdeviconsLightGreen  = { 'FG':'#5FAF5F' }
-let s:FtdeviconsColorscheme.ftdeviconsGrey        = { 'FG':'#b2b2b2' }
+let s:FtdeviconsColorscheme.ftdeviconsGrey        = { 'FG':'#B2B2B2' }
 let s:FtdeviconsColorscheme.ftdeviconsWhite       = { 'FG':'#FFFFFF' }
 
+let s:StatuslineColorscheme = {}
+" Base statusline color
+let s:StatuslineColorscheme.StatusLine                          = { 'FG':s:CP.AccentFg,  'BG':s:CP.AccentBg, }
+let s:StatuslineColorscheme.StatusLineNC                        = { 'FG':s:CP.ObjFg,     'BG':s:CP.ObjBg, }
+" Hint
+let s:StatuslineColorscheme.StatusLineHint                      = { 'FG':'#545469',     'BG':s:StatuslineColorscheme.StatusLineNC['BG'], }
+" Seperators
+let s:StatuslineColorscheme.StatusLineSep                       = { 'FG':s:StatuslineColorscheme.StatusLine['BG'],  'BG':s:StatuslineColorscheme.StatusLineNC['BG'], }
+" Diagnostics
+let s:StatuslineColorscheme.StatuslinediagnosticSignError       = { 'FG':'#890000',      'BG':s:StatuslineColorscheme.StatusLineNC['BG'] }
+let s:StatuslineColorscheme.StatuslinediagnosticSignWarn        = { 'FG':'#99924F',      'BG':s:StatuslineColorscheme.StatusLineNC['BG'] }
+let s:StatuslineColorscheme.StatuslinediagnosticSignInfo        = { 'FG':'#587BCD',      'BG':s:StatuslineColorscheme.StatusLineNC['BG'] }
+let s:StatuslineColorscheme.StatuslinediagnosticSignHint        = { 'FG':'#C6C6C6',      'BG':s:StatuslineColorscheme.StatusLineNC['BG'] }
+
 let s:TablineColorscheme = {}
-" Base tab color
+" Base tabline color
 let s:TablineColorscheme.TabLineSel                             = { 'FG':s:CP.ViewFg,                                        'BG':s:CP.ViewBg, }
 let s:TablineColorscheme.TabLine                                = { 'FG':s:CP.MidViewFg,                                     'BG':s:CP.MidViewBg, }
 let s:TablineColorscheme.TabLineFill                            = { 'BG':s:CP.DarkViewBg, }
@@ -442,6 +456,8 @@ call s:writecomment('-------------- Devicons highlights --------------')
 for [key, value] in items(s:FtdeviconsColorscheme) | call s:AppendColorToFile(key, value) | endfor
 call s:writecomment('-------------- Tabline highlights --------------')
 for [key, value] in items(s:TablineColorscheme) | call s:AppendColorToFile(key, value) | endfor
+call s:writecomment('-------------- Statusline highlights --------------')
+for [key, value] in items(s:StatuslineColorscheme) | call s:AppendColorToFile(key, value) | endfor
 call s:writecomment('-------------- General links --------------')
 for [key, value] in items(s:BaseLinks) | call s:AppendLinkToFile(key, value) | endfor
 call s:writecomment('-------------- Vim links --------------')

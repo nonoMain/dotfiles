@@ -5,28 +5,29 @@ local M = {}
 
 M.signs = {}
 if vim.g.devicons then
-M.diagnosticSymbols = {
-	DiagnosticSignError = '',
-	DiagnosticSignWarn = '',
-	DiagnosticSignInfo = '',
-	DiagnosticSignHint = '',
-}
+	-- M.signs.ActiveTabSymbol = '○'
+	-- M.signs.InactiveTabSymbol = '×'
+	M.signs.ActiveTabSymbol = '◉'
+	M.signs.InactiveTabSymbol = '○'
+	M.signs.LeftSep = ' '
+	M.signs.RightSep = ' '
+	M.diagnosticSymbols = {
+		DiagnosticSignError = '',
+		DiagnosticSignWarn = '',
+		DiagnosticSignInfo = '',
+		DiagnosticSignHint = '',
+	}
 else
-M.diagnosticSymbols = {
-	DiagnosticSignError = 'E',
-	DiagnosticSignWarn = 'W',
-	DiagnosticSignInfo = '?',
-	DiagnosticSignHint = 'I',
-}
-end
-M.signs.ActiveTabSymbol = '○'
-M.signs.InactiveTabSymbol = '×'
-if vim.g.devicons then
-	M.signs.LeftSep = '_'
-	M.signs.RightSep = '_'
-else
+	M.signs.ActiveTabSymbol = '[x]'
+	M.signs.InactiveTabSymbol = '[ ]'
 	M.signs.LeftSep = ''
 	M.signs.RightSep = ''
+	M.diagnosticSymbols = {
+		DiagnosticSignError = 'E',
+		DiagnosticSignWarn = 'W',
+		DiagnosticSignInfo = '?',
+		DiagnosticSignHint = 'I',
+	}
 end
 
 M.insertTab = function(tabnr, line)
@@ -121,13 +122,17 @@ M.generateLabel = function(tab, is_active)
 		highlights.normal = '%#TabLineSel#'
 		highlights.symbol = '%#TabLineSel#'
 		highlights.seperator = '%#TabLineSelSep#'
-		highlights.ftsymbol = '%#TablineftdeviconsActive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
+		if vim.g.devicons then
+			highlights.ftsymbol = '%#TablineftdeviconsActive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
+		end
 		symbols.labelSymbol = M.signs.ActiveTabSymbol
 	else
 		highlights.normal = '%#TabLine#'
 		highlights.symbol = '%#TabLine#'
 		highlights.seperator = '%#TabLineSep#'
-		highlights.ftsymbol = '%#TablineftdeviconsInactive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
+		if vim.g.devicons then
+			highlights.ftsymbol = '%#TablineftdeviconsInactive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
+		end
 		symbols.labelSymbol = M.signs.InactiveTabSymbol
 	end
 	local label = highlights.hint .. windowCount .. ' ' .. highlights.ftsymbol .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. M.getBufferDiagnostics(tab.tabnr, is_active) .. highlights.symbol .. M.insertCloseSign(tab.tabnr, symbols.labelSymbol)

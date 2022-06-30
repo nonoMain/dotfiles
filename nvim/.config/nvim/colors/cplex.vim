@@ -66,17 +66,17 @@ highlight Boolean                                            guifg=#af87d7 guibg
 highlight ColorColumn                                        guifg=NONE guibg=#202028 ctermfg=NONE ctermbg=234 term=NONE gui=NONE
 highlight Repeat                                             guifg=#C586C0 guibg=NONE ctermfg=175 ctermbg=NONE term=NONE gui=NONE
 " -------------- Devicons highlights --------------
-highlight ftdeviconsGrey                                     guifg=#b2b2b2 guibg=NONE ctermfg=249 ctermbg=NONE term=NONE gui=NONE
+highlight ftdeviconsGrey                                     guifg=#B2B2B2 guibg=NONE ctermfg=249 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsAqua                                     guifg=#5FFFD7 guibg=NONE ctermfg=86 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsLightGreen                               guifg=#5FAF5F guibg=NONE ctermfg=71 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsPink                                     guifg=#FF5F87 guibg=NONE ctermfg=204 ctermbg=NONE term=NONE gui=NONE
-highlight ftdeviconsBlue                                     guifg=#005f87 guibg=NONE ctermfg=24 ctermbg=NONE term=NONE gui=NONE
+highlight ftdeviconsBlue                                     guifg=#005F87 guibg=NONE ctermfg=24 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsPurple                                   guifg=#875F87 guibg=NONE ctermfg=96 ctermbg=NONE term=NONE gui=NONE
-highlight ftdeviconsDarkBlue                                 guifg=#005fd7 guibg=NONE ctermfg=26 ctermbg=NONE term=NONE gui=NONE
+highlight ftdeviconsDarkBlue                                 guifg=#005FD7 guibg=NONE ctermfg=26 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsWhite                                    guifg=#FFFFFF guibg=NONE ctermfg=231 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsBrown                                    guifg=#875F5F guibg=NONE ctermfg=95 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsGreen                                    guifg=#87AF5F guibg=NONE ctermfg=107 ctermbg=NONE term=NONE gui=NONE
-highlight ftdeviconsRed                                      guifg=#af0000 guibg=NONE ctermfg=124 ctermbg=NONE term=NONE gui=NONE
+highlight ftdeviconsRed                                      guifg=#AF0000 guibg=NONE ctermfg=124 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsSalmon                                   guifg=#D75F5F guibg=NONE ctermfg=167 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsOrange                                   guifg=#FFAF5F guibg=NONE ctermfg=215 ctermbg=NONE term=NONE gui=NONE
 highlight ftdeviconsYellow                                   guifg=#FFD700 guibg=NONE ctermfg=220 ctermbg=NONE term=NONE gui=NONE
@@ -124,6 +124,15 @@ highlight TablineftdeviconsInactivePink                      guifg=#e15477 guibg
 highlight TablineftdeviconsActiveWhite                       guifg=#FFFFFF guibg=#18181A ctermfg=231 ctermbg=234 term=NONE gui=NONE
 highlight TablinediagnosticInactiveSignError                 guifg=#890000 guibg=#101013 ctermfg=88 ctermbg=233 term=NONE gui=NONE
 highlight TablineftdeviconsActivePink                        guifg=#FF5F87 guibg=#18181A ctermfg=204 ctermbg=234 term=NONE gui=NONE
+" -------------- Statusline highlights --------------
+highlight StatuslinediagnosticSignError                      guifg=#890000 guibg=#2B2B3B ctermfg=88 ctermbg=236 term=NONE gui=NONE
+highlight StatusLineNC                                       guifg=#b2b2b2 guibg=#2B2B3B ctermfg=249 ctermbg=236 term=NONE gui=NONE
+highlight StatuslinediagnosticSignWarn                       guifg=#99924F guibg=#2B2B3B ctermfg=246 ctermbg=236 term=NONE gui=NONE
+highlight StatusLine                                         guifg=#d5d5e0 guibg=#2166a6 ctermfg=188 ctermbg=25 term=NONE gui=NONE
+highlight StatuslinediagnosticSignInfo                       guifg=#587BCD guibg=#2B2B3B ctermfg=67 ctermbg=236 term=NONE gui=NONE
+highlight StatusLineHint                                     guifg=#545469 guibg=#2B2B3B ctermfg=240 ctermbg=236 term=NONE gui=NONE
+highlight StatusLineSep                                      guifg=#2166a6 guibg=#2B2B3B ctermfg=25 ctermbg=236 term=NONE gui=NONE
+highlight StatuslinediagnosticSignHint                       guifg=#C6C6C6 guibg=#2B2B3B ctermfg=251 ctermbg=236 term=NONE gui=NONE
 " -------------- General links --------------
 highlight! link Todo                     Special
 highlight! link SpecialComment           Special
