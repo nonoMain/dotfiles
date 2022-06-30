@@ -133,7 +133,7 @@ function! s:AppendColorToFile(key, dict)
 		let l:special='NONE'
 	endif
 	let l:name = a:key
-	for i in range(30 - len(l:name))
+	for i in range(50 - len(l:name))
 		let l:name ..= ' '
 	endfor
 	let line = 'highlight ' . l:name . ' guifg='. l:guifg . ' guibg=' . l:guibg . ' ctermfg=' . l:ctermfg . ' ctermbg=' . l:ctermbg . ' term=' . l:special . ' gui=' . l:special
@@ -154,8 +154,10 @@ let s:CP = {}
 let s:CP.AccentFg          = '#d5d5e0'
 let s:CP.AccentBg          = '#2166a6'
 let s:CP.ViewFg            = '#d5d5e0'
-let s:CP.ViewBg            = '#161618'
-let s:CP.DarkViewFg        = '#b2b2b2'
+let s:CP.ViewBg            = '#18181A'
+let s:CP.MidViewFg         = '#b2b2b2'
+let s:CP.MidViewBg         = '#101013'
+let s:CP.DarkViewFg        = '#a8a8a8'
 let s:CP.DarkViewBg        = '#0C0C0C'
 let s:CP.ObjFg             = '#b2b2b2'
 let s:CP.ObjBg             = '#2B2B3B'
@@ -167,8 +169,8 @@ let s:CP.ViewHint          = '#202028'
 let s:CP.Special           = '#5fafff'
 let s:CP.InfoFg            = '#585858'
 let s:CP.InfoBg            = '#2a2a2a'
-let s:CP.WarSym            = '#b7af5f'
 let s:CP.ErrSym            = '#a70000'
+let s:CP.WarSym            = '#b7af5f'
 let s:CP.InfoSym           = '#658beb'
 let s:CP.HintSym           = '#e4e4e4'
 let s:CP.DiffAdd           = '#73C991'
@@ -180,7 +182,7 @@ let s:CP.SearchSelected    = '#724325'
 let s:CP.ErrorMsg          = '#F44747'
 " Code related colors
 let s:CP.Comment           = '#5f875f'
-let s:CP.String            = '#CE9178'
+let s:CP.String            = '#C38872'
 let s:CP.Number            = '#afd7af'
 let s:CP.Boolean           = '#af87d7'
 let s:CP.Type              = '#5fafaf'
@@ -195,6 +197,7 @@ let s:CP.Constant          = '#e7e89f'
 let s:CP.Function          = '#e8e6b5'
 
 let s:BaseColorscheme = {}
+let s:BaseColorscheme.Accent                                 = { 'FG':s:CP.AccentBg, }
 let s:BaseColorscheme.Normal                                 = { 'FG':s:CP.ViewFg,            'BG':s:CP.ViewBg, }
 let s:BaseColorscheme.NormalFloat                            = { 'FG':s:CP.ViewFg,            'BG':s:CP.ViewBg, }
 let s:BaseColorscheme.Include                                = { 'FG':s:CP.Include, }
@@ -225,7 +228,7 @@ let s:BaseColorscheme.PmenuSel                               = { 'FG':s:CP.Selec
 let s:BaseColorscheme.PmenuSbar                              = { 'BG':s:CP.LimitLines, }
 let s:BaseColorscheme.PmenuThumb                             = { 'BG':s:CP.SelectedObjBg, }
 let s:BaseColorscheme.TabLineSel                             = { 'FG':s:CP.ViewFg,            'BG':s:CP.ViewBg, }
-let s:BaseColorscheme.TabLine                                = { 'FG':s:CP.DarkViewFg,        'BG':s:CP.DarkViewBg, }
+let s:BaseColorscheme.TabLine                                = { 'FG':s:CP.MidViewFg,        'BG':s:CP.MidViewBg, }
 let s:BaseColorscheme.TabLineFill                            = { 'BG':s:CP.DarkViewBg, }
 let s:BaseColorscheme.WildMenu                               = { 'FG':s:CP.ObjFg,             'BG':s:CP.ObjBg, }
 let s:BaseColorscheme.LineNr                                 = { 'FG':s:CP.ObjFg, }
@@ -253,22 +256,73 @@ let s:BaseColorscheme.DiagnosticSignInformation              = { 'FG':s:CP.InfoS
 let s:BaseColorscheme.DiagnosticSignInfo                     = { 'FG':s:CP.InfoSym, }
 let s:BaseColorscheme.DiagnosticSignHint                     = { 'FG':s:CP.HintSym, }
 
-let s:FtdeviconsColorscheme = {
-	\'ftdeviconsBrown'       : { 'FG':'#875F5F' },
-	\'ftdeviconsAqua'        : { 'FG':'#5FFFD7' },
-	\'ftdeviconsBlue'        : { 'FG':'#005f87' },
-	\'ftdeviconsDarkBlue'    : { 'FG':'#005fd7' },
-	\'ftdeviconsPurple'      : { 'FG':'#875F87' },
-	\'ftdeviconsRed'         : { 'FG':'#af0000' },
-	\'ftdeviconsYellow'      : { 'FG':'#FFD700' },
-	\'ftdeviconsOrange'      : { 'FG':'#FFAF5F' },
-	\'ftdeviconsPink'        : { 'FG':'#FF5F87' },
-	\'ftdeviconsSalmon'      : { 'FG':'#D75F5F' },
-	\'ftdeviconsGreen'       : { 'FG':'#87AF5F' },
-	\'ftdeviconsLightGreen'  : { 'FG':'#5FAF5F' },
-	\'ftdeviconsGrey'        : { 'FG':'#b2b2b2' },
-	\'ftdeviconsWhite'       : { 'FG':'#FFFFFF' },
-\}
+let s:FtdeviconsColorscheme = {}
+let s:FtdeviconsColorscheme.ftdeviconsBrown       = { 'FG':'#875F5F' }
+let s:FtdeviconsColorscheme.ftdeviconsAqua        = { 'FG':'#5FFFD7' }
+let s:FtdeviconsColorscheme.ftdeviconsBlue        = { 'FG':'#005f87' }
+let s:FtdeviconsColorscheme.ftdeviconsDarkBlue    = { 'FG':'#005fd7' }
+let s:FtdeviconsColorscheme.ftdeviconsPurple      = { 'FG':'#875F87' }
+let s:FtdeviconsColorscheme.ftdeviconsRed         = { 'FG':'#af0000' }
+let s:FtdeviconsColorscheme.ftdeviconsYellow      = { 'FG':'#FFD700' }
+let s:FtdeviconsColorscheme.ftdeviconsOrange      = { 'FG':'#FFAF5F' }
+let s:FtdeviconsColorscheme.ftdeviconsPink        = { 'FG':'#FF5F87' }
+let s:FtdeviconsColorscheme.ftdeviconsSalmon      = { 'FG':'#D75F5F' }
+let s:FtdeviconsColorscheme.ftdeviconsGreen       = { 'FG':'#87AF5F' }
+let s:FtdeviconsColorscheme.ftdeviconsLightGreen  = { 'FG':'#5FAF5F' }
+let s:FtdeviconsColorscheme.ftdeviconsGrey        = { 'FG':'#b2b2b2' }
+let s:FtdeviconsColorscheme.ftdeviconsWhite       = { 'FG':'#FFFFFF' }
+
+let s:TablineColorscheme = {}
+" Base tab color
+let s:TablineColorscheme.TabLineSel                             = { 'FG':s:CP.ViewFg,                                        'BG':s:CP.ViewBg, }
+let s:TablineColorscheme.TabLine                                = { 'FG':s:CP.MidViewFg,                                     'BG':s:CP.MidViewBg, }
+let s:TablineColorscheme.TabLineFill                            = { 'BG':s:CP.DarkViewBg, }
+" Hints
+let s:TablineColorscheme.TabLineSelHint                         = { 'FG':'#4C4C5F', 'BG':s:TablineColorscheme.TabLineSel['BG'], }
+let s:TablineColorscheme.TabLineHint                            = { 'FG':'#343441', 'BG':s:TablineColorscheme.TabLine['BG'], }
+" Seperators
+let s:TablineColorscheme.TabLineSelSep                          = { 'FG':s:CP.ViewBg,                                        'BG':s:TablineColorscheme.TabLineFill['BG'], }
+let s:TablineColorscheme.TabLineSep                             = { 'FG':s:CP.MidViewBg,                                     'BG':s:TablineColorscheme.TabLineFill['BG'], }
+" Active diagnostics
+let s:TablineColorscheme.TablinediagnosticActiveSignError       = { 'FG':'#A70000',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablinediagnosticActiveSignWarn        = { 'FG':'#B7AF5F',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablinediagnosticActiveSignInfo        = { 'FG':'#658BEB',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablinediagnosticActiveSignHint        = { 'FG':'#E4E4E4',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+" Inactive diagnostics
+let s:TablineColorscheme.TablinediagnosticInactiveSignError     = { 'FG':'#890000',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablinediagnosticInactiveSignWarn      = { 'FG':'#99924F',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablinediagnosticInactiveSignInfo      = { 'FG':'#587BCD',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablinediagnosticInactiveSignHint      = { 'FG':'#C6C6C6',      'BG':s:TablineColorscheme.TabLine['BG'] }
+" Active ftdevicons
+let s:TablineColorscheme.TablineftdeviconsActiveBrown           = { 'FG':'#875F5F',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveAqua            = { 'FG':'#5FFFD7',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveBlue            = { 'FG':'#005f87',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveDarkBlue        = { 'FG':'#005fd7',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActivePurple          = { 'FG':'#875F87',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveRed             = { 'FG':'#af0000',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveYellow          = { 'FG':'#FFD700',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveOrange          = { 'FG':'#FFAF5F',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActivePink            = { 'FG':'#FF5F87',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveSalmon          = { 'FG':'#D75F5F',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveGreen           = { 'FG':'#87AF5F',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveLightGreen      = { 'FG':'#5FAF5F',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveGrey            = { 'FG':'#b2b2b2',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+let s:TablineColorscheme.TablineftdeviconsActiveWhite           = { 'FG':'#FFFFFF',      'BG':s:TablineColorscheme.TabLineSel['BG'] }
+" Inactive ftdevicons
+let s:TablineColorscheme.TablineftdeviconsInactiveBrown         = { 'FG':'#694a4a',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveAqua          = { 'FG':'#54e1be',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveBlue          = { 'FG':'#004b69',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveDarkBlue      = { 'FG':'#005fd7',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactivePurple        = { 'FG':'#694a69',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveRed           = { 'FG':'#910000',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveYellow        = { 'FG':'#e1bc00',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveOrange        = { 'FG':'#e19a54',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactivePink          = { 'FG':'#e15477',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveSalmon        = { 'FG':'#b95252',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveGreen         = { 'FG':'#70914e',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveLightGreen    = { 'FG':'#4e914e',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveGrey          = { 'FG':'#949494',      'BG':s:TablineColorscheme.TabLine['BG'] }
+let s:TablineColorscheme.TablineftdeviconsInactiveWhite         = { 'FG':'#e1e1e1',      'BG':s:TablineColorscheme.TabLine['BG'] }
 
 let s:BaseLinks = {
 \'Title'          : 'Normal',
@@ -383,12 +437,16 @@ let s:TreesitterLinks = {
 call s:WriteColorschemeHeader()
 call s:writecomment('" This file was genereated with ' .. s:this_script_path .. ' file')
 call s:writecomment('-------------- Cplex highlights --------------')
-for key in keys(s:BaseColorscheme) | call s:AppendColorToFile(key, s:BaseColorscheme[key]) | endfor
+for [key, value] in items(s:BaseColorscheme) | call s:AppendColorToFile(key, value) | endfor
+call s:writecomment('-------------- Devicons highlights --------------')
+for [key, value] in items(s:FtdeviconsColorscheme) | call s:AppendColorToFile(key, value) | endfor
+call s:writecomment('-------------- Tabline highlights --------------')
+for [key, value] in items(s:TablineColorscheme) | call s:AppendColorToFile(key, value) | endfor
 call s:writecomment('-------------- General links --------------')
-for key in keys(s:BaseLinks) | call s:AppendLinkToFile(key, s:BaseLinks[key]) | endfor
+for [key, value] in items(s:BaseLinks) | call s:AppendLinkToFile(key, value) | endfor
 call s:writecomment('-------------- Vim links --------------')
-for key in keys(s:VimLinks) | call s:AppendLinkToFile(key, s:VimLinks[key]) | endfor
+for [key, value] in items(s:VimLinks) | call s:AppendLinkToFile(key, value) | endfor
 call s:writecomment('-------------- JSON links --------------')
-for key in keys(s:JsonLinks) | call s:AppendLinkToFile(key, s:JsonLinks[key]) | endfor
+for [key, value] in items(s:JsonLinks) | call s:AppendLinkToFile(key, value) | endfor
 call s:writecomment('-------------- Treesitter links --------------')
-for key in keys(s:TreesitterLinks) | call s:AppendLinkToFile(key, s:TreesitterLinks[key]) | endfor
+for [key, value] in items(s:TreesitterLinks) | call s:AppendLinkToFile(key, value) | endfor

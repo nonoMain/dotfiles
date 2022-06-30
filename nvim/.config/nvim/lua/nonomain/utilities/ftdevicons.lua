@@ -1,5 +1,6 @@
 local M = {}
 
+M.default_extentionSymbol = ''
 M.extentionSymbols = {}
 M.extentionSymbols['ai']                      = ''
 M.extentionSymbols['awk']                     = ''
@@ -124,8 +125,11 @@ M.extentionSymbols['zsh']                     = ''
 M.extentionSymbols['exe']                     = '省'
 M.extentionSymbols['bin']                     = '省'
 
+M.default_filenameSymbol = ''
 M.filenameSymbols = {}
-M.filenameSymbols['bash']                     = ''
+M.filenameSymbols['bash']                     = ''
+M.filenameSymbols['zsh']                      = ''
+M.filenameSymbols['fish']                     = ''
 M.filenameSymbols['.bashprofile']             = ''
 M.filenameSymbols['.profile']                 = ''
 M.filenameSymbols['.bashrc']                  = ''
@@ -167,21 +171,54 @@ M.filenameSymbols['.zprofile']                = ''
 M.filenameSymbols['.zshenv']                  = ''
 M.filenameSymbols['.zshrc']                   = ''
 
+M.default_directorySymbol = ''
 M.directorySymbols = {}
 M.directorySymbols['open']                    = ''
 M.directorySymbols['closed']                  = ''
 M.directorySymbols['linked']                  = ''
 
+M.iconsColorDicts = {}
+M.iconsColorDicts['Brown'] = {''}
+M.iconsColorDicts['Aqua'] = {''}
+M.iconsColorDicts['Blue'] = {'', '', '', '', '', '', '', '', '', '', ''}
+M.iconsColorDicts['DarkBlue'] = {'', '', '', '', ''}
+M.iconsColorDicts['Purple'] = {'', '', '', '', '', '', ''}
+M.iconsColorDicts['Red'] = {'', '', '', ''}
+M.iconsColorDicts['Yellow'] = {'', ''}
+M.iconsColorDicts['Orange'] = {'', '', '', '', '', '', '', '', '', 'λ', '', '', ''}
+M.iconsColorDicts['Pink'] = {'', ''}
+M.iconsColorDicts['Salmon'] = {'', ''}
+M.iconsColorDicts['Green'] = {'', '', '', '', '', '', '', ''}
+M.iconsColorDicts['LightGreen'] = {'﵂'}
+M.iconsColorDicts['Grey'] = {'', '', '', ''}
+M.iconsColorDicts['White'] = {'', '', '', ''}
+
+-- these for loops set the values inside each dict to keys so we could check
+-- if a specific value is indise there by checking if dict[value] isn't nil
+for key, _ in pairs(M.iconsColorDicts) do
+	local table = M.iconsColorDicts[key]
+	for _, l in ipairs(table) do M.iconsColorDicts[key][l] = true end
+end
+
+M.getColorOfSymbol = function(symbol)
+	for color, dict in pairs(M.iconsColorDicts) do
+		if dict[symbol] then
+			return color
+		end
+	end
+	return nil
+end
+
 M.getFilenameSymbol = function(filename)
-		return M.filenameSymbols[filename]
+	return M.filenameSymbols[filename]
 end
 
 M.getExtentionSymbol = function(extention)
-		return M.extentionSymbols[extention]
+	return M.extentionSymbols[extention]
 end
 
 M.getDirectorySymbol = function(state)
-		return M.directorySymbols[state]
+	return M.directorySymbols[state]
 end
 
 return M

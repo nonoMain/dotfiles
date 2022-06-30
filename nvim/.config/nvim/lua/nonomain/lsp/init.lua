@@ -9,6 +9,22 @@ end
 
 local M = {}
 
+if vim.g.devicons then
+M.signs = {
+	{ name = 'DiagnosticSignError', text = '' },
+	{ name = 'DiagnosticSignWarn', text = '' },
+	{ name = 'DiagnosticSignInfo', text = '' },
+	{ name = 'DiagnosticSignHint', text = '' },
+}
+else
+M.signs = {
+	{ name = 'DiagnosticSignError', text = 'E' },
+	{ name = 'DiagnosticSignWarn', text = 'W' },
+	{ name = 'DiagnosticSignHint', text = '?' },
+	{ name = 'DiagnosticSignInfo', text = 'I' },
+}
+end
+
 M.setup_installer = function(language_servers)
 	local setup_table = {}
 	setup_table.ensure_installed = language_servers
@@ -65,31 +81,15 @@ M.setup_configs = function(language_servers)
 		{ '└', 'FloatBorder' },
 		{ '│', 'FloatBorder' },
 	}
-	local signs = {}
-	if vim.g.devicons then
-	signs = {
-		{ name = 'DiagnosticSignError', text = '' },
-		{ name = 'DiagnosticSignWarn', text = '' },
-		{ name = 'DiagnosticSignInfo', text = '' },
-		{ name = 'DiagnosticSignHint', text = '' },
-	}
-	else
-	signs = {
-		{ name = 'DiagnosticSignError', text = 'E' },
-		{ name = 'DiagnosticSignWarn', text = 'W' },
-		{ name = 'DiagnosticSignHint', text = '?' },
-		{ name = 'DiagnosticSignInfo', text = 'I' },
-	}
-	end
 
-	for _, sign in ipairs(signs) do
+	for _, sign in ipairs(M.signs) do
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
 	end
 
 	vim.diagnostic.config({
 		virtual_text = false,
 		signs = {
-			active = signs,
+			active = M.signs,
 		},
 		update_in_insert = false,
 		underline = true,

@@ -12,7 +12,7 @@ M.toggle = function()
 		api.nvim_command('Bwipeout')
 	else -- open the explorer
 		api.nvim_command('Explore')
-		api.nvim_command('setlocal bufhidden=wipe nocursorcolumn')
+		api.nvim_command('setlocal bufhidden=wipe nocursorcolumn colorcolumn=""')
 	end
 end
 

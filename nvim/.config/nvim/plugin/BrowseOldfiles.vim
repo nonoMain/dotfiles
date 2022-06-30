@@ -37,6 +37,9 @@ function! s:openBrowser()
 				let l:symbol = luaeval("require(\'nonomain/utilities/ftdevicons\').getFilenameSymbol('" .. fnamemodify(l:file, ':t') .. "')")
 				if l:symbol == v:null
 					let l:symbol = luaeval("require(\'nonomain/utilities/ftdevicons\').getExtentionSymbol('" .. fnamemodify(l:file, ':e') .. "')")
+					if l:symbol == v:null
+						let l:symbol = luaeval("require(\'nonomain/utilities/ftdevicons\').default_extentionSymbol")
+					endif
 				endif
 			endif
 			let l:symbol = "\[" .. l:symbol .. "\] "
@@ -59,9 +62,37 @@ function! s:openBrowser()
 
 	nnoremap <silent> <buffer> <CR> :call <SID>openFileUnderCursor()<CR>
 
+	setlocal colorcolumn=""
 	setlocal nomodifiable noswapfile nospell nowrap
-	setlocal buftype=nofile bufhidden=delete conceallevel=2 filetype=oldfilesBroswer
+	setlocal buftype=nofile bufhidden=wipe conceallevel=2 filetype=oldfilesBroswer
 endfunction
+
+" Highlight icons inside this filetype
+let s:devicons_color_icons_dict = {
+\'Brown':[''],
+\'Aqua':[''],
+\'Blue':['', '', '', '', '', '', '', '', '', '', ''],
+\'DarkBlue':['', '', '', '', ''],
+\'Purple':['', '', '', '', '', '', ''],
+\'Red':['', '', '', ''],
+\'Yellow':['', ''],
+\'Orange':['', '', '', '', '', '', '', '', '', 'λ', '', '', ''],
+\'Pink':['', ''],
+\'Salmon':['', ''],
+\'Green':['', '', '', '', '', '', '', ''],
+\'LightGreen':['﵂'],
+\'Grey':['', '', '', ''],
+\'White':['', '', ''],
+\}
+
+if g:devicons
+	augroup devicons_colors
+		autocmd!
+		for color in keys(s:devicons_color_icons_dict)
+			exec 'autocmd FileType oldfilesBroswer ' . 'syntax match ftdevicons'.color.' /\v'.join(s:devicons_color_icons_dict[color], '|').'/ containedin=ALL'
+		endfor
+	augroup END
+endif
 
 function! BrowseOldfiles#ToggleHistory()
 	let l:amountOfbuffers = len(filter(range(1, bufnr('$')), 'bufexists(v:val)'))
@@ -73,9 +104,5 @@ function! BrowseOldfiles#ToggleHistory()
 	endif
 endfunction
 
-augroup oldfilesBrowser
-  autocmd!
-  autocmd FileType oldfilesBroswer setlocal bufhidden=wipe
-augroup end
-
 nnoremap <silent> <leader>h :call BrowseOldfiles#ToggleHistory()<CR>
+

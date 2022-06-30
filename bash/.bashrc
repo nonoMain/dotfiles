@@ -334,12 +334,12 @@ ps1_fancy ()
 			;;
 	esac
 	ps_line1+="${BOLD}${B_BLUE}${BLACK} ${path} ${NC}"
-	ps_line1+="${BLUE}$right_arrow_sharp${NC}"
-	if [ ! -z "$(parse_git_branch)" ]; then
-		ps_line1+=' '
-		ps_line1+="${GREEN}$left_arrow_round${NC}"
-		ps_line1+="${BOLD}${B_GREEN}${BLACK}$(parse_git_branch)${NC}"
-		ps_line1+="${GREEN}$right_arrow_round${NC}"
+	if [ -z "$(parse_git_branch)" ]; then
+		ps_line1+="${BLUE}$right_arrow_sharp${NC}"
+	else
+		ps_line1+="${B_GREEN}${BLUE}$right_arrow_sharp${NC}"
+		ps_line1+="${BOLD}${B_GREEN}${BLACK} $(parse_git_branch) ${NC}"
+		ps_line1+="${GREEN}$right_arrow_sharp${NC}"
 	fi
 
 	# Second line
