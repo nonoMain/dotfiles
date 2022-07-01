@@ -101,11 +101,22 @@ _G.packer_plugins = {
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/playground",
     url = "https://github.com/nvim-treesitter/playground"
   },
+  ["surround.nvim"] = {
+    config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0" },
+    loaded = true,
+    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/surround.nvim",
+    url = "https://github.com/ur4ltz/surround.nvim"
+  },
   ultisnips = {
     config = { "\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31nonomain/plugins/ultisnips\frequire\0" },
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/ultisnips",
     url = "https://github.com/SirVer/ultisnips"
+  },
+  ["vim-repeat"] = {
+    loaded = true,
+    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/vim-repeat",
+    url = "https://github.com/tpope/vim-repeat"
   }
 }
 
@@ -114,6 +125,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for playground]], true)
 try_loadstring("\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain/plugins/nvim-treesitter-playground\frequire\0", "config", "playground")
 time([[Config for playground]], false)
+-- Config for: surround.nvim
+time([[Config for surround.nvim]], true)
+try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+time([[Config for surround.nvim]], false)
 -- Config for: ultisnips
 time([[Config for ultisnips]], true)
 try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31nonomain/plugins/ultisnips\frequire\0", "config", "ultisnips")

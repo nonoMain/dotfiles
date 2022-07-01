@@ -34,13 +34,12 @@ return require('packer').startup(function(use)
 		use 'wbthomason/packer.nvim'            -- packer.alzheimer? (needed)
 
 		use {
-			'SirVer/ultisnips',                  -- snippets
+			'SirVer/ultisnips',                 -- snippets
 			config = function() require 'nonomain/plugins/ultisnips' end,
 		}
-
 		use {
-			"neovim/nvim-lspconfig",            -- nvim-lsp support
-			"williamboman/nvim-lsp-installer",  -- install lsp servers (cross platform)
+			'neovim/nvim-lspconfig',            -- nvim-lsp support
+			'williamboman/nvim-lsp-installer',  -- install lsp servers (cross platform)
 		}
 		use {
 			'nvim-treesitter/nvim-treesitter',  -- treesitter (1)
@@ -50,6 +49,13 @@ return require('packer').startup(function(use)
 		use {
 			'nvim-treesitter/playground',       -- treesitter (2)
 			config = function() require 'nonomain/plugins/nvim-treesitter-playground' end,
+		}
+
+		use 'tpope/vim-repeat'                  -- repeat plugin actions with the '.' key
+
+		use {                                   -- surround text faster
+			'ur4ltz/surround.nvim',
+			config = function() require'surround'.setup {mappings_style = 'sandwich'} end
 		}
 
 		use 'norcalli/nvim-colorizer.lua'       -- coloring codes inside neovim

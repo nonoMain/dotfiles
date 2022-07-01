@@ -35,51 +35,73 @@ M.insertTab = function(tabnr, line)
 	if #line == 0 then return '' end
 	return '%' .. tabnr .. 'T' .. line .. '%T'
 end
+
 M.insertCloseSign = function(tabnr, line)
 	if #line == 0 then return '' end
 	return '%' .. tabnr .. 'X' .. line .. '%X'
 end
 
-M.getBufferPath = function(tabnr)
-	local bufnr = fn.tabpagebuflist(tabnr)[fn.tabpagewinnr(tabnr)]
+M.getBufnr = function(tabnr)
+	return fn.tabpagebuflist(tabnr)[fn.tabpagewinnr(tabnr)]
+end
+
+M.getBufferPath = function(bufnr)
 	return fn.bufname(bufnr)
 end
 
-M.getBufferTitle = function(tabnr)
-	local bufnr = fn.tabpagebuflist(tabnr)[fn.tabpagewinnr(tabnr)]
+M.getBufferTitle = function(bufnr)
 	local path = fn.bufname(bufnr)
 	local buftype = vim.fn.getbufvar(bufnr, '&buftype')
+	local filetype = vim.fn.getbufvar(bufnr, '&filetype')
 
-	if path == '' then
-		return '[No Name]'
-	elseif buftype == 'terminal' then
+	if buftype == 'terminal' then
 		local _, match = string.match(path, "term:(.*):(%a+)")
 		return 't:' .. (match ~= nil and match or vim.fn.fnamemodify(vim.env.SHELL, ':t'))
+	elseif buftype == 'quickfix' then
+		return 'quickfix'
 	elseif buftype == 'help' then
 		return 'help:' .. vim.fn.fnamemodify(path, ':t:r')
+	elseif filetype == 'man' then
+		return 'man:' .. string.sub(path, 7)
+	elseif filetype == 'oldfilesBroswer' then
+		return 'old files'
+	elseif filetype == 'git' then
+		return 'Git'
+	elseif filetype == 'fugitive' then
+		return 'Fugitive'
+	elseif path == '' then
+		return '[No Name]'
 	else
 		return vim.fn.pathshorten(vim.fn.fnamemodify(path, ':~:t'))
 	end
 end
 
-M.getActiveBuf = function(tabnr)
-	local window = fn.tabpagewinnr(tabnr)
-	return fn.tabpagebuflist(tabnr)[window]
-
+M.getBufferSymbol = function(bufnr)
+	local buftype = vim.fn.getbufvar(bufnr, '&buftype')
+	local filetype = vim.fn.getbufvar(bufnr, '&filetype')
+	if filetype == 'oldfilesBroswer' then
+		return '📔'
+	elseif filetype == 'man' then
+		return '📜'
+	elseif buftype == 'quickfix' then
+		return '💡'
+	elseif buftype == 'help' then
+		return '📖'
+	end
+	return nil
 end
 
-M.getBufferDiagnostics = function(tabnr, is_active)
-	local buffer = M.getActiveBuf(tabnr)
+M.getBufferDiagnostics = function(bufnr, is_active)
 	local state = is_active and 'Active' or 'Inactive'
 	local ret = ''
 	local bd = {}
-	local _, ec = pcall(diagnostic.get,buffer, { severity = vim.diagnostic.severity.ERROR })
+	local _, ec = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.ERROR })
 	bd.ErrorCount = #(ec)
-	local _, wc = pcall(diagnostic.get,buffer, { severity = vim.diagnostic.severity.WARN })
+	local _, wc = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.WARN })
 	bd.WarningCount = #(wc)
-	local _, ic = pcall(diagnostic.get,buffer, { severity = vim.diagnostic.severity.INFO })
+	local _, ic = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.INFO })
 	bd.InfoCount = #(ic)
-	local _, hc = pcall(diagnostic.get,buffer, { severity = vim.diagnostic.severity.HINT })
+	local _, hc = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.HINT })
 	bd.HintCount = #(hc)
 	if bd.ErrorCount > 0 then   ret = ret .. '%#Tablinediagnostic' .. state .. 'SignError#' .. M.diagnosticSymbols.DiagnosticSignError .. ' ' end
 	if bd.WarningCount > 0 then ret = ret .. '%#Tablinediagnostic' .. state .. 'SignWarn#' .. M.diagnosticSymbols.DiagnosticSignWarn .. ' ' end
@@ -97,11 +119,13 @@ M.getWindowCount = function(tab)
 end
 
 M.generateLabel = function(tab, is_active)
+	local bufnr = M.getBufnr(tab.tabnr)
 	local windowCount = M.getWindowCount(tab)
-	local path = M.getBufferPath(tab.tabnr)
-	local title = M.getBufferTitle(tab.tabnr)
+	local path = M.getBufferPath(bufnr)
+	local title = M.getBufferTitle(bufnr)
 	local symbols = {}
 	local highlights = {}
+	highlights.ftsymbol = ''
 	if is_active then
 		highlights.hint = '%#TabLineSelHint#'
 	else
@@ -109,12 +133,10 @@ M.generateLabel = function(tab, is_active)
 	end
 
 	if vim.g.devicons then
-		if path == '' then
-			symbols.ftsymbol = ftdevicons.default_extentionSymbol
-		elseif utils.is_dir(path) then
+		if utils.is_dir(path) then
 			symbols.ftsymbol = ftdevicons.default_directorySymbol
 		else
-			symbols.ftsymbol = ftdevicons.getFilenameSymbol(fn.fnamemodify(path, ':t')) or ftdevicons.getExtentionSymbol(fn.fnamemodify(path, ':e')) or ftdevicons.default_extentionSymbol
+			symbols.ftsymbol = M.getBufferSymbol(bufnr) or ftdevicons.getFilenameSymbol(fn.fnamemodify(path, ':t')) or ftdevicons.getExtentionSymbol(fn.fnamemodify(path, ':e')) or ftdevicons.default_extentionSymbol
 		end
 	else
 		symbols.ftsymbol = ''
@@ -125,7 +147,7 @@ M.generateLabel = function(tab, is_active)
 		highlights.normal = '%#TabLineSel#'
 		highlights.symbol = '%#TabLineSel#'
 		highlights.seperator = '%#TabLineSelSep#'
-		if vim.g.devicons then
+		if vim.g.devicons and ftdevicons.getColorOfSymbol(symbols.ftsymbol) then
 			highlights.ftsymbol = '%#TablineftdeviconsActive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
 		end
 		symbols.labelSymbol = M.signs.ActiveTabSymbol
@@ -133,12 +155,12 @@ M.generateLabel = function(tab, is_active)
 		highlights.normal = '%#TabLine#'
 		highlights.symbol = '%#TabLine#'
 		highlights.seperator = '%#TabLineSep#'
-		if vim.g.devicons then
+		if vim.g.devicons and ftdevicons.getColorOfSymbol(symbols.ftsymbol) then
 			highlights.ftsymbol = '%#TablineftdeviconsInactive' .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
 		end
 		symbols.labelSymbol = M.signs.InactiveTabSymbol
 	end
-	local label = highlights.hint .. windowCount .. ' ' .. highlights.ftsymbol .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. M.getBufferDiagnostics(tab.tabnr, is_active) .. highlights.symbol .. M.insertCloseSign(tab.tabnr, symbols.labelSymbol)
+	local label = highlights.hint .. windowCount .. ' ' .. highlights.ftsymbol .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. M.getBufferDiagnostics(bufnr, is_active) .. highlights.symbol .. M.insertCloseSign(tab.tabnr, symbols.labelSymbol)
 	local comp_lable = highlights.seperator .. M.signs.LeftSep .. label .. highlights.seperator .. M.signs.RightSep
 	return M.insertTab(tab.tabnr, comp_lable)
 end

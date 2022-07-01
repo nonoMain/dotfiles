@@ -50,7 +50,7 @@ end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
+M.on_attach = function(_, bufnr)
 	local opts = { noremap=true, silent=true }
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
