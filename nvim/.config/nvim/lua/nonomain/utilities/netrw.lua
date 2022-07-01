@@ -12,11 +12,17 @@ M.toggle = function()
 		api.nvim_command('Bwipeout')
 	else -- open the explorer
 		api.nvim_command('Explore')
-		api.nvim_command('setlocal bufhidden=wipe')
-		api.nvim_command('setlocal nocursorcolumn')
-		api.nvim_command('setlocal colorcolumn=""')
 	end
 end
+
+M.augroup = api.nvim_create_augroup('NetrwConfig', { clear = true })
+
+-- netrw needs autocmd because each time you move to another directory its a new buffer
+api.nvim_create_autocmd( 'FileType', {
+	pattern = { 'netrw' },
+	command = [[ setlocal bufhidden=wipe nocursorcolumn colorcolumn="" ]],
+	group = 'NetrwConfig',
+})
 
 keymap('n', '<leader>e', '<cmd>lua require(\'nonomain/utilities/netrw\').toggle()<CR>', opts)
 

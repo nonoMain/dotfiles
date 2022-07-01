@@ -51,6 +51,8 @@ return require('packer').startup(function(use)
 			config = function() require 'nonomain/plugins/nvim-treesitter-playground' end,
 		}
 
+		use 'tpope/vim-fugitive'                -- nice git client inside (neo)vim
+
 		use 'tpope/vim-repeat'                  -- repeat plugin actions with the '.' key
 
 		use {                                   -- surround text faster
