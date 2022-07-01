@@ -51,42 +51,46 @@ end
 
 M.getBufferTitle = function(bufnr)
 	local path = fn.bufname(bufnr)
-	local buftype = vim.fn.getbufvar(bufnr, '&buftype')
-	local filetype = vim.fn.getbufvar(bufnr, '&filetype')
+	local buftype = fn.getbufvar(bufnr, '&buftype')
+	local filetype = fn.getbufvar(bufnr, '&filetype')
 
-	if buftype == 'terminal' then
+	if filetype == 'netrw' then
+		return 'netrw:' .. fn.fnamemodify(path, ':~:.')
+	elseif buftype == 'terminal' then
 		local _, match = string.match(path, "term:(.*):(%a+)")
-		return 't:' .. (match ~= nil and match or vim.fn.fnamemodify(vim.env.SHELL, ':t'))
+		return 't:' .. (match ~= nil and match or fn.fnamemodify(vim.env.SHELL, ':t'))
 	elseif buftype == 'quickfix' then
 		return 'quickfix'
 	elseif buftype == 'help' then
-		return 'help:' .. vim.fn.fnamemodify(path, ':t:r')
+		return 'help:' .. fn.fnamemodify(path, ':t:r')
 	elseif filetype == 'man' then
 		return 'man:' .. string.sub(path, 7)
-	elseif filetype == 'oldfilesBroswer' then
-		return 'old files'
 	elseif filetype == 'git' then
 		return 'Git'
 	elseif filetype == 'fugitive' then
 		return 'Fugitive'
+	elseif filetype == 'oldfilesBroswer' then
+		return 'old files'
 	elseif path == '' then
 		return '[No Name]'
 	else
-		return vim.fn.pathshorten(vim.fn.fnamemodify(path, ':~:t'))
+		return fn.pathshorten(fn.fnamemodify(path, ':~:t'))
 	end
 end
 
 M.getBufferSymbol = function(bufnr)
-	local buftype = vim.fn.getbufvar(bufnr, '&buftype')
-	local filetype = vim.fn.getbufvar(bufnr, '&filetype')
-	if filetype == 'oldfilesBroswer' then
-		return '📔'
+	local buftype = fn.getbufvar(bufnr, '&buftype')
+	local filetype = fn.getbufvar(bufnr, '&filetype')
+	if filetype == 'netrw' then
+		return '📁'
 	elseif filetype == 'man' then
 		return '📜'
 	elseif buftype == 'quickfix' then
 		return '💡'
 	elseif buftype == 'help' then
 		return '📖'
+	elseif filetype == 'oldfilesBroswer' then
+		return '📔'
 	end
 	return nil
 end
@@ -133,7 +137,7 @@ M.generateLabel = function(tab, is_active)
 	end
 
 	if vim.g.devicons then
-		if utils.is_dir(path) then
+		if not M.getBufferSymbol(bufnr) and utils.is_dir(path) then
 			symbols.ftsymbol = ftdevicons.default_directorySymbol
 		else
 			symbols.ftsymbol = M.getBufferSymbol(bufnr) or ftdevicons.getFilenameSymbol(fn.fnamemodify(path, ':t')) or ftdevicons.getExtentionSymbol(fn.fnamemodify(path, ':e')) or ftdevicons.default_extentionSymbol
@@ -209,6 +213,7 @@ M.generateTabline = function()
 	end
 	-- end of the tabline
 	tabline = tabline .. '%=%#TabLineFill#'
+	tabline = tabline .. '%#TabLineSelSep#' .. M.signs.LeftSep
 	tabline = tabline .. '%#Accent# ' .. M.getOS() .. ' '
 	return tabline
 end

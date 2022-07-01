@@ -152,9 +152,21 @@ M.filenameSymbols['gulpfile.js']              = ''
 M.filenameSymbols['gulpfile.ls']              = ''
 M.filenameSymbols['.gvimrc']                  = ''
 M.filenameSymbols['_gvimrc']                  = ''
+M.filenameSymbols['readme']                   = ''
+M.filenameSymbols['readme.md']                = ''
+M.filenameSymbols['readme.markdown']          = ''
+M.filenameSymbols['Readme']                   = ''
+M.filenameSymbols['Readme.md']                = ''
+M.filenameSymbols['Readme.markdown']          = ''
+M.filenameSymbols['README']                   = ''
+M.filenameSymbols['README.md']                = ''
+M.filenameSymbols['README.markdown']          = ''
 M.filenameSymbols['license']                  = ''
 M.filenameSymbols['license.md']               = ''
 M.filenameSymbols['license.markdown']         = ''
+M.filenameSymbols['License']                  = ''
+M.filenameSymbols['License.md']               = ''
+M.filenameSymbols['License.markdown']         = ''
 M.filenameSymbols['LICENSE']                  = ''
 M.filenameSymbols['LICENSE.md']               = ''
 M.filenameSymbols['LICENSE.markdown']         = ''
@@ -192,7 +204,7 @@ M.iconsColorDicts['Salmon'] = {'', ''}
 M.iconsColorDicts['Green'] = {'', '', '', '', '', '', '', ''}
 M.iconsColorDicts['LightGreen'] = {'﵂'}
 M.iconsColorDicts['Grey'] = {'', '', '', ''}
-M.iconsColorDicts['White'] = {'', '', '', ''}
+M.iconsColorDicts['White'] = {'', '', '', '', '', ''}
 
 -- these for loops set the values inside each dict to keys so we could check
 -- if a specific value is indise there by checking if dict[value] isn't nil

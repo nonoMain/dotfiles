@@ -82,7 +82,7 @@ let s:devicons_color_icons_dict = {
 \'Green':['', '', '', '', '', '', '', ''],
 \'LightGreen':['﵂'],
 \'Grey':['', '', '', ''],
-\'White':['', '', ''],
+\'White':['', '', '', '', '', ''],
 \}
 
 if g:devicons
