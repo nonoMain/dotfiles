@@ -124,6 +124,7 @@ M.extentionSymbols['yml']                     = ''
 M.extentionSymbols['zsh']                     = ''
 M.extentionSymbols['exe']                     = '省'
 M.extentionSymbols['bin']                     = '省'
+M.extentionSymbols['snippets']                = ''
 
 M.default_filenameSymbol = ''
 M.filenameSymbols = {}
@@ -204,7 +205,7 @@ M.iconsColorDicts['Salmon'] = {'', ''}
 M.iconsColorDicts['Green'] = {'', '', '', '', '', '', '', ''}
 M.iconsColorDicts['LightGreen'] = {'﵂'}
 M.iconsColorDicts['Grey'] = {'', '', '', ''}
-M.iconsColorDicts['White'] = {'', '', '', '', '', ''}
+M.iconsColorDicts['White'] = {'', '', '', '', '', '', ''}
 
 -- these for loops set the values inside each dict to keys so we could check
 -- if a specific value is indise there by checking if dict[value] isn't nil

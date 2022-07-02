@@ -4,4 +4,4 @@ local status_ok, _ = pcall(require, 'nvim-treesitter-playground')
 if not status_ok then
 	return
 end
-keymap('n', '<f10>', ':TSHighlightCapturesUnderCursor<CR>', opts)
+keymap('n', '<f10>', '<cmd>TSHighlightCapturesUnderCursor<CR>', opts)

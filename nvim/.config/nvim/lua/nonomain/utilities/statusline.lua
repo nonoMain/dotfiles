@@ -1,6 +1,6 @@
 local fn = vim.fn
 local api = vim.api
-local git = require('nonomain/utilities/git')
+local util = require('nonomain/utilities/utils')
 local diagnostic = vim.diagnostic
 -- local ftdevicons = require('nonomain/utilities/ftdevicons')
 local M = {}
@@ -29,8 +29,8 @@ else
 end
 
 M.getGitBranch = function()
-	local maybe, branch = pcall(git.branch)
-	if not maybe or #branch == 0 or branch == nil then
+	local maybe, branch = pcall(util.get_git_branch)
+	if not maybe or branch == '' or branch == nil then
 		return ''
 	else
 		return M.signs.branch .. ' ' .. branch

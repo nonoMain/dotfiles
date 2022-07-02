@@ -42,7 +42,7 @@ function! s:openBrowser()
 					endif
 				endif
 			endif
-			let l:symbol = "\[" .. l:symbol .. "\] "
+			let l:symbol = l:symbol
 		endif
 
 		for l:pattern in s:historyIgnore
@@ -53,7 +53,7 @@ function! s:openBrowser()
 		endfor
 
 		if !l:ignore
-			let l:line = l:symbol .. l:file
+			let l:line = l:symbol .. ' ' .. l:file
 			let s:files_shown += [l:file]
 			silent put = l:line
 		endif
@@ -82,7 +82,7 @@ let s:devicons_color_icons_dict = {
 \'Green':['', '', '', '', '', '', '', ''],
 \'LightGreen':['﵂'],
 \'Grey':['', '', '', ''],
-\'White':['', '', '', '', '', ''],
+\'White':['', '', '', '', '', '', ''],
 \}
 
 if g:devicons
