@@ -1,23 +1,24 @@
+local utils = require("nonomain.utilities.utils")
 local opts = { noremap = true, silent = true }
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 local api = vim.api
 local M = {};
 
 M.toggle = function()
-	if vim.bo.buftype == 'terminal' then -- quit while inside terminal
-		api.nvim_command('Bwipeout!')
-	else -- open the explorer
-		api.nvim_command('terminal')
-		api.nvim_command('setlocal bufhidden=wipe')
-		api.nvim_command('setlocal nonumber')
-		api.nvim_command('setlocal norelativenumber')
-		api.nvim_command('setlocal nocursorcolumn')
-		api.nvim_command('setlocal colorcolumn=""')
+	if vim.bo.buftype == "terminal" then -- quit while inside terminal
+		utils.bkill(0)
+	else -- open the terminal
+		api.nvim_command("terminal")
+		vim.cmd [[
+			setlocal bufhidden=wipe
+			setlocal nonumber
+			setlocal norelativenumber
+			setlocal colorcolumn=""
+		]]
+		api.nvim_command("startinsert")
 	end
 end
 
-keymap('n', '<leader>t', '<cmd>lua require(\'nonomain/utilities/terminal\').toggle()<CR>', opts)
+keymap({'n', 't'}, "<leader>t", M.toggle, opts)
 
-return {
-	toggle = M.toggle,
-}
+return { toggle = M.toggle }

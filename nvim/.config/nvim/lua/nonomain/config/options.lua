@@ -17,6 +17,7 @@ opt.shiftwidth = 4
 -- UI
 api.nvim_command('colorscheme cplex')
 opt.termguicolors = true
+opt.number = true
 opt.relativenumber = true
 opt.errorbells = false
 opt.showmatch = true
@@ -26,10 +27,8 @@ opt.smartcase = true
 opt.linebreak = true
 opt.hlsearch = true
 opt.showmode = true
-opt.number = true
 opt.wrap = false
 opt.guicursor=''
-opt.mouse = 'a'
 opt.completeopt = 'menuone'
 opt.backspace = 'indent,eol,start'
 opt.pumheight = 10
@@ -40,8 +39,10 @@ opt.timeoutlen = 200
 opt.foldmethod = 'indent'
 opt.colorcolumn = '100'
 opt.list = true
-opt.listchars = 'tab: ,eol:¬,trail:~,extends:>,precedes:<'
-opt.fillchars = 'stlnc: ,stl: ,vert:│,fold:-,diff:-'
+opt.listchars = 'tab: ,eol:¬,trail:~,lead:~,extends:>,precedes:<,nbsp:⨷'
+opt.fillchars = 'stlnc: ,stl: ,vert:│,fold:-,diff:-,eob:~'
+-- only losers use the mouse but if you want to put:
+-- opt.mouse = 'a'
 
 -- Backend
 opt.swapfile = true

@@ -30,40 +30,44 @@ packer.init {
   },
 }
 
-return require('packer').startup(function(use)
-		use 'wbthomason/packer.nvim'            -- packer.alzheimer? (needed)
+return require("packer").startup(function(use)
+		use "wbthomason/packer.nvim"            -- packer.alzheimer? (needed)
 
 		use {
-			'SirVer/ultisnips',                 -- snippets
-			config = function() require 'nonomain/plugins/ultisnips' end,
+			"neovim/nvim-lspconfig",            -- nvim-lsp support
+			"williamboman/nvim-lsp-installer",  -- install lsp servers (cross platform)
 		}
 		use {
-			'neovim/nvim-lspconfig',            -- nvim-lsp support
-			'williamboman/nvim-lsp-installer',  -- install lsp servers (cross platform)
+			"nvim-treesitter/nvim-treesitter",  -- treesitter (1)
+			run = ":TSUpdate",
+			config = function() require "nonomain.plugins.nvim-treesitter" end,
 		}
 		use {
-			'nvim-treesitter/nvim-treesitter',  -- treesitter (1)
-			run = ':TSUpdate',
-			config = function() require 'nonomain/plugins/nvim-treesitter' end,
+			"nvim-treesitter/playground",       -- treesitter (2)
+			config = function() require "nonomain.plugins.nvim-treesitter-playground" end,
 		}
 		use {
-			'nvim-treesitter/playground',       -- treesitter (2)
-			config = function() require 'nonomain/plugins/nvim-treesitter-playground' end,
+			"L3MON4D3/LuaSnip",                 -- snippets
+			config = function() require "nonomain.plugins.luasnip" end,
+		}
+		use {
+			"lewis6991/gitsigns.nvim",
+			config = function() require "nonomain.plugins.gitsigns" end,
 		}
 
-		use 'tpope/vim-repeat'                  -- repeat plugin actions with the '.' key
+		use "tpope/vim-repeat"                  -- repeat plugin actions with the "." key
 
 		use {                                   -- surround text faster
-			'ur4ltz/surround.nvim',
-			config = function() require'surround'.setup {mappings_style = 'sandwich'} end
+			"ur4ltz/surround.nvim",
+			config = function() require"surround".setup {mappings_style = "sandwich"} end
 		}
 
-		use 'norcalli/nvim-colorizer.lua'       -- coloring codes inside neovim
+		use "norcalli/nvim-colorizer.lua"       -- coloring codes inside neovim
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then
-			require('packer').sync()
+			require("packer").sync()
 		end
 	end
 )

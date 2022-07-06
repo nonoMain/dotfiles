@@ -69,6 +69,18 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29nonomain.plugins.luasnip\frequire\0" },
+    loaded = true,
+    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30nonomain.plugins.gitsigns\frequire\0" },
+    loaded = true,
+    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
@@ -85,7 +97,7 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
-    config = { "\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain/plugins/nvim-treesitter\frequire\0" },
+    config = { "\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain.plugins.nvim-treesitter\frequire\0" },
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -96,7 +108,7 @@ _G.packer_plugins = {
     url = "https://github.com/wbthomason/packer.nvim"
   },
   playground = {
-    config = { "\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain/plugins/nvim-treesitter-playground\frequire\0" },
+    config = { "\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain.plugins.nvim-treesitter-playground\frequire\0" },
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/playground",
     url = "https://github.com/nvim-treesitter/playground"
@@ -107,12 +119,6 @@ _G.packer_plugins = {
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/surround.nvim",
     url = "https://github.com/ur4ltz/surround.nvim"
   },
-  ultisnips = {
-    config = { "\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31nonomain/plugins/ultisnips\frequire\0" },
-    loaded = true,
-    path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/ultisnips",
-    url = "https://github.com/SirVer/ultisnips"
-  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/nonomain/.local/share/nvim/site/pack/packer/start/vim-repeat",
@@ -121,18 +127,22 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30nonomain.plugins.gitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: playground
 time([[Config for playground]], true)
-try_loadstring("\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain/plugins/nvim-treesitter-playground\frequire\0", "config", "playground")
+try_loadstring("\27LJ\2\nK\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0000nonomain.plugins.nvim-treesitter-playground\frequire\0", "config", "playground")
 time([[Config for playground]], false)
--- Config for: ultisnips
-time([[Config for ultisnips]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31nonomain/plugins/ultisnips\frequire\0", "config", "ultisnips")
-time([[Config for ultisnips]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain/plugins/nvim-treesitter\frequire\0", "config", "nvim-treesitter")
+try_loadstring("\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%nonomain.plugins.nvim-treesitter\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29nonomain.plugins.luasnip\frequire\0", "config", "LuaSnip")
+time([[Config for LuaSnip]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
 try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0", "config", "surround.nvim")

@@ -13,15 +13,15 @@ if vim.g.devicons then
 M.signs = {
 	{ name = 'DiagnosticSignError', text = '' },
 	{ name = 'DiagnosticSignWarn', text = '' },
-	{ name = 'DiagnosticSignInfo', text = '' },
-	{ name = 'DiagnosticSignHint', text = '' },
+	{ name = 'DiagnosticSignInfo', text = '' },
+	{ name = 'DiagnosticSignHint', text = '' },
 }
 else
 M.signs = {
 	{ name = 'DiagnosticSignError', text = 'E' },
 	{ name = 'DiagnosticSignWarn', text = 'W' },
-	{ name = 'DiagnosticSignHint', text = '?' },
-	{ name = 'DiagnosticSignInfo', text = 'I' },
+	{ name = 'DiagnosticSignHint', text = 'I' },
+	{ name = 'DiagnosticSignInfo', text = 'H' },
 }
 end
 

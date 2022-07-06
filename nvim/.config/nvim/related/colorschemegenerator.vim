@@ -1,6 +1,6 @@
 let s:colorscheme = 'cplex'
 let s:filename = fnamemodify($MYVIMRC, ':p:h') .. '/colors/' . s:colorscheme . '.vim'
-let s:this_script_path = 'related/colorschemeGenerator.vim'
+let s:this_script_path = $PWD .. "/colorschemegenerator.vim"
 
 function! s:WriteColorschemeHeader()
 	let l:header = []
@@ -151,50 +151,50 @@ endfunction
 let s:CP = {}
 
 " UI related colors
-let s:CP.AccentFg          = '#d5d5e0'
-let s:CP.AccentBg          = '#2166a6'
-let s:CP.ViewFg            = '#d5d5e0'
+let s:CP.AccentFg          = '#D5D5E0'
+let s:CP.AccentBg          = '#2166A6'
+let s:CP.ViewFg            = '#D5D5E0'
 let s:CP.ViewBg            = '#18181A'
-let s:CP.MidViewFg         = '#b2b2b2'
+let s:CP.MidViewFg         = '#B2B2B2'
 let s:CP.MidViewBg         = '#101013'
-let s:CP.DarkViewFg        = '#a8a8a8'
+let s:CP.DarkViewFg        = '#A8A8A8'
 let s:CP.DarkViewBg        = '#0C0C0C'
-let s:CP.ObjFg             = '#b2b2b2'
+let s:CP.ObjFg             = '#B2B2B2'
 let s:CP.ObjBg             = '#2B2B3B'
-let s:CP.SelectedObjFg     = '#d2d2d2'
+let s:CP.SelectedObjFg     = '#D2D2D2'
 let s:CP.SelectedObjBg     = '#4B4B4B'
 let s:CP.NonText           = '#585858'
-let s:CP.LimitLines        = '#34343a'
+let s:CP.LimitLines        = '#34343A'
 let s:CP.ViewHint          = '#202028'
-let s:CP.Special           = '#5fafff'
+let s:CP.Special           = '#5FAFFF'
 let s:CP.InfoFg            = '#585858'
-let s:CP.InfoBg            = '#2a2a2a'
-let s:CP.ErrSym            = '#a70000'
-let s:CP.WarSym            = '#b7af5f'
-let s:CP.InfoSym           = '#658beb'
-let s:CP.HintSym           = '#e4e4e4'
-let s:CP.DiffAdd           = '#73C991'
-let s:CP.DiffChange        = '#D7BA7D'
-let s:CP.DiffDelete        = '#94151b'
-let s:CP.VisualSelection   = '#263e76'
-let s:CP.SearchHighlight   = '#263e76'
+let s:CP.InfoBg            = '#2A2A2A'
+let s:CP.ErrSym            = '#A70000'
+let s:CP.WarSym            = '#B7AF5F'
+let s:CP.InfoSym           = '#658BEB'
+let s:CP.HintSym           = '#E4E4E4'
+let s:CP.DiffAdd           = '#83C99A'
+let s:CP.DiffChange        = '#D7BF8E'
+let s:CP.DiffDelete        = '#942126'
+let s:CP.VisualSelection   = '#263E76'
+let s:CP.SearchHighlight   = '#263E76'
 let s:CP.SearchSelected    = '#724325'
 let s:CP.ErrorMsg          = '#F44747'
 " Code related colors
-let s:CP.Comment           = '#5f875f'
+let s:CP.Comment           = '#5F875F'
 let s:CP.String            = '#C38872'
-let s:CP.Number            = '#afd7af'
-let s:CP.Boolean           = '#af87d7'
-let s:CP.Type              = '#5fafaf'
-let s:CP.Keyword           = '#87afff'
-let s:CP.Operator          = '#af5f87'
+let s:CP.Number            = '#AFD7AF'
+let s:CP.Boolean           = '#AF87D7'
+let s:CP.Type              = '#5FAFAF'
+let s:CP.Keyword           = '#87AFFF'
+let s:CP.Operator          = '#AF5F87'
 let s:CP.Repeat            = '#C586C0'
-let s:CP.Conditional       = '#af87d7'
-let s:CP.Include           = '#d75f87'
-let s:CP.Object            = '#e4e4e4'
-let s:CP.Field             = '#c4e4ff'
-let s:CP.Constant          = '#e7e89f'
-let s:CP.Function          = '#e8e6b5'
+let s:CP.Conditional       = '#AF87D7'
+let s:CP.Include           = '#D75F87'
+let s:CP.Object            = '#E4E4E4'
+let s:CP.Field             = '#C4E4FF'
+let s:CP.Constant          = '#E7E89F'
+let s:CP.Function          = '#E8E6B5'
 
 let s:BaseColorscheme = {}
 let s:BaseColorscheme.Accent                                 = { 'FG':s:CP.AccentBg, }
@@ -449,7 +449,7 @@ let s:TreesitterLinks = {
 \}
 
 call s:WriteColorschemeHeader()
-call s:writecomment('" This file was genereated with ' .. s:this_script_path .. ' file')
+call s:writecomment('This file was genereated with ' .. fnamemodify(s:this_script_path, ':t') .. ' file')
 call s:writecomment('-------------- Cplex highlights --------------')
 for [key, value] in items(s:BaseColorscheme) | call s:AppendColorToFile(key, value) | endfor
 call s:writecomment('-------------- Devicons highlights --------------')
