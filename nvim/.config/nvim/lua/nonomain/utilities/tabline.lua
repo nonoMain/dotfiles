@@ -1,6 +1,4 @@
 local fn = vim.fn
-local diagnostic = vim.diagnostic
-local utils = require("nonomain/utilities/utils")
 local ftdevicons = require("nonomain/utilities/ftdevicons")
 local M = {}
 
@@ -12,23 +10,11 @@ if vim.g.devicons then
 	M.signs.InactiveTabSymbol = '○'
 	M.signs.LeftSep = " "
 	M.signs.RightSep = " "
-	M.diagnosticSymbols = {
-		DiagnosticSignError = '',
-		DiagnosticSignWarn = '',
-		DiagnosticSignInfo = '',
-		DiagnosticSignHint = '',
-	}
 else
 	M.signs.ActiveTabSymbol = '[x]'
 	M.signs.InactiveTabSymbol = '[ ]'
 	M.signs.LeftSep = ''
 	M.signs.RightSep = ''
-	M.diagnosticSymbols = {
-		DiagnosticSignError = 'E',
-		DiagnosticSignWarn = 'W',
-		DiagnosticSignInfo = 'I',
-		DiagnosticSignHint = 'H',
-	}
 end
 
 M.insertTab = function(tabnr, line)
@@ -82,36 +68,17 @@ M.getBufferSymbol = function(bufnr)
 	local buftype = fn.getbufvar(bufnr, "&buftype")
 	local filetype = fn.getbufvar(bufnr, "&filetype")
 	if filetype == "netrw" then
-		return '📁'
+		return ' '
 	elseif filetype == "man" then
-		return '📜'
+		return '龎'
 	elseif buftype == "quickfix" then
-		return '💡'
+		return ''
 	elseif buftype == "help" then
-		return '📖'
+		return 'ﲉ'
 	elseif filetype == "oldfilesBrowser" then
-		return '📔'
+		return ''
 	end
 	return nil
-end
-
-M.getBufferDiagnostics = function(bufnr, is_active)
-	local state = is_active and "Active" or "Inactive"
-	local ret = ''
-	local bd = {}
-	local _, ec = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.ERROR })
-	bd.ErrorCount = #(ec)
-	local _, wc = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.WARN })
-	bd.WarningCount = #(wc)
-	local _, ic = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.INFO })
-	bd.InfoCount = #(ic)
-	local _, hc = pcall(diagnostic.get,bufnr, { severity = vim.diagnostic.severity.HINT })
-	bd.HintCount = #(hc)
-	if bd.ErrorCount > 0 then   ret = ret .. "%#Tablinediagnostic" .. state .. "SignError#" .. M.diagnosticSymbols.DiagnosticSignError .. ' ' end
-	if bd.WarningCount > 0 then ret = ret .. "%#Tablinediagnostic" .. state .. "SignWarn#" .. M.diagnosticSymbols.DiagnosticSignWarn .. ' ' end
-	if bd.InfoCount > 0 then    ret = ret .. "%#Tablinediagnostic" .. state .. "SignInfo#" .. M.diagnosticSymbols.DiagnosticSignInfo .. ' ' end
-	if bd.HintCount > 0 then    ret = ret .. "%#Tablinediagnostic" .. state .. "SignHint#" .. M.diagnosticSymbols.DiagnosticSignHint .. ' ' end
-	return ret
 end
 
 M.getWindowCount = function(tab)
@@ -132,12 +99,7 @@ M.generateLabel = function(tab, is_active)
 
 	symbols.ftsymbol = ''
 	highlights.ftsymbol = ''
-
-	if is_active then
-		highlights.hint = "%#TabLineSelHint#"
-	else
-		highlights.hint = "%#TabLineHint#"
-	end
+	highlights.hint = "%#PanelHint#"
 
 	if vim.g.devicons then
 		if M.getBufferSymbol(bufnr) == nil then
@@ -152,7 +114,7 @@ M.generateLabel = function(tab, is_active)
 		highlights.symbol = "%#TabLineSel#"
 		highlights.seperator = "%#TabLineSelSep#"
 		if vim.g.devicons and ftdevicons.getColorOfSymbol(symbols.ftsymbol) then
-			highlights.ftsymbol = "%#TablineftdeviconsActive" .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
+			highlights.ftsymbol = "%#" .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
 		end
 		symbols.labelSymbol = M.signs.ActiveTabSymbol
 	else
@@ -160,11 +122,11 @@ M.generateLabel = function(tab, is_active)
 		highlights.symbol = "%#TabLine#"
 		highlights.seperator = "%#TabLineSep#"
 		if vim.g.devicons and ftdevicons.getColorOfSymbol(symbols.ftsymbol) then
-			highlights.ftsymbol = "%#TablineftdeviconsInactive" .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
+			highlights.ftsymbol = "%#" .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
 		end
 		symbols.labelSymbol = M.signs.InactiveTabSymbol
 	end
-	local label = highlights.hint .. windowCount .. ' ' .. highlights.ftsymbol .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. M.getBufferDiagnostics(bufnr, is_active) .. highlights.symbol .. M.insertCloseSign(tab.tabnr, symbols.labelSymbol)
+	local label = highlights.hint .. windowCount .. highlights.ftsymbol .. ' ' .. symbols.ftsymbol .. ' ' .. highlights.normal .. title .. ' ' .. highlights.symbol .. M.insertCloseSign(tab.tabnr, symbols.labelSymbol)
 	local comp_lable = highlights.seperator .. M.signs.LeftSep .. label .. highlights.seperator .. M.signs.RightSep
 	return M.insertTab(tab.tabnr, comp_lable)
 end

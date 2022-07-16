@@ -1,6 +1,4 @@
 local ls = require("luasnip")
--- support reloading by cleaning all the keymaps
-ls.cleanup()
 -- load all of my snippets
 require("nonomain.plugins.luasnip.ft")
 -- set completion
@@ -10,15 +8,15 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
 ls.config.set_config {
-  -- This tells LuaSnip to remember to keep around the last snippet.
-  -- You can jump back into it even if you move outside of the selection
-  history = true,
+	-- This tells LuaSnip whether to remember to keep around the last snippet.
+	-- (You can jump back into it even if you move outside of the selection)
+	history = true,
 
-  -- This one is cool cause if you have dynamic snippets, it updates as you type!
-  updateevents = "TextChanged,TextChangedI",
+	-- This one is cool cause if you have dynamic snippets, it updates as you type!
+	updateevents = "TextChanged,TextChangedI",
 
-  -- Autosnippets:
-  enable_autosnippets = false,
+	-- Autosnippets:
+	enable_autosnippets = false,
 }
 
 -- expand snippets

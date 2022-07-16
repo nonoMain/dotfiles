@@ -40,7 +40,7 @@ M.openBrowser = function()
 				end
 			end
 			if not to_ignore then
-				line = "⦁ " .. symbol .. ' ' .. file
+				line = " ⦁ " .. symbol .. ' ' .. file
 				table.insert(M.files_shown, file)
 				table.insert(M.lines_shown, line)
 			end
@@ -50,8 +50,12 @@ M.openBrowser = function()
 
 	keymap('n', '<CR>', M.openFile, { noremap = true, silent = true, buffer = vim.fn.bufnr() })
 
+	api.nvim_exec("file existing oldfiles", false)
+
 	-- local settings
 	vim.cmd [[
+		setlocal nonumber
+		setlocal norelativenumber
 		setlocal nomodifiable
 		setlocal noswapfile
 		setlocal buftype=nofile
@@ -79,7 +83,7 @@ if vim.g.devicons then
 	api.nvim_create_autocmd({ "FileType" }, { pattern = "oldfilesBrowser", callback = function()
 		vim.schedule(function()
 			for color, icons in pairs(ftdevicons.iconsColorDicts) do
-				vim.cmd(string.format("syntax match ftdevicons%s /\\v%s/ containedin=ALL", color, table.concat(icons,'|')), false)
+				vim.cmd(string.format("syntax match %s /\\v%s/ containedin=ALL", color, table.concat(icons,'|')), false)
 			end
 		end)
 	end, group = "BrowseOldfiles"})

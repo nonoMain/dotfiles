@@ -217,6 +217,7 @@ alias r='fc -s'
 
 alias ..='cd ../'
 alias ...='cd ../../'
+alias ....='cd ../../../'
 # ls
 alias ll='ls -alF'
 alias ls='ls --color=auto'
@@ -240,9 +241,12 @@ alias remove-unneeded-packages='sudo pacman -Rsn $(pacman -Qdtq)'
 # check memeory leaks of binary files
 if does_command_exist "valgrind"; then
 	alias memcheckbin='valgrind --leak-check=summary'
+	alias memcheckbinfull='valgrind --leak-check=summary'
 else
 	alias memcheckbin='echo "To use this alias valgrind must be found available"'
+	alias memcheckbinfull='echo "To use this alias valgrind must be found available"'
 fi
+alias testcolors='curl -s https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh | bash'
 
 ## PS1
 PS_PATH_MAX_LENGTH=35
@@ -357,6 +361,6 @@ if [ -f '/usr/share/nvm/init-nvm.sh' ]; then
 fi
 
 # Activate tmux on start
-#if does_command_exist "tmux" && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#	exec tmux -u
-#fi
+# if does_command_exist "tmux" && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+# 	tmux; exit
+# fi

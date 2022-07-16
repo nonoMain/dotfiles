@@ -1,4 +1,3 @@
-local g = vim.g
 local opt = vim.opt
 local api = vim.api
 
@@ -48,6 +47,11 @@ opt.fillchars = 'stlnc: ,stl: ,vert:│,fold:-,diff:-,eob:~'
 opt.swapfile = true
 opt.fileencoding = 'utf-8'
 opt.encoding = 'utf-8'
+if vim.fn.has('win32') then
+	opt.shada = "!,'250,<50,s10,h,rA:,rB:"
+else
+	opt.shada = "!,'250,<50,s10,h"
+end
 
 -- Usage
 opt.hidden = true
@@ -56,13 +60,14 @@ opt.lazyredraw = true
 opt.synmaxcol = 500
 opt.updatetime = 300
 
--- Cursor augroup
+-- Augroups
+-- Active cursor have lines
 api.nvim_create_augroup('CursorlinesOnActiveOnly', { clear = false })
 api.nvim_create_autocmd('WinLeave', { command = 'set nocursorline nocursorcolumn' , group = 'CursorlinesOnActiveOnly'})
 api.nvim_create_autocmd('WinEnter', { command = 'set cursorline cursorcolumn' , group = 'CursorlinesOnActiveOnly'})
 api.nvim_create_autocmd('VimEnter', { command = 'set cursorline cursorcolumn' , group = 'CursorlinesOnActiveOnly'})
-
-api.nvim_create_augroup('FoldTeller', { clear = true })
-api.nvim_create_autocmd('BufWinEnter', { command = 'let &foldlevel = max(map(range(1, line(\'$\')), \'foldlevel(v:val)\'))' , group = 'FoldTeller'})
+-- Buffer starts with the current minimum limit foldlevel value
+api.nvim_create_augroup('SetFoldLevel', { clear = true })
+api.nvim_create_autocmd('BufWinEnter', { command = 'let &foldlevel = max(map(range(1, line(\'$\')), \'foldlevel(v:val)\'))' , group = 'SetFoldLevel'})
 
 opt.shortmess:append 'sI' -- Disable nvim intro

@@ -3,12 +3,19 @@ local au = require("au")
 vim.luasnip = {}
 local M = {}
 
+if vim.g.devicons then
+	M.snippet_sign = ''
+else
+	M.snippet_sign = 'S'
+end
+
 local function snippet2completion(snippet)
 	return {
-		word			= snippet.trigger,
-		menu			= snippet.name,
-		info			= vim.trim(table.concat(vim.tbl_flatten({snippet.dscr or "", "", snippet:get_docstring()}), "\n")),
-		dup			 = true,
+		word = snippet.trigger,
+		menu = snippet.name,
+		info = vim.trim(table.concat(vim.tbl_flatten({snippet.dscr or "", "", snippet:get_docstring()}), "\n")),
+		kind = M.snippet_sign,
+		dup = true,
 		user_data = "luasnip"
 	}
 end
