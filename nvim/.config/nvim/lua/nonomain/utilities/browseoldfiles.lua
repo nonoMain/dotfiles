@@ -46,9 +46,9 @@ M.openBrowser = function()
 			end
 		end
 	end
-	api.nvim_put(M.lines_shown, "l", true, false)
+	api.nvim_put(M.lines_shown, 'l', true, false)
 
-	keymap('n', '<CR>', M.openFile, { noremap = true, silent = true, buffer = vim.fn.bufnr() })
+	keymap('n', "<CR>", M.openFile, { noremap = true, silent = true, buffer = vim.fn.bufnr() })
 
 	api.nvim_exec("file existing oldfiles", false)
 
@@ -71,7 +71,7 @@ M.openBrowser = function()
 end
 
 M.toggle = function()
-	if vim.bo.filetype == 'oldfilesBrowser' then -- quit while browsing
+	if vim.bo.filetype == "oldfilesBrowser" then -- quit while browsing
 		utils.bkill(0)
 	else -- open the browser
 		M.openBrowser()
@@ -89,6 +89,6 @@ if vim.g.devicons then
 	end, group = "BrowseOldfiles"})
 end
 
-keymap('n', '<leader>h', M.toggle, opts)
+keymap('n', "<leader>h", M.toggle, opts)
 
 return { toggle = M.toggle }

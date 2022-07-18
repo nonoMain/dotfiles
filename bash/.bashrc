@@ -215,9 +215,9 @@ alias rm='rm -i'
 # e.g r ssh will repeat the last command that started with 'ssh'
 alias r='fc -s'
 
-alias ..='cd ../'
-alias ...='cd ../../'
-alias ....='cd ../../../'
+alias .='cd ../'
+alias ..='cd ../../'
+alias ...='cd ../../../'
 # ls
 alias ll='ls -alF'
 alias ls='ls --color=auto'
@@ -225,6 +225,8 @@ alias la='ls -A'
 # lsd
 if does_command_exist "lsd"; then
 	alias ll='lsd -alF'
+	alias ls='lsd'
+	alias la='lsd -A'
 fi
 if does_command_exist "figlet"; then
 	alias asciiCalendar='watch -n 1 "date '+%D%n%T' | figlet -k"'

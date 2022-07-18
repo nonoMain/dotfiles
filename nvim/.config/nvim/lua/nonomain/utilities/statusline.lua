@@ -83,7 +83,7 @@ M.ActiveLine = function()
 	local symbol = M.getBufferSymbol() or ftdevicons.getPathSymbol(fn.bufname()) or ""
 	local stl = M.highlights.accent .. ' ' .. "b:%n" .. ' ' .. M.getGitBranch() .. ' '
 	stl = stl .. M.highlights.seperator .. M.signs.LeftSep
-	stl = stl .. M.highlights.normal .. "%=" .. symbol .. " %f %h%w%m%r%=" .. M.getBufferDiagnostics()
+	stl = stl .. M.highlights.normal .. "%=" .. symbol .. " %<%f %h%w%m%r%=" .. M.getBufferDiagnostics()
 	stl = stl .. M.highlights.seperator .. M.signs.RightSep
 	stl = stl .. M.highlights.accent .. ' '
 	stl = stl .. "%-6.(%l,%c%V%) %P "
@@ -96,7 +96,7 @@ M.statusline = function()
 end
 M.statuslineNC = function()
 	local symbol = M.getBufferSymbol() or ftdevicons.getPathSymbol(fn.bufname()) or ""
-	local stl = " b:%n" .. ' ' .. M.getGitBranch() .. ' ' .. "%=" .. symbol .. " %f %h%w%m%r%=%-6.(%l,%c%V%) %P "
+	local stl = " b:%n" .. ' ' .. M.getGitBranch() .. ' ' .. "%=" .. symbol .. " %<%f %h%w%m%r%=%-6.(%l,%c%V%) %P "
 	vim.wo.statusline = stl
 end
 M.enable = function()
