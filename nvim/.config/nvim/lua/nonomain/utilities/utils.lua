@@ -2,6 +2,12 @@ local fn = vim.fn
 local api = vim.api
 local M = {}
 
+M.disable = function(plugins)
+	for i = 1, #plugins do 
+		vim.g['loaded_' .. plugins[i]] = true
+	end
+end
+
 M.capture_command = function(cmd, raw)
 	local f = assert(io.popen(cmd, 'r'))
 	local s = assert(f:read("*a"))

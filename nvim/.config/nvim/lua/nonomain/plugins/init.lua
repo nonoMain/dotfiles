@@ -26,10 +26,12 @@ packer.init {
 return require("packer").startup(function(use)
 		use "wbthomason/packer.nvim"            -- packer.nvim (a plugin manager needs to plug itself..)
 
+		use "neovim/nvim-lspconfig"            -- nvim-lsp support
 		use {
-			"neovim/nvim-lspconfig",            -- nvim-lsp support
-			"williamboman/nvim-lsp-installer",  -- install lsp servers (cross platform)
+			"williamboman/mason.nvim",  -- install lsp servers (cross platform)
+			config = function() require "mason".setup() end,
 		}
+		use "williamboman/mason-lspconfig.nvim"  -- install lsp servers (cross platform)
 
 		use {
 			"nvim-treesitter/nvim-treesitter",  -- treesitter (1)
@@ -42,10 +44,12 @@ return require("packer").startup(function(use)
 			config = function() require "nonomain.plugins.nvim-treesitter-playground" end,
 		}
 
-		use {
-			"L3MON4D3/LuaSnip",                 -- snippets
-			config = function() require "nonomain.plugins.luasnip" end,
-		}
+		use "SirVer/ultisnips"
+
+--		use {
+--			"L3MON4D3/LuaSnip",                 -- snippets
+--			config = function() require "nonomain.plugins.luasnip" end,
+--		}
 
 		use {
 			"lewis6991/gitsigns.nvim",          -- git diff signs
@@ -56,10 +60,12 @@ return require("packer").startup(function(use)
 
 		use {                                   -- surround text faster
 			"ur4ltz/surround.nvim",
-			config = function() require"surround".setup {mappings_style = "sandwich"} end
+			config = function() require("surround").setup {mappings_style = "sandwich"} end
 		}
 
 		use "norcalli/nvim-colorizer.lua"       -- coloring codes inside neovim
+
+		use 'lewis6991/impatient.nvim'          -- makes loading lua faster
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins

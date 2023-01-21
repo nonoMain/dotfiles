@@ -3,8 +3,17 @@ local i2cv = { 0, 95, 135, 175, 215, 255 }
 local M = {}
 
 M.colorscheme_name = "cplex"
-M.colorscheme_background = "dark"
-M.colorscheme_file = io.open(os.getenv("XDG_CONFIG_HOME") .. "/nvim/colors/" .. M.colorscheme_name .. ".vim", 'w')
+M.filetype = "lua" -- write the colorscheme in lua (default)
+-- M.filetype = "vim" -- write the colorscheme in vimscript
+
+M.colorscheme_path = os.getenv("XDG_CONFIG_HOME") .. "/nvim/colors/" .. M.colorscheme_name
+if M.filetype == "vim" then
+	M.colorscheme_path = M.colorscheme_path .. ".vim"
+else
+	M.colorscheme_path = M.colorscheme_path .. ".lua"
+end
+
+M.colorscheme_file = io.open(M.colorscheme_path, 'w')
 
 M.v2ci = function(v)
 	if v < 48 then
@@ -56,27 +65,59 @@ M.hex2rgb = function(hex)
 end
 
 M.generate_highlight_command = function(dict)
-	if dict.sp == nil then dict.sp = "NONE" end
+	if dict.reverse == nil then dict.reverse = false end
+	if dict.bold == nil then dict.bold = false end
 
-	if dict.fg == nil then dict.gfg = "NONE"; dict.tfg = "NONE"
+	if dict.fg == nil then
+		if M.filetype == "vim" then
+			dict.gfg = "NONE"; dict.tfg = "NONE"
+		else
+			dict.gfg = "none"; dict.tfg = "'none'"
+		end
 	else dict.gfg = dict.fg; dict.tfg = M.rgb2x256(M.hex2rgb(dict.gfg))
 	end
 
-	if dict.bg == nil then dict.gbg = "NONE"; dict.tbg = "NONE"
+	if dict.bg == nil then
+		if M.filetype == "vim" then
+			dict.gbg = "NONE"; dict.tbg = "NONE"
+		else
+			dict.gbg = "none"; dict.tbg = "'none'"
+		end
 	else dict.gbg = dict.bg; dict.tbg = M.rgb2x256(M.hex2rgb(dict.gbg))
 	end
 
+	local line = ""
+	if M.filetype == "vim" then -- use sp
 
-	local line = "highlight " .. dict.group .. " guifg=" .. dict.gfg .. " guibg=" .. dict.gbg .. " ctermfg=" .. dict.tfg .. " ctermbg=" .. dict.tbg .. " term=" .. dict.sp .. " gui=" .. dict.sp
+		dict.sp = "" -- create the gui / cterm field for vimscript
+		if dict.reverse == true then dict.sp = dict.sp .. "reverse," end
+		if dict.bold == true then dict.sp = dict.sp .. "bold," end
+		if dict.sp == "" then dict.sp = "NONE" end
+
+		line = line .. "highlight " .. dict.group .. " guifg=" .. dict.gfg .. " guibg=" .. dict.gbg .. " ctermfg=" .. dict.tfg .. " ctermbg=" .. dict.tbg .. " cterm=" .. dict.sp .. " gui=" .. dict.sp
+	else -- lua -> use boolean args (no need for cterm / gui)
+		line = line .. "vim.api.nvim_set_hl" .. "(0, '" .. dict.group .. "', {" .. " fg = '" .. dict.gfg .. "'" .. ", bg = '" .. dict.gbg .. "'" .. ", ctermfg = " .. dict.tfg .. ", ctermbg = " .. dict.tbg
+		if dict.reverse == true then line = line .. ", reverse = true" end
+		if dict.bold == true then line = line .. ", bold = true" end
+		line = line .. "})"
+	end
 	return line
 end
 
 M.generate_link_command = function(dict)
-	return 'highlight! link ' .. dict.from .. ' ' .. dict.to
+	if M.filetype == "vim" then
+		return 'highlight! link ' .. dict.from .. ' ' .. dict.to
+	else
+		return "vim.api.nvim_set_hl" .. "(0, '" .. dict.from .. "'" .. ", { link = '" .. dict.to .. "'})"
+	end
 end
 
 M.comment = function(note)
-	return '" ' .. note
+	if M.filetype == "vim" then
+		return '" ' .. note
+	else
+		return '-- ' .. note
+	end
 end
 
 M.append = function(text)
@@ -87,17 +128,13 @@ M.appendln = function(text)
 	M.append(text .. "\n")
 end
 
-M.header = function(name, bg)
+M.header = function(name)
 	local header = M.comment(name .. " colorscheme header") .. '\n'
-	header = header .. "set background=" .. bg .. '\n'
-	header = header ..
-[[
-highlight clear
-if exists("syntax_on")
-	syntax reset
-endif
-]]
-	header = header .. "let g:colors_name = \"" .. name .. "\"\n"
+	if M.filetype == "vim" then
+		header = header .. "let g:colors_name = \"" .. name .. "\"\n"
+	else
+		header = header .. "vim.g.colors_name = \"" .. name .. "\"\n"
+	end
 	return header
 end
 
@@ -151,10 +188,10 @@ M.colors = {
 }
 
 M.Colorscheme = {
-	{ note = "Hints for panels" },
+	{ note = "Hints for panels" }, -- notice the note
 	{ group = "PanelHint",                             fg = M.colors.PanelHint },
 
-	{ note = "General colors" },
+	{ note = "General colors" }, -- notice the note
 	{ group = "Accent",                                fg = M.colors.AccentBg, },
 	{ group = "Normal",                                fg = M.colors.ViewFg,            bg = M.colors.ViewBg, },
 	{ group = "Float",                                 fg = M.colors.ViewFg,            bg = M.colors.ViewBg, },
@@ -176,7 +213,7 @@ M.Colorscheme = {
 	{ group = "Field",                                 fg = M.colors.Field, },
 	{ group = "Type",                                  fg = M.colors.Type, },
 	{ group = "Directory",                             fg = M.colors.Special, },
-	{ group = "Error",                                 fg = M.colors.ErrorMsg,          sp = "bold", },
+	{ group = "Error",                                 fg = M.colors.ErrorMsg,          bold = true, },
 	{ group = "Special",                               fg = M.colors.Special, },
 	{ group = "Folded",                                fg = M.colors.Special,           bg = M.colors.NonText, },
 	{ group = "StatusLine",                            fg = M.colors.AccentFg,          bg = M.colors.AccentBg, },
@@ -199,7 +236,7 @@ M.Colorscheme = {
 	{ group = "CursorLine",                            bg = M.colors.ViewHint, },
 	{ group = "CursorColumn",                          bg = M.colors.ViewHint, },
 	{ group = "ColorColumn",                           bg = M.colors.ViewHint, },
-	{ group = "Cursor",                                sp = "Reverse", },
+	{ group = "Cursor",                                reverse = true, },
 	{ group = "VertSplit",                             fg = M.colors.LimitLines, },
 	{ group = "WinSeparator",                          fg = M.colors.LimitLines, },
 	{ group = "Search",                                bg = M.colors.SearchHighlight, },
@@ -217,7 +254,7 @@ M.Colorscheme = {
 	{ group = "DiagnosticSignInfo",                    fg = M.colors.InfoSym, },
 	{ group = "DiagnosticSignHint",                    fg = M.colors.HintSym, },
 
-	{ note = "Specific colors (mainly for devicons)" },
+	{ note = "Specific colors (mainly for devicons)" }, -- notice the note
 	{ group = "c_F14C28",                              fg = "#F14C28", },
 	{ group = "c_019833",                              fg = "#019833", },
 	{ group = "c_DEA584",                              fg = "#DEA584", },
@@ -249,7 +286,7 @@ M.Colorscheme = {
 }
 
 M.Links = {
-	{ note = "Normal links" },
+	{ note = "Normal links" }, -- notice the note
 	{ from = "Title",                                  to = "Normal", },
 	{ from = "Todo",                                   to = "Special", },
 	{ from = "Statement",                              to = "Repeat", },
@@ -257,7 +294,7 @@ M.Links = {
 	{ from = "CursorColumn",                           to = "CursorLine", },
 	{ from = "String",                                 to = "Character", },
 
-	{ note = "Lsp links" },
+	{ note = "Lsp links" }, -- notice the note
 	{ from = "LspDiagnosticsDefaultError",             to = "DiagnosticSignError", },
 	{ from = "LspDiagnosticsDefaultWarning",           to = "DiagnosticSignWarning", },
 	{ from = "LspDiagnosticsDefaultInformation",       to = "DiagnosticSignInformation", },
@@ -289,7 +326,7 @@ M.Links = {
 	{ from = "LspDiagnosticsUnderlineInfo",            to = "DiagnosticSignInfo", },
 	{ from = "LspDiagnosticsUnderlineHint",            to = "DiagnosticSignHint", },
 
-	{ note = "Viml links" },
+	{ note = "Viml links" }, -- notice the note
 	{ from = "vimEnvvar",                              to = "Constant", },
 	{ from = "vimHiKeyList",                           to = "Constant", },
 	{ from = "vimCommand",                             to = "Keyword", },
@@ -299,11 +336,11 @@ M.Links = {
 	{ from = "vimUserFunc",                            to = "Function", },
 	{ from = "vimCommentTitle",                        to = "Special", },
 
-	{ note = "Json links" },
+	{ note = "Json links" }, -- notice the note
 	{ from = "jsonKeyword",                            to = "Keyword", },
 	{ from = "jsonBoolean",                            to = "Boolean", },
 
-	{ note = "Treesitter links" },
+	{ note = "Treesitter links" }, -- notice the note
 	{ from = "TSString",                               to = "String", },
 	{ from = "TSOperator",                             to = "Operator", },
 	{ from = "TSFunction",                             to = "Function", },
@@ -355,7 +392,7 @@ M.Links = {
 	{ from = "TSTagDelimiter",                         to = "TagDelimiter", },
 }
 
-M.append(M.header(M.colorscheme_name, M.colorscheme_background))
+M.append(M.header(M.colorscheme_name))
 
 for _, highlight_dict in ipairs(M.Colorscheme) do
 	if highlight_dict.note ~= nil then

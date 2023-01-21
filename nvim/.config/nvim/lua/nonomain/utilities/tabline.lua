@@ -4,11 +4,9 @@ local M = {}
 
 M.signs = {}
 if vim.g.devicons then
-	-- M.signs.ActiveTabSymbol = '○'
-	-- M.signs.InactiveTabSymbol = '×'
 	M.signs.ActiveTabSymbol = '◉'
 	M.signs.InactiveTabSymbol = '○'
-	M.signs.LeftSep = " "
+	M.signs.LeftSep = " "
 	M.signs.RightSep = " "
 else
 	M.signs.ActiveTabSymbol = '[x]'
@@ -118,9 +116,12 @@ M.generateLabel = function(tab, is_active)
 		end
 		symbols.labelSymbol = M.signs.ActiveTabSymbol
 	else
-		highlights.normal = "%#TabLine#"
-		highlights.symbol = "%#TabLine#"
-		highlights.seperator = "%#TabLineSep#"
+		-- highlights.normal = "%#TabLine#"
+		-- highlights.symbol = "%#TabLine#"
+		-- highlights.seperator = "%#TabLineSep#"
+		highlights.normal = "%#TabLineSel#"
+		highlights.symbol = "%#TabLineSel#"
+		highlights.seperator = "%#TabLineSelSep#"
 		if vim.g.devicons and ftdevicons.getColorOfSymbol(symbols.ftsymbol) then
 			highlights.ftsymbol = "%#" .. ftdevicons.getColorOfSymbol(symbols.ftsymbol) .. '#'
 		end
