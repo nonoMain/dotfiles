@@ -1,76 +1,57 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-local packer_bootstrap
-if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap = fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path, }
-	print "Installing packer close and reopen Neovim..."
-	vim.cmd [[packadd packer.nvim]]
+-- Bootstrap lazy
+local lazypath = vim.fn.stdpath "data"  .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+	"--depth",
+	"1",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local status_ok, packer = pcall(require, "packer")
+local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
 	return
 end
 
--- config packer
-packer.init {
-	display = {
-		open_fn = function()
-			return require("packer.util").float { border = "rounded" }
-		end,
+return lazy.setup({
+	"neovim/nvim-lspconfig",            -- nvim-lsp support
+
+	{
+		"williamboman/mason.nvim",  -- install lsp servers (cross platform)
+		config = function() require "mason".setup() end,
 	},
-}
+	"williamboman/mason-lspconfig.nvim",  -- install lsp servers (cross platform)
 
-return require("packer").startup(function(use)
-		use "wbthomason/packer.nvim"            -- packer.nvim (a plugin manager needs to plug itself..)
+	{
+		"nvim-treesitter/nvim-treesitter",  -- treesitter (1)
+		run = ":TSUpdate",
+		config = function() require "nonomain.plugins.nvim-treesitter" end,
+	},
 
-		use "neovim/nvim-lspconfig"            -- nvim-lsp support
-		use {
-			"williamboman/mason.nvim",  -- install lsp servers (cross platform)
-			config = function() require "mason".setup() end,
-		}
-		use "williamboman/mason-lspconfig.nvim"  -- install lsp servers (cross platform)
+	{
+		"nvim-treesitter/playground",       -- treesitter (2)
+		config = function() require "nonomain.plugins.nvim-treesitter-playground" end,
+	},
 
-		use {
-			"nvim-treesitter/nvim-treesitter",  -- treesitter (1)
-			run = ":TSUpdate",
-			config = function() require "nonomain.plugins.nvim-treesitter" end,
-		}
+	"SirVer/ultisnips",
 
-		use {
-			"nvim-treesitter/playground",       -- treesitter (2)
-			config = function() require "nonomain.plugins.nvim-treesitter-playground" end,
-		}
+	{
+		"lewis6991/gitsigns.nvim",          -- git diff signs
+		config = function() require "nonomain.plugins.gitsigns" end,
+	},
 
-		use "SirVer/ultisnips"
+	"tpope/vim-repeat",                  -- repeat plugin actions with the "." key
 
---		use {
---			"L3MON4D3/LuaSnip",                 -- snippets
---			config = function() require "nonomain.plugins.luasnip" end,
---		}
+	{                                   -- surround text faster
+		"ur4ltz/surround.nvim",
+		config = function() require("surround").setup {mappings_style = "sandwich"} end
+	},
 
-		use {
-			"lewis6991/gitsigns.nvim",          -- git diff signs
-			config = function() require "nonomain.plugins.gitsigns" end,
-		}
-
-		use "tpope/vim-repeat"                  -- repeat plugin actions with the "." key
-
-		use {                                   -- surround text faster
-			"ur4ltz/surround.nvim",
-			config = function() require("surround").setup {mappings_style = "sandwich"} end
-		}
-
-		use "norcalli/nvim-colorizer.lua"       -- coloring codes inside neovim
-
-		use 'lewis6991/impatient.nvim'          -- makes loading lua faster
-
-		-- Automatically set up your configuration after cloning packer.nvim
-		-- Put this at the end after all plugins
-		if packer_bootstrap then
-			require("packer").sync()
-		end
-	end
-)
+	"norcalli/nvim-colorizer.lua",       -- coloring codes inside neovim
+})
