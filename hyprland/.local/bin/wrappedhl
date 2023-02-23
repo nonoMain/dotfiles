@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cd ~
+
+# log WLR errors and logs to the hyprland log. Recommended
+export HYPRLAND_LOG_WLR=1
+
+# tell XWayland to use a cursor theme
+export XCURSOR_THEME=Bibata-Modern-Classic
+
+# set a cursor size
+export XCURSOR_SIZE=24
+
+# set IME for this script
+IME=ibus
+export GTK_IM_MODULE=$IME
+export QT_IM_MODULE=$IME
+export XMODIFIERS=@im=$IME
+export SDL_IM_MODULE=$IME
+export GLFW_IM_MODULE=$IME
+
+# Execute Hyprland
+if [ -f /usr/local/bin/Hyprland ]; then
+	exec /usr/local/bin/Hyprland >/dev/null 2>&1 
+elif [ -f /usr/bin/Hyprland ]; then
+	exec /usr/bin/Hyprland >/dev/null 2>&1 
+fi

@@ -1,0 +1,9 @@
+[Unit]
+Description=A service for hyprland wrapper
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/wrappedhl
+
+[Install]
+WantedBy=default.target

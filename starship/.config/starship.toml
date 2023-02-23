@@ -1,0 +1,233 @@
+# ~/.config/starship.toml
+
+format ="""\
+$username\
+$hostname\
+$directory\
+$all\
+$shell\
+$cmd_duration\
+$character
+"""
+
+[package]
+style = 'bold dimmed white'
+symbol = ' '
+format = '[is](dimmed white) [$symbol$version]($style) '
+
+[git_branch]
+symbol = ' '
+style = 'bold green'
+format = '[on](dimmed white) [$symbol$branch(:$remote_branch)]($style) '
+
+[directory]
+style = 'bold cyan'
+read_only_style = 'red'
+read_only = ' '
+truncation_length = 4
+repo_root_style = 'bold green'
+truncation_symbol = '…/'
+format = '[$path ]($style)'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+
+# Here is how you can shorten some long paths by text replacement
+[directory.substitutions]
+"Documents" = ' '
+"Downloads" = ' '
+"Music" = ' '
+"Pictures" = ' '
+# Keep in mind that the order matters. For example:
+# "Important Documents" = '  '
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important  " = '  '
+
+[battery]
+full_symbol = '  '
+charging_symbol = '⚡'
+discharging_symbol = '󰁼'
+
+[[battery.display]]
+threshold = 30
+style = 'bold red'
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[✖](bold red) '
+
+[cmd_duration]
+show_milliseconds = false
+min_time = 100  # Show command duration over 100 milliseconds (=0.1 sec)
+format = 'took [$duration](bold yellow) '
+
+[git_commit]
+commit_hash_length = 8
+style = 'bold white'
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[git_status]
+style = 'dimmed white'
+conflicted = '=|'
+up_to_date = ' |'
+ahead = '⇡ ×${count}|'
+behind = '⇣ ×${count}|'
+diverged = '⇕ ⇡×${ahead_count} ⇣×${behind_count}|'
+untracked = '?:${count}|'
+stashed = '$|'
+modified = 'm:${count}|'
+staged = '+:${count}|'
+renamed = '»:${count}|'
+deleted = '✘:${count}|'
+format = '[|$all_status$ahead_behind]($style) '
+
+[hostname]
+ssh_only = true
+style = 'bold dimmed white'
+format = '[$ssh_symbol$hostname]($style)'
+
+[username]
+style_user = 'bold cyan'
+show_always = false
+format = '[$user]($style) [in](dimmed white) '
+
+# just symbols
+[aws]
+symbol = '  '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[buf]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[c]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[conda]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[dart]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[docker_context]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[elixir]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[elm]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[golang]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[haskell]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[haxe]
+symbol = '⌘ '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[java]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[julia]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[lua]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[meson]
+symbol = '喝 '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[nim]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[nodejs]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[python]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[rlang]
+symbol = 'ﳒ '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[ruby]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[rust]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[scala]
+symbol = ' '
+format = '[\[](dimmed white) [$symbol]($style)[\]](dimmed white)'
+
+[hg_branch]
+symbol = ' '
+
+[guix_shell]
+symbol = ' '
+
+[memory_usage]
+symbol = ' '
+
+[nix_shell]
+symbol = ' '
+
+[os.symbols]
+Alpine = ' '
+Amazon = ' '
+Android = ' '
+Arch = ' '
+CentOS = ' '
+Debian = ' '
+DragonFly = ' '
+Emscripten = ' '
+EndeavourOS = ' '
+Fedora = ' '
+FreeBSD = ' '
+Garuda = '﯑ '
+Gentoo = ' '
+HardenedBSD = 'ﲊ '
+Illumos = ' '
+Linux = ' '
+Macos = ' '
+Manjaro = ' '
+Mariner = ' '
+MidnightBSD = ' '
+Mint = ' '
+NetBSD = ' '
+NixOS = ' '
+OpenBSD = ' '
+openSUSE = ' '
+OracleLinux = ' '
+Pop = ' '
+Raspbian = ' '
+Redhat = ' '
+RedHatEnterprise = ' '
+Redox = ' '
+Solus = 'ﴱ '
+SUSE = ' '
+Ubuntu = ' '
+Unknown = ' '
+Windows = ' '
+
