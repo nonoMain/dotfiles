@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [[ $1 == "status" ]]; then
+	if [[ "$(pamixer --default-source --get-mute)" -eq 'false' ]]; then
+    echo yes
+  else
+    echo no
+  fi
+fi
+
+if [[ $1 == "toggle" ]]; then
+  pamixer --default-source -t
+fi
