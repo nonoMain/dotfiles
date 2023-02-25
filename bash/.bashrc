@@ -308,6 +308,11 @@ fi
 if does_command_exist "figlet"; then
 	alias asciiCalendar='watch -n 1 "date '+%D%n%T' | figlet -k"'
 fi
+if does_command_exist "tty-clock"; then
+	alias asciiClock='tty-clock -s -c'
+	alias ttyClock='tty-clock -s -c'
+	alias tty-clock='tty-clock -s -c'
+fi
 
 # Add an "alert" alias for long running commands.  e.g: sleep 10; alert
 if does_command_exist "dunstify"; then

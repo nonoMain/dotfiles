@@ -1,128 +1,129 @@
 {
     "layer": "top",
     "position": "top",
-    "mod": "dock",
-    "exclusive": true,
-    "passtrough": false,
-    "gtk-layer-shell": true,
-    "height": 0,
+    "height": 32,
+    // Choose the order of the modules
     "modules-left": [
-        "battery",
-        "clock",
-        // "cpu",
-        // "memory",
-        "custom/weather",
-        "wlr/workspaces"
-    ],
+		"wlr/workspaces",
+		"custom/recorder",
+		"custom/audiorec"
+	],
     "modules-center": ["hyprland/window"],
     "modules-right": [
-        "tray",
-        "cpu",
-        "memory",
-        "custom/updates",
-        // "custom/language",
+		"tray",
+        "idle_inhibitor",
+        "battery",
+		"network",
         "pulseaudio",
-        "pulseaudio#microphone"
-    ],
-
-	"battery": {
-        "format": "{icon} {capacity}%",
-        "format-icons": [" ", " ", " ", " ", " "],
-        "format-time": "{H}h{M}m",
-        "format-charging": " {capacity}%",
-        "format-full": "",
-        "interval": 30,
-        "states": {
-            "warning": 30,
-            "critical": 10
-        },
-        "tooltip": false
-    },
+        "clock"
+	],
     "hyprland/window": {
-        "format": "{}"
+            "format": "{}"
     },
     "wlr/workspaces": {
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "all-outputs": true,
-        "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "default": "₀",
+            "1": "₁",
+            "2": "₂",
+            "3": "₃",
+            "4": "₄",
+            "5": "₅",
+            "6": "₆",
+            "7": "₇",
+            "8": "₈",
+            "9": "₉",
             "urgent": "",
-            "active": "",
-            "default": ""
-          }
+            "focused": "",
+        },
+     "on-scroll-up": "hyprctl dispatch workspace e+1",
+     "on-scroll-down": "hyprctl dispatch workspace e-1",
+      "on-click": "activate",
     },
-    "cpu": {
-        "interval": 10,
-        "format": " {}% ",
-        "max-length": 10,
-        "on-click": ""
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
     },
-    "memory": {
-        "interval": 30,
-        "format": " {}% ",
-        "format-alt":" {used:0.1f}G",
-        "max-length": 10
+    "tray": {
+        "icon-size": 20,
+        "spacing": 6
     },
+    "clock": {
+        "interval": 1,
+        "locale": "C", 
+        "format": "{:%d/%m/%Y %H:%M:%S}",
+        "format-alt": "{:%a,%b %d %d/%m/%Y %H:%M}"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-good": "{icon} {capacity}%", // An empty format will hide the module
+        "format-full": "{icon}",
+        "format-icons": ["", "", "", "",]
+
+        // "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "✈ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format": "{essid}: {ipaddr}"
+    },
+    "pulseaudio": {
+      "scroll-step": 2, // %, can be a float
+      "format": "{icon} {volume}% {format_source}",
+      "format-bluetooth": "{icon} {volume}% {format_source}",
+      "format-bluetooth-muted": " {format_source}",
+      "format-muted": "  {format_source}",
+      "format-source": " {volume}%",
+      "format-source-muted": "",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "🎧",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+      },
+      "on-click": "pavucontrol"
+    },
+    },
+
     "custom/updates": {
         "exec": "(paru -Qua) | wc -l",
         "interval": 7200,
         "format": " {}"
     },
- //     "custom/language": {
- //         "exec": "cat /tmp/kb_layout",
- //         "interval": 3,
- //         "format": " {}",
- //         "tooltip": false
- //     },
-    "custom/weather" : {
-        "tooltip" : true,
-        "format" : "{}",
-        "restart-interval" : 300,
-        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type" : "json"
+    "custom/recorder": {
+        "format": " Rec",
+        "format-disabled": " Off-air", //An empty format will hide the module.
+        "return-type": "json",
+        "interval": 1,
+        "exec": "echo '{\"class\": \"recording\"}'",
+        "exec-if": "pgrep wf-recorder",
     },
-    "tray": {
-        "icon-size": 13,
-        "tooltip": false,
-        "spacing": 10
+
+    "custom/audiorec": {
+        "format": "♬ Rec",
+        "format-disabled": "♬ Off-air", //An empty format will hide the module.
+        "return-type": "json",
+        "interval": 1,
+        "exec": "echo '{\"class\": \"audio recording\"}'",
+        "exec-if": "pgrep ffmpeg",
     },
-    "clock": {
-        "format": "{: %R   %d/%m}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip": false,
-        "format-muted": " Muted",
-        "on-click": "pamixer -t",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
-    },
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "tooltip": false,
-        "format-source": " {volume}%",
-        "format-source-muted": " Muted",
-        "on-click": "pamixer --default-source -t",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
-    }
+
 }

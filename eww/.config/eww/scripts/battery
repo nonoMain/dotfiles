@@ -1,6 +1,10 @@
 #!/bin/bash
 
-bat=/sys/class/power_supply/BAT*/
+if [ -f '/sys/class/power_supply/BAT0' ]; then
+	bat='/sys/class/power_supply/BAT0'
+else
+	bat='/sys/class/power_supply/BAT1'
+fi
 per="$(cat "$bat/capacity")"
 
 icon() {

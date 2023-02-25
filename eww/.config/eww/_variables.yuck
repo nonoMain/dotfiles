@@ -1,0 +1,34 @@
+;; Variables ---------------------------------------
+;; notes
+;; "large" interval times are for being lighter (a bit) so sometimes they are slow as they can be
+
+;; Date --------------------------------------------
+(defpoll datetime :interval "1s" "date '+%d/%m %H:%M:%S'")
+(defpoll calendar_day :initial "0" :interval "2h" "date '+%d'")
+(defpoll calendar_month :initial "0" :interval "2h" "date '+%m'")
+(defpoll calendar_year :initial "0" :interval "2h" "date '+%Y'")
+
+;; Connections -------------------------------------
+;; network information
+(defpoll network_icon :interval "3s" "./scripts/network.sh icon")
+(defpoll network_class :interval "3s" "./scripts/network.sh class")
+(defpoll network_name :interval "3s" "./scripts/network.sh name")
+(defpoll network_status :interval "1s" "./scripts/network.sh status")
+(defpoll network_radio :interval "1s" "./scripts/network.sh radio-status")
+(defpoll network_ssid :interval "1s" "./scripts/network.sh ssid")
+
+;; volume information
+(defpoll volume_class :interval "1s" "scripts/volume class")
+(defpoll volume :interval "1s" "scripts/volume percentage")
+(defpoll volume_icon :interval "1s" "scripts/volume icon")
+(defpoll vol :interval "1s" "scripts/volume vol")
+
+;; mic information
+(defpoll mic_status :interval "1s" "~/.config/eww/scripts/mic status")
+
+;; bluetooth information
+(defpoll bluetooth_state :interval "1s" "~/.config/eww/scripts/bluetooth state")
+
+;; Battery ----------------------------------------
+(defpoll battery_icon :interval "1s" "scripts/battery icon")
+(defpoll battery :interval "1s" "scripts/battery percent")

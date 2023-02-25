@@ -1,27 +1,28 @@
-  $bg: rgba($color: #0a0a09, $alpha: 0.4);;
-  $contrastbg: #0a0a09;
-  $bgSecondary: #0a0a09;
-  $bgCal: rgba($color: #0a0a09, $alpha: 0.6);
-  $fg: #fdfffd;
-  $fgDim: #cccccc;
-  $watermelon: #e05f65;
+$bg: rgba($color: #0a0a09, $alpha: 0.6);;
+$contrastbg: #0a0a09;
+$bgSecondary: #0a0a09;
+$bgCal: rgba($color: #0a0a09, $alpha: 0.8);
+$fg: #fdfffd;
+$fgDim: #cccccc;
+$sep: #556666;
+$watermelon: #e05f65;
 
-  // Aliases
-  $background: $bg;
-  $backgroundSecondary: $bgSecondary;
-  $foreground: $fg;
-  $foregroundDim: $fgDim;
+// Aliases
+$background: $bg;
+$backgroundSecondary: $bgSecondary;
+$foreground: $fg;
+$foregroundDim: $fgDim;
 
-  $black: #242931;
-  $red: #995C38;
-  $green: #8F7359;
-  $blue: #d4743b;
-  $cyan: #c89464;
-  $blue-desaturated: #74bee9;
-  $magenta: #c68aee;
-  $purple: #c68aee;
-  $aquamarine: #94f7c5;
-  $yellow: #f1cf8a;
-  $accent: #5d8fc9;
-  $javacafeMagenta: #c68aee;
-  $javacafeBlue: #70a5eb;
+$black: #242931;
+$red: #995C38;
+$green: #8F7359;
+$blue: #d4743b;
+$cyan: #c89464;
+$blue-desaturated: #74bee9;
+$magenta: #c68aee;
+$purple: #c68aee;
+$aquamarine: #94f7c5;
+$yellow: #f1cf8a;
+$accent: #5d8fc9;
+$javacafeMagenta: #c68aee;
+$javacafeBlue: #70a5eb;

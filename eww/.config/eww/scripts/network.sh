@@ -1,4 +1,5 @@
 #!/bin/bash
+# @requires: nmcli
 
 symbol() {
   if [ $(cat /sys/class/net/enp*/operstate) = up ]
@@ -96,3 +97,4 @@ if [[ $1 == "toggle-radio" ]]; then
     nmcli radio wifi on
   fi
 fi
+

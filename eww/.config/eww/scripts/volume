@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # @requires: pamixer
 
 percentage () {
@@ -66,3 +65,4 @@ fi
 if [[ $1 == "vol" ]]; then
   get_vol
 fi
+
