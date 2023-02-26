@@ -2,33 +2,41 @@
 ;; notes
 ;; "large" interval times are for being lighter (a bit) so sometimes they are slow as they can be
 
+(defvar eww "/usr/bin/eww")
+
 ;; Date --------------------------------------------
 (defpoll datetime :interval "1s" "date '+%d/%m %H:%M:%S'")
-(defpoll calendar_day :initial "0" :interval "2h" "date '+%d'")
-(defpoll calendar_month :initial "0" :interval "2h" "date '+%m'")
-(defpoll calendar_year :initial "0" :interval "2h" "date '+%Y'")
+(defpoll calendar_day :initial "1" :interval "2h" "date '+%d'")
+(defpoll calendar_month :initial "1" :interval "2h" "date '+%m'")
+(defpoll calendar_year :initial "1" :interval "2h" "date '+%Y'")
 
 ;; Connections -------------------------------------
 ;; network information
-(defpoll network_icon :interval "3s" "./scripts/network.sh icon")
-(defpoll network_class :interval "3s" "./scripts/network.sh class")
-(defpoll network_name :interval "3s" "./scripts/network.sh name")
-(defpoll network_status :interval "1s" "./scripts/network.sh status")
-(defpoll network_radio :interval "1s" "./scripts/network.sh radio-status")
-(defpoll network_ssid :interval "1s" "./scripts/network.sh ssid")
+(defpoll network_icon :interval "3s" "./scripts/network icon")
+(defpoll network_class :interval "3s" "./scripts/network class")
+(defpoll network_name :interval "3s" "./scripts/network name")
+(defpoll network_status :interval "1s" "./scripts/network status")
+(defpoll network_ssid :interval "1s" "./scripts/network ssid")
 
 ;; volume information
 (defpoll volume_class :interval "1s" "scripts/volume class")
-(defpoll volume :interval "1s" "scripts/volume percentage")
-(defpoll volume_icon :interval "1s" "scripts/volume icon")
-(defpoll vol :interval "1s" "scripts/volume vol")
+(defpoll volume :interval "50ms" "scripts/volume percentage")
+(defpoll volume_icon :interval "50ms" "scripts/volume icon")
+(defpoll vol :interval "50ms" "scripts/volume vol")
 
 ;; mic information
-(defpoll mic_status :interval "1s" "~/.config/eww/scripts/mic status")
+(defpoll mic_status :interval "50ms" "scripts/mic status")
 
 ;; bluetooth information
-(defpoll bluetooth_state :interval "1s" "~/.config/eww/scripts/bluetooth state")
+(defpoll bluetooth_state :interval "1s" "scripts/bluetooth state")
+
+;; updates information
+(defpoll updates_count :interval "1h" "scripts/updates")
 
 ;; Battery ----------------------------------------
 (defpoll battery_icon :interval "1s" "scripts/battery icon")
-(defpoll battery :interval "1s" "scripts/battery percent")
+(defpoll battery_percent :interval "1s" "scripts/battery percent")
+
+;; Bar menus -------------------------------------
+(defvar reveal_var_powermenu false)
+(defvar reveal_var_workspaces false)

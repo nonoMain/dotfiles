@@ -1,0 +1,148 @@
+;; workspaces widget -> taken from hyprland docs
+(deflisten workspaces :initial "[]" "scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "scripts/get-active-workspace")
+(defwidget workspaces []
+	(eventbox :onscroll "scripts/change-active-workspace {} ${current_workspace}" :class "workspaces"
+		(box
+			:space-evenly false
+			:spacing "5"
+			(for workspace in workspaces
+				(eventbox :onclick "scripts/change-active-workspace to ${workspace.id}"
+					(box :class "${workspace.id == current_workspace ? "active" : "${workspace.id}"}"
+						(label :text "${workspace.id == current_workspace ? "" : workspace.windows > 0 ? "" : ""}")
+					)
+				)
+			)
+		)
+	)
+)
+
+;; active window widget -> taken from hyprland docs
+(deflisten window :initial "Desktop" "scripts/get-window-title")
+(defwidget wintitle []
+	(box :class "wintitle"
+		(label :limit-width 55 :text "${"${window}" == "" ? "Desktop" : "${window}" }"
+		)
+	)
+)
+
+(defwidget launcher []
+	(eventbox	:onhover "${eww} update reveal_var_workspaces=true"
+				:onhoverlost "${eww} update reveal_var_workspaces=false"
+		(box		:class "launcher"
+					:orientation "h"
+					:space-evenly false
+					:spacing 5
+					:vexpand false
+			(button :class "dispatcher" :onclick "~/.config/rofi/toggle_modes.sh \"L\"" "")
+			(revealer	:transition "slideright"
+							:reveal reveal_var_workspaces
+							:duration "550ms"
+				(workspaces)
+			)
+		)
+	)
+)
+
+;; Powermenu Widget
+(defwidget powermenu []
+	(eventbox	:onhover "${eww} update reveal_var_powermenu=true"
+				:onhoverlost "${eww} update reveal_var_powermenu=false"
+		(box		:orientation "h"
+					:space-evenly false
+					:vexpand false
+					:class "powermenu"
+			(revealer	:transition "slideleft"
+							:reveal reveal_var_powermenu
+							:duration "550ms"
+				(box	:orientation "h"
+						:space-evenly true
+						:spacing 5
+					(button :class "btn_lock" :onclick "scripts/powermenu lock" "")
+					(button :class "btn_logout" :onclick "scripts/powermenu logout" "󰍃")
+					(button :class "btn_sleep" :onclick "scripts/powermenu sleep" "󰤄")
+					(button :class "btn_reboot" :onclick "scripts/powermenu reboot" "")
+					(button :class "btn_shutdown" :onclick "scripts/powermenu shutdown" "⏻")
+				)
+			)
+		(button :class "btn_launcher" :onclick "~/.config/rofi/toggle_modes.sh \"L\"" "")
+		)
+	)
+)
+
+(defwidget systembox []
+	(button :class "systembox" :onclick "${eww} open --toggle systembox"
+		(box :orientation "h"
+				:space-evenly false
+				:spacing 6
+			; margin are used to fix issues with nerd fonts widths :/
+			(label :class "updates" :text "${updates_count == '0' ? '' : ''}")
+			(label :class "network" :text "${network_icon}")
+			(label :class "bluetooth" :text "${bluetooth_state == 'on' ? '' : ''}")
+			(label :class "volume_out" :text "${volume_icon}")
+			(label :class "volume_in" :text "${mic_status == 'yes' ? '' : ''}")
+			(label :class "battery" :text "${battery_icon}")
+		)
+	)
+)
+
+(defwidget datebox []
+	(box :orientation "h"
+			:class "date-box"
+			:space-evenly false
+			:spacing 5
+		(label :text datetime :class "content")
+		(dropdown
+			:onclick "eww open --toggle calendar"
+			:class "date-dropdown"
+			)
+	)
+)
+
+(defwidget sep []
+	(label :class "sep" :text "|")
+)
+
+(defwidget dropdown [onclick ?class ?tooltip]
+	(button :tooltip tooltip :class class :onclick onclick "")
+)
+
+(defwidget left []
+	(box :orientation "h"
+			:space-evenly false
+		 :spacing "5"
+			:halign "start"
+			:class "left"
+		(launcher)
+		(datebox)
+	)
+)
+
+(defwidget center []
+	(box :class "center-widgets"
+				:space-evenly false
+				:halign "center"
+				:orientation "h"
+		(wintitle)
+	)
+)
+
+(defwidget right []
+	(box :class "right-modules"
+				:space-evenly false
+				:halign "end"
+				:spacing 5
+				:orientation "h"
+		(systembox)
+		(powermenu)
+	)
+)
+
+(defwidget bar []
+	(box :class "bar"
+		:orientation "h"
+	(left)
+	(center)
+	(right)
+	)
+)

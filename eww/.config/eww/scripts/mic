@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $1 == "status" ]]; then
-	if [[ "$(pamixer --default-source --get-mute)" -eq 'false' ]]; then
+	if [[ "$(pamixer --default-source --get-mute)" == "false" ]]; then
     echo yes
   else
     echo no

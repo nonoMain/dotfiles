@@ -1,0 +1,150 @@
+.bar {
+	background-color: $bg;
+	font-family: all-the-icons;
+	font-size: 18px;
+	color: $fg;
+}
+
+.launcher {
+	margin: 3px 0 3px 3px;
+	font-size: 18px;
+	.dispatcher {
+		background-color: $accentbg;
+		color: $bg;
+		border-radius: 10px;
+		font-size: inherit;
+		padding: 0 8px;
+	}
+}
+
+.workspaces {
+	font-family: Product Sans;
+	background-color: $bg;
+	margin: 3px 0;
+	border-radius: 10px;
+	font-size: 20px;
+
+	.0 {
+	}
+	
+	.1 {
+		padding: 0 0 0 5px;
+		color: $fgDim;
+	}
+	
+	.10 {
+		padding: 0 5px 0 0;
+		color: $fgDim;
+	}
+
+	.2, .3, .4, .5, .6, .7, .8, .9 {
+		color: $fgDim;
+	}
+
+	.active {
+		color: $accent;
+	}
+}
+
+.sep {
+	color: $sep;
+}
+
+.wintitle {
+	font-family: Product Sans;
+	background-color: $bg;
+	color: $accent;
+	margin: 3px 0;
+	padding: 0 10px;
+	border-radius: 10px;
+	font-size: 16px;
+}
+
+.systembox {
+	background: $bg;
+	border-radius: 10px;
+	padding: 0 12px;
+	margin: 3px 0px;
+
+	.updates {
+		font-size: 13px;
+	}
+	.network {
+		font-size: 20px;
+	}
+	.volume_out {
+		font-size: 22px;
+	}
+	.volume_in {
+		font-size: 14px;
+	}
+	.bluetooth {
+		font-size: 15px;
+	}
+	.battery {
+		font-size: 25px;
+	}
+}
+
+.date-box {
+	font-family: Product Sans;
+	font-weight: bold;
+	background: $bg;
+	margin: 3px 0px 3px 0;
+	padding: 0 2px 0 14px;
+	border-radius: 10px;
+	.content {
+		color: $fg;
+		font-size: 14px;
+	}
+	.date-dropdown {
+		margin: 0;
+		padding: 0 10px 0 0px;
+		color: $fg;
+	}
+}
+
+.cal-box {
+	font-family: Product Sans;
+	font-weight: bold;
+	font-size: 16px;
+	background: $bg;
+	margin: 3px 0px 3px 0;
+	padding: 0 2px 0 14px;
+	border-radius: 10px;
+}
+
+.powermenu {
+	font-family: Product Sans;
+	font-weight: bold;
+	font-size: 16px;
+	background: $bg;
+	margin: 3px 3px 3px 0 ;
+	padding: 3px 6px;
+	border-radius: 10px;
+	color: $accent;
+
+	.btn_lock {
+		padding: inherit;
+	}
+	.btn_logout {
+		padding: inherit;
+	}
+	.btn_sleep {
+		padding: inherit;
+	}
+	.btn_reboot {
+		padding: 3px 6px 3px 10px;
+	}
+	.btn_shutdown {
+		margin: 3px 3px 3px 3px;
+		border-radius: 10px;
+		font-size: 13px;
+	}
+	.btn_launcher {
+		padding: 0 7px 0 3px;
+	}
+	.powermenu-dropdown {
+		padding: 0 0 0 3px;
+	}
+}

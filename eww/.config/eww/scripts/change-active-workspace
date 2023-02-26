@@ -1,0 +1,27 @@
+#! /bin/bash
+function clamp {
+	min=$1
+	max=$2
+	val=$3
+	python -c "print(max($min, min($val, $max)))"
+}
+
+direction="$1"
+given_index="$2"
+
+case "$direction" in
+	to)
+		echo "jumping to $given_index"
+		hyprctl dispatch workspace $given_index
+		;;
+	down)
+		target=$(clamp 1 10 $(($given_index+1)))
+		echo "jumping to $target"
+		hyprctl dispatch workspace $target
+		;;
+	up)
+		target=$(clamp 1 10 $(($given_index-1)))
+		echo "jumping to $target"
+		hyprctl dispatch workspace $target
+		;;
+esac

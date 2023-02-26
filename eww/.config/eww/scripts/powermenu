@@ -1,0 +1,25 @@
+#!/bin/bash
+
+lock_bg () {
+	swaylock &
+	eww update reveal_var_powermenu=false # fix panel not calling the 'losthover' event
+}
+
+case "$1" in
+	lock)
+		lock_bg
+		;;
+	logout)
+		hyprctl dispatch exit
+		;;
+	sleep)
+		lock_bg
+		systemctl suspend
+		;;
+	reboot)
+		systemctl reboot
+		;;
+	shutdown)
+		systemctl poweroff
+		;;
+esac

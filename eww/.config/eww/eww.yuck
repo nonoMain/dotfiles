@@ -1,3 +1,10 @@
-(include "./_variables.yuck")
-(include "./bar/bar.yuck")
-(include "actions/actions.yuck")
+(include "_variables.yuck")
+
+;; all of the objects
+(include "objects/bar.yuck")
+(include "objects/calendar.yuck")
+(include "objects/percentage_bar.yuck")
+(include "objects/actions.yuck")
+
+;; all the windows that were defined for all of the different objects
+(include "_windows.yuck")

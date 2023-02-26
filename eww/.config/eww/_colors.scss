@@ -1,4 +1,4 @@
-$bg: rgba($color: #0a0a09, $alpha: 0.6);;
+$bg: rgba($color: #0a0a09, $alpha: 0.3);
 $contrastbg: #0a0a09;
 $bgSecondary: #0a0a09;
 $bgCal: rgba($color: #0a0a09, $alpha: 0.8);
@@ -24,5 +24,6 @@ $purple: #c68aee;
 $aquamarine: #94f7c5;
 $yellow: #f1cf8a;
 $accent: #5d8fc9;
+$accentbg: rgba($color: $accent, $alpha: 0.7);
 $javacafeMagenta: #c68aee;
 $javacafeBlue: #70a5eb;
