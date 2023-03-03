@@ -21,3 +21,5 @@ tmp ref: https://github.com/PoSayDone/.dotfiles_new
 tmp ref: https://www.reddit.com/r/unixporn/comments/wwtq70/openbox_eww_is_so_cool/
 
 tmp ref: https://github.com/NeshHari/XMonad/blob/main/eww/.config/eww/eww.yuck
+
+tmp ref: https://www.reddit.com/r/unixporn/comments/119xqjy/hyprland_eww_is_cool/

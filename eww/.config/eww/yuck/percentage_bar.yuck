@@ -1,20 +1,17 @@
-(defvar percentage_bar_icon "󰕾")
-(defvar percentage_bar_value 50)
-
 (defwidget percentage_bar [] (eventbox
     :onclick "${EWW_CONFIG_DIR}/scripts/percentage_bar close"
     (box :class "percentage_bar"
         (overlay
             (progress
                 :class "scale"
-                :value percentage_bar_value
+                :value volume
                 :valign "CENTER"
                 :halign "CENTER"
                 :orientation "v"
                 :flipped true
             )
             (label 
-                :text percentage_bar_icon 
+                :text volume_icon 
                 :valign "END" 
                 :halign "CENTER"
                 :class "icon"

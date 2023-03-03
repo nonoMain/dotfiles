@@ -9,12 +9,8 @@ STATE_PATH="$STATE_DIR/rofi_toggle_state"
 
 wanted_mode="$1"
 
-if [[ "$wanted_mode" == "L" ]]; then
-	pgrep -x rofi
-	[[ $? -eq 1 ]] && rofi -show drun -theme ~/.config/rofi/themes/default || killall rofi
-fi
 killall rofi
-if [[ "$wanted_mode" == "$(cat $STATE_PATH)" ]]; then # launch the wanted mode
+if [[ "$?" == "0" && "$wanted_mode" == "$(cat $STATE_PATH)" ]]; then
 	cat /dev/null > $STATE_PATH
 else
 	printf "$wanted_mode" > $STATE_PATH
@@ -34,9 +30,11 @@ else
 		F) # filebrowser mode
 			rofi -show filebrowser -theme ~/.config/rofi/themes/default
 			;;
-		L) # launcher mode
-			pgrep -x rofi
-			[[ $? -eq 1 ]] && rofi -show drun -theme ~/.config/rofi/themes/default
+		S) # spellcheck mode
+			~/.config/rofi/scripts/spellcheck.sh
+			;;
+		A) # spellcheck mode
+			~/.config/rofi/scripts/audio.sh
 			;;
 	esac
 fi

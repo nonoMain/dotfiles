@@ -2,8 +2,8 @@
   all: unset;
 }
 
-@import "_colors.scss";
+@import "scss/colors.scss";
+@import "scss/variables.scss";
 @import "scss/bar.scss";
-@import "scss/actions.scss";
-@import "scss/calendar.scss";
-@import "scss/percentage_bar.scss.scss";
+// @import "scss/calendar.scss";
+// @import "scss/percentage_bar.scss";

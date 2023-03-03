@@ -1,5 +1,5 @@
 .bar {
-	background-color: $bg;
+	background-color: $bg_light;
 	font-family: all-the-icons;
 	font-size: 18px;
 	color: $fg;
@@ -9,8 +9,8 @@
 	margin: 3px 0 3px 3px;
 	font-size: 18px;
 	.dispatcher {
-		background-color: $accentbg;
-		color: $bg;
+		background-color: $accent;
+		color: $bg_light;
 		border-radius: 10px;
 		font-size: inherit;
 		padding: 0 8px;
@@ -19,7 +19,7 @@
 
 .workspaces {
 	font-family: Product Sans;
-	background-color: $bg;
+	background-color: $bg_light;
 	margin: 3px 0;
 	border-radius: 10px;
 	font-size: 20px;
@@ -29,16 +29,16 @@
 	
 	.1 {
 		padding: 0 0 0 5px;
-		color: $fgDim;
+		color: $fg_dim;
 	}
 	
 	.10 {
 		padding: 0 5px 0 0;
-		color: $fgDim;
+		color: $fg_dim;
 	}
 
 	.2, .3, .4, .5, .6, .7, .8, .9 {
-		color: $fgDim;
+		color: $fg_dim;
 	}
 
 	.active {
@@ -52,7 +52,7 @@
 
 .wintitle {
 	font-family: Product Sans;
-	background-color: $bg;
+	background-color: $bg_light;
 	color: $accent;
 	margin: 3px 0;
 	padding: 0 10px;
@@ -61,7 +61,7 @@
 }
 
 .systembox {
-	background: $bg;
+	background: $bg_light;
 	border-radius: 10px;
 	padding: 0 12px;
 	margin: 3px 0px;
@@ -89,7 +89,7 @@
 .date-box {
 	font-family: Product Sans;
 	font-weight: bold;
-	background: $bg;
+	background: $bg_light;
 	margin: 3px 0px 3px 0;
 	padding: 0 2px 0 14px;
 	border-radius: 10px;
@@ -108,7 +108,7 @@
 	font-family: Product Sans;
 	font-weight: bold;
 	font-size: 16px;
-	background: $bg;
+	background: $bg_light;
 	margin: 3px 0px 3px 0;
 	padding: 0 2px 0 14px;
 	border-radius: 10px;
@@ -118,7 +118,7 @@
 	font-family: Product Sans;
 	font-weight: bold;
 	font-size: 16px;
-	background: $bg;
+	background: $bg_light;
 	margin: 3px 3px 3px 0 ;
 	padding: 3px 6px;
 	border-radius: 10px;
