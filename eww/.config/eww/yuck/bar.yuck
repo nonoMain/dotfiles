@@ -2,26 +2,17 @@
 (deflisten workspaces :initial "[]" "scripts/get-workspaces")
 (deflisten current_workspace :initial "1" "scripts/get-active-workspace")
 (defwidget workspaces []
-	(eventbox :onscroll "scripts/change-active-workspace {} ${current_workspace}" :class "workspaces"
-		(box
+	(eventbox :onscroll "scripts/change-active-workspace {} ${current_workspace}"
+		(box :class "workspaces"
 			:space-evenly false
-			:spacing "5"
+			:spacing 5
 			(for workspace in workspaces
 				(eventbox :onclick "scripts/change-active-workspace to ${workspace.id}"
-					(box :class "${workspace.id == current_workspace ? "active" : "${workspace.id}"}"
-						(label :text "${workspace.id == current_workspace ? "" : workspace.windows > 0 ? "" : ""}")
+					(box :class "${workspace.id == current_workspace ? "active" : workspace.windows > 0 ? "occupied" : "empty"}"
+						(label :text "${workspace.id == current_workspace ? "󰝥" : workspace.windows > 0 ? "󰺕" : "󰝦"}")
 					)
 				)
 			)
-		)
-	)
-)
-
-;; active window widget -> taken from hyprland docs
-(deflisten window :initial "Desktop" "scripts/get-window-title")
-(defwidget wintitle []
-	(box :class "wintitle"
-		(label :limit-width 55 :text "${"${window}" == "" ? "Desktop" : "${window}" }"
 		)
 	)
 )
@@ -38,7 +29,6 @@
 			(revealer	:transition "slideright"
 							:reveal reveal_var_workspaces
 							:duration "550ms"
-				(workspaces)
 			)
 		)
 	)
@@ -65,7 +55,7 @@
 					(button :class "btn_shutdown" :onclick "scripts/powermenu shutdown" "⏻")
 				)
 			)
-		(button :class "btn_launcher" :onclick "~/.config/rofi/toggle_modes.sh \"L\"" "")
+		(button :class "btn_launcher" :onclick "~/.config/rofi/toggle_modes.sh \"R\"" "")
 		)
 	)
 )
@@ -87,15 +77,13 @@
 )
 
 (defwidget datebox []
-	(box :orientation "h"
-			:class "date-box"
-			:space-evenly false
-			:spacing 5
-		(label :text datetime :class "content")
-		(dropdown
-			:onclick "eww open --toggle calendar"
-			:class "date-dropdown"
-			)
+	(button :onclick "eww open --toggle calendar"
+		(box :orientation "h"
+				:class "date-box"
+				:space-evenly false
+				:spacing 5
+			(label :text "${datetime}" :class "content")
+		)
 	)
 )
 
@@ -113,8 +101,7 @@
 		 :spacing "5"
 			:halign "start"
 			:class "left"
-		(launcher)
-		(datebox)
+		(workspaces)
 	)
 )
 
@@ -123,7 +110,7 @@
 				:space-evenly false
 				:halign "center"
 				:orientation "h"
-		(wintitle)
+		(datebox)
 	)
 )
 

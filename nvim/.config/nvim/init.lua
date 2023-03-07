@@ -5,7 +5,7 @@ require "nonomain.config"                         -- CONFIG --
 require "nonomain.plugins"                        -- PLUGINS --
 require "nonomain.utilities"                      -- UTILS --
 require "nonomain.lsp".setup({                    -- Language Server Protocol --
-	"lua_ls",                                -- • Lua
+	"lua_ls",                                     -- • Lua
 	"bashls",                                     -- • Bash
 	"vimls",                                      -- • Vimscript
 	"pyright",                                    -- • Python

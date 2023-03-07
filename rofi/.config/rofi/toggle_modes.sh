@@ -16,7 +16,7 @@ else
 	printf "$wanted_mode" > $STATE_PATH
 	case "$wanted_mode" in
 		R) # normal mode
-			rofi -show drun -theme ~/.config/rofi/themes/default
+			rofi -show drun -show-icons -theme ~/.config/rofi/themes/default
 			;;
 		W) # window mode
 			rofi -show window -theme ~/.config/rofi/themes/default

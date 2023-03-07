@@ -101,7 +101,6 @@
       },
       "on-click": "pavucontrol"
     },
-    },
 
     "custom/updates": {
         "exec": "(paru -Qua) | wc -l",

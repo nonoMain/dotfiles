@@ -5,7 +5,7 @@
 (defvar eww "/usr/bin/eww")
 
 ;; Date --------------------------------------------
-(defpoll datetime :interval "1s" "date '+%d/%m %H:%M:%S'")
+(defpoll datetime :interval "1s" "date '+%H:%M:%S ~ %A, %d/%m'")
 (defpoll calendar_day :initial "1" :interval "2h" "date '+%d'")
 (defpoll calendar_month :initial "1" :interval "2h" "date '+%m'")
 (defpoll calendar_year :initial "1" :interval "2h" "date '+%Y'")

@@ -19,30 +19,23 @@
 
 .workspaces {
 	font-family: Product Sans;
-	background-color: $bg_light;
-	margin: 3px 0;
+	background: $bg_light;
+	margin: 3px 0px 3px 0;
+	padding: 0 10px 0 10px;
 	border-radius: 10px;
-	font-size: 20px;
-
-	.0 {
-	}
-	
-	.1 {
-		padding: 0 0 0 5px;
-		color: $fg_dim;
-	}
-	
-	.10 {
-		padding: 0 5px 0 0;
-		color: $fg_dim;
-	}
-
-	.2, .3, .4, .5, .6, .7, .8, .9 {
-		color: $fg_dim;
-	}
+	font-size: 30px;
 
 	.active {
+		font-size: 24px;
 		color: $accent;
+	}
+	.occupied {
+		font-size: 21px;
+		color: $fg;
+	}
+	.empty {
+		font-size: 21px;
+		color: $fg;
 	}
 }
 
@@ -91,16 +84,11 @@
 	font-weight: bold;
 	background: $bg_light;
 	margin: 3px 0px 3px 0;
-	padding: 0 2px 0 14px;
+	padding: 0 10px 0 10px;
 	border-radius: 10px;
 	.content {
 		color: $fg;
 		font-size: 14px;
-	}
-	.date-dropdown {
-		margin: 0;
-		padding: 0 10px 0 0px;
-		color: $fg;
 	}
 }
 

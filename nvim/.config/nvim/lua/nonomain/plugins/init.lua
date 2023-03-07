@@ -39,8 +39,6 @@ return lazy.setup({
 		config = function() require "nonomain.plugins.nvim-treesitter-playground" end,
 	},
 
-	"SirVer/ultisnips",
-
 	{
 		"lewis6991/gitsigns.nvim",          -- git diff signs
 		config = function() require "nonomain.plugins.gitsigns" end,

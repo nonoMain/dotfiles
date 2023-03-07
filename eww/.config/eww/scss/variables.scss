@@ -1,8 +1,8 @@
 $hover: transparentize($fg, 0.84);
 $accent_heavy: transparentize($accent, 0.84);
 
-$bg_light: transparentize($bg, 0.7);
-$bg_heavy: transparentize($bg, 0.8);
+$bg_light: transparentize($bg, 0.8);
+$bg_heavy: transparentize($bg, 0.5);
 
 $wm_gaps: 18px;
 $destructive: $red;
