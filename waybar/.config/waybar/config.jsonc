@@ -1,0 +1,133 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": 32,
+	"modules-left": [
+		"wlr/workspaces",
+	],
+	"modules-center": [
+		"custom/active-prog-name",
+		"clock",
+	],
+	"modules-right": [
+		"tray",
+		"custom/space",
+		"idle_inhibitor",
+		"custom/updates",
+		"battery",
+		"network",
+		"pulseaudio",
+	],
+	"custom/space": {
+		"format": " ",
+	},
+	// left modules
+	"wlr/workspaces": {
+		"sort-by-number": true,
+		"format": "<span font='16'>{icon}</span><span font='7'>{name}</span>",
+		"format-icons": {
+			"1": "󰭹",  // chats - usually discord
+			"2": "",  // browser - general
+			"3": "󱃖",  // programming
+			"4": "",
+			"5": "",
+			"6": "",
+			"7": "",
+			"8": "",  // terminal
+			"9": "",  // work
+			"10": "",  // music - spotify
+		},
+		"on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1",
+		"on-click": "activate",
+	},
+
+	// center modules
+/*
+	"wlr/taskbar": {
+        "all-outputs": true,
+        "format": "{icon} {title:.15}",
+        "icon-theme": "Breeze",
+        "icon-size": 16,
+        "on-click": "activate",
+        "on-middle-click": "close",
+        "on-right-click": "minimize"
+    },
+*/
+
+	"custom/active-prog-name": {
+		"format": "{} |",
+		"interval": 1,
+		"exec": "~/.config/waybar/scripts/active_program_name.sh",
+		"tooltip": false
+	},
+
+	"clock": {
+		"interval": 1,
+		"locale": "C", 
+		"format": "{:%H:%M:%S ~ %A, %d/%m}",
+	},
+
+	// right modules
+	"tray": {
+		"icon-size": 20,
+		"spacing": 6
+	},
+	"idle_inhibitor": {
+		"format": "<span font='16'>{icon}</span>",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "<span font='10'>{icon}</span> <span font='8'>{capacity}%</span>",
+		"format-charging": "<span font='10'></span> <span font='8'>{capacity}%</span>",
+		"format-plugged": "<span font='10'></span> <span font='8'>{capacity}%</span>",
+		"format-alt": "{icon} {time}",
+		"format-good": "<span font='10'>{icon}</span> <span font='8'>{capacity}%</span>", // An empty format will hide the module
+		"format-full": "{icon}",
+		"format-icons": ["", "", "", "",]
+
+		// "format-icons": ["", "", "", "", ""]
+	},
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "<span font='16'></span>",
+		"format-ethernet": "<span font='16'></span>",
+		"format-linked": "{ifname} (No IP)",
+		"format-disconnected": "✈ Disconnected",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"tooltip-format": "{essid} ({signalStrength}%): {ipaddr}"
+	},
+	"pulseaudio": {
+		"scroll-step": 2, // %, can be a float
+		"format": "<span font='18'>{icon}</span><span font='8'>{volume}%</span> {format_source}",
+		"format-bluetooth": "<span font='18'>{icon}</span><span font='8'>{volume}%</span> {format_source}",
+		"format-bluetooth-muted": "<span font='18'> </span>{format_source}",
+		"format-muted": "<span font='18'> </span>{format_source}",
+		"format-source": "<span font='14'></span><span font='8'>{volume}%</span>",
+		"format-source-muted": "<span font='14'></span>",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "🎧",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", "󰕾", ""]
+		},
+		"on-click": "pavucontrol"
+	},
+
+	"custom/updates": {
+		"exec": "~/.config/waybar/scripts/updates.sh",
+		"interval": 7200,
+		"format": "{}"
+	},
+}

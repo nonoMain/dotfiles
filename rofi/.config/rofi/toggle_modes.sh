@@ -24,17 +24,23 @@ else
 		E) # Emoji mode
 			rofi -show emoji -theme ~/.config/rofi/themes/default
 			;;
-		C) # command / run mode
+		C) # command (run) mode
 			rofi -show run -theme ~/.config/rofi/themes/default
-			;;
-		F) # filebrowser mode
-			rofi -show filebrowser -theme ~/.config/rofi/themes/default
 			;;
 		S) # spellcheck mode
 			~/.config/rofi/scripts/spellcheck.sh
 			;;
-		A) # spellcheck mode
+		A) # audio mode
 			~/.config/rofi/scripts/audio.sh
+			;;
+		V) # clipboard mode
+			~/.config/rofi/scripts/clipboard.sh S
+			;;
+		Vd) # clipboard delete mode
+			~/.config/rofi/scripts/clipboard.sh D
+			;;
+		P) # powermenu mode
+			~/.config/rofi/scripts/powermenu.sh
 			;;
 	esac
 fi

@@ -6,7 +6,7 @@ cd ~
 export HYPRLAND_LOG_WLR=1
 
 # tell XWayland to use a cursor theme
-export XCURSOR_THEME=macOSBigSur
+export XCURSOR_THEME=breeze_cursor
 export QT_QPA_PLATFORMTHEME=gtk2
 
 # set a cursor size

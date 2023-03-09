@@ -1,0 +1,71 @@
+@define-color fgcolor #ffffff;  /* foreground color */
+@define-color fgdimcolor #aaaaaa;  /* foreground color */
+@define-color fgcolortransparent rgba(255, 255, 255, 0.7);  /* foreground color */
+@define-color bgcolor rgba(0, 0, 0, 0.4);  /* foreground color */
+@define-color tooltipbg rgba(0, 0, 0, 0.4);  /* foreground color */
+@define-color sepcolor rgba(53, 81, 115, 0.6);  /* foreground color */
+@define-color accentcolor #5d8fc9;
+@define-color accentcolortransparent rgba(93, 143, 201, 0.8);
+@define-color objectcolor #555570;
+
+* {
+	border: none;
+	/* font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+	font-family: all-the-icons;
+	font-size: 14px;
+}
+
+window#waybar {
+	background-color: @bgcolor;
+	border-bottom: 2px solid @sepcolor;
+	color: @fgcolor;
+}
+
+#workspaces,
+#clock,
+#tray,
+#battery,
+#network,
+#idle_inhibitor,
+#pulseaudio,
+#custom-active-prog-name,
+#custom-right-sep,
+#custom-left-sep,
+#custom-updates {
+	padding: 0 5px;
+}
+
+#custom-active-prog-name,
+#clock,
+#tray {
+	font-weight: bold;
+}
+
+#workspaces button {
+	border-radius: 0px;
+	color: @fgcolortransparent;
+}
+
+#workspaces button.active {
+	border-radius: 0px;
+	color: @accentcolortransparent;
+	border-bottom: 2px solid @accentcolortransparent;
+}
+
+#workspaces button:hover {
+	background: @bgcolor;
+}
+
+tooltip {
+	background: @tooltipbg;
+	border-radius: 10px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: @sepcolor;
+}
+
+/*
+#workspaces button.current_output.focused {
+	background: #ff0088;
+}
+*/
