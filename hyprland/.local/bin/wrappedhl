@@ -2,15 +2,12 @@
 
 cd ~
 
+export _JAVA_AWT_WM_NONREPARENTING=1
 # log WLR errors and logs to the hyprland log. Recommended
 export HYPRLAND_LOG_WLR=1
-
-# tell XWayland to use a cursor theme
-export XCURSOR_THEME=breeze_cursor
-export QT_QPA_PLATFORMTHEME=gtk2
-
 # set a cursor size
 export XCURSOR_SIZE=24
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 # set IME for this script
 IME=ibus
