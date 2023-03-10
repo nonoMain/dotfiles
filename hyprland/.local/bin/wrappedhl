@@ -7,7 +7,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export HYPRLAND_LOG_WLR=1
 # set a cursor size
 export XCURSOR_SIZE=24
+# tell qt what theme to use
 export QT_QPA_PLATFORMTHEME=qt5ct
+# tell gtk what theme to use
+export GTK_THEME=Decayce
 
 # set IME for this script
 IME=ibus
