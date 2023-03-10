@@ -86,13 +86,13 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "<span font='10'>{icon}</span> <span font='8'>{capacity}%</span>",
+		"format": "<span font='20'>{icon}</span><span font='8'>{capacity}%</span>",
 		"format-charging": "<span font='10'></span> <span font='8'>{capacity}%</span>",
 		"format-plugged": "<span font='10'></span> <span font='8'>{capacity}%</span>",
 		"format-alt": "{icon} {time}",
-		"format-good": "<span font='10'>{icon}</span> <span font='8'>{capacity}%</span>", // An empty format will hide the module
+		"format-good": "<span font='20'>{icon}</span><span font='8'>{capacity}%</span>", // An empty format will hide the module
 		"format-full": "{icon}",
-		"format-icons": ["", "", "", "",]
+		"format-icons": ["󰁻", "󰁽", "󰁿", "󰂁", "󰁹"]
 
 		// "format-icons": ["", "", "", "", ""]
 	},
