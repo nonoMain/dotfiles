@@ -28,14 +28,19 @@ lock_bg () {
 	swaylock &
 }
 
+wipe_clipboard() {
+	rm -rf ~/.cache/cliphist
+}
+
 chosen="$(run_rofi)"
 case ${chosen} in
 	$shutdown)
 		# clean the clipboard history on shutdown
-		[[ -f ~/.cache/cliphist/db ]] && rm -rf ~/.cache/cliphist/db
+		wipe_clipboard
 		systemctl poweroff
 		;;
 	$reboot)
+		wipe_clipboard
 		systemctl reboot
 		;;
 	$lock)
