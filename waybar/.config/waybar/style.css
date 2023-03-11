@@ -10,8 +10,8 @@
 
 * {
 	border: none;
-	/* font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
-	font-family: all-the-icons;
+	/* font-family: FontAwesome, all-the-icons, Roboto, Helvetica, Arial, sans-serif; */
+	font-family: Caskaydia Cove Nerd Font;
 	font-size: 14px;
 }
 
@@ -26,7 +26,6 @@ window#waybar {
 #tray,
 #battery,
 #network,
-#idle_inhibitor,
 #pulseaudio,
 #custom-active-prog-name,
 #custom-right-sep,
