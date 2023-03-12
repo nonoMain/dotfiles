@@ -2,6 +2,8 @@
 
 cd ~
 
+~/.config/hypr/autostart.sh
+
 export _JAVA_AWT_WM_NONREPARENTING=1
 # log WLR errors and logs to the hyprland log. Recommended
 export HYPRLAND_LOG_WLR=1
@@ -12,17 +14,24 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # tell gtk what theme to use
 export GTK_THEME=Decayce
 
+# Session
+#export XDG_SESSION_TYPE=wayland
+#export XDG_SESSION_DESKTOP=Hyprland
+#export XDG_CURRENT_DESKTOP=Hyprland
+
 # set IME for this script
-IME=ibus
-export GTK_IM_MODULE=$IME
-export QT_IM_MODULE=$IME
-export XMODIFIERS=@im=$IME
-export SDL_IM_MODULE=$IME
-export GLFW_IM_MODULE=$IME
+#IME=fcitx
+#export GTK_IM_MODULE=$IME
+#export QT_IM_MODULE=$IME
+#export XMODIFIERS=@im=$IME
+#export SDL_IM_MODULE=$IME
+#export GLFW_IM_MODULE=$IME
 
 # Execute Hyprland
 if [ -f /usr/local/bin/Hyprland ]; then
-	exec /usr/local/bin/Hyprland >/dev/null 2>&1 
+	#dbus-run-session /usr/local/bin/Hyprland
+	/usr/bin/Hyprland
 elif [ -f /usr/bin/Hyprland ]; then
-	exec /usr/bin/Hyprland >/dev/null 2>&1 
+	#dbus-run-session /usr/bin/Hyprland
+	/usr/bin/Hyprland
 fi
