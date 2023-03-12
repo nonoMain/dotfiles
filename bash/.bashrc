@@ -310,7 +310,7 @@ if does_command_exist "figlet"; then
 fi
 if does_command_exist "tty-clock"; then
 	alias asciiClock='tty-clock -s -c'
-	alias ttyClock='tty-clock -s -c'
+	alias ttyClock='tty-clock -s -c -C'
 	alias tty-clock='tty-clock -s -c'
 fi
 
