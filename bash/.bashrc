@@ -276,6 +276,8 @@ alias rm='rm -i'
 
 alias dotfiles='cd ~/dotfiles'
 
+alias rewaybar='killall waybar; waybar &'
+
 # shorts
 # e.g r ssh will repeat the last command that started with 'ssh'
 alias r='fc -s'
@@ -283,6 +285,8 @@ alias r='fc -s'
 alias h="history | grep "
 # Find files in current folder
 alias f="find . | grep "
+
+alias grep='grep --color=auto'
 
 # Alias's for archives
 alias mktar='tar -cvf'
