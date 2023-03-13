@@ -12,7 +12,6 @@ require "nonomain.lsp".setup({                    -- Language Server Protocol --
 	"clangd",                                     -- • C/Cpp/Obj-c/Obj-cpp
 	"gopls",                                      -- • Golang
 	"jdtls",                                      -- • Java
-	"csharp_ls",                                  -- • C#
 	"rust_analyzer"                               -- • Rust
 })
 

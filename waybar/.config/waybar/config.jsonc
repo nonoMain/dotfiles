@@ -28,14 +28,14 @@
 			// ₁,₂,₃,₄,₅,₆,₇,₈,₉,₀.
 			"1": "󰭹",  // chats - usually discord
 			"2": "",  // browser - general
-			"3": "󱃖",  // programming
-			"4": "",
+			"3": "󱃖",  // programming - tmux{vim,lazygit}
+			"4": "󰚗",  // dev board - manage project information
 			"5": "",
 			"6": "",
-			"7": "",
+			"7": "",  // utilities [dashboard] - usually for home server:)
 			"8": "",  // terminal
 			"9": "󰃖",  // work
-			"10": "",  // music - spotify
+			"10": "", // music - spotify
 		},
 		"on-scroll-up": "hyprctl dispatch workspace e+1",
 		"on-scroll-down": "hyprctl dispatch workspace e-1",
@@ -110,8 +110,8 @@
 		"scroll-step": 2, // %, can be a float
 		"format": "{icon}{volume}% {format_source}",
 		"format-bluetooth": "{icon} {volume}% {format_source}",
-		"format-bluetooth-muted": " {format_source}",
-		"format-muted": " {format_source}",
+		"format-bluetooth-muted": "  {format_source}",
+		"format-muted": "  {format_source}",
 		"format-source": " {volume}%",
 		"format-source-muted": "",
 		"format-icons": {
