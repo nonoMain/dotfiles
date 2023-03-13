@@ -10,7 +10,8 @@ export HYPRLAND_LOG_WLR=1
 # set a cursor size
 export XCURSOR_SIZE=24
 # tell qt what theme to use
-export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_QPA_PLATFORMTHEME="qt5ct"
+#export QT_STYLE_OVERRIDE="Adwaita-Dark"
 # tell gtk what theme to use
 export GTK_THEME=Decayce
 
@@ -29,9 +30,7 @@ export GTK_THEME=Decayce
 
 # Execute Hyprland
 if [ -f /usr/local/bin/Hyprland ]; then
-	#dbus-run-session /usr/local/bin/Hyprland
 	/usr/bin/Hyprland
 elif [ -f /usr/bin/Hyprland ]; then
-	#dbus-run-session /usr/bin/Hyprland
 	/usr/bin/Hyprland
 fi
