@@ -27,7 +27,7 @@ read_only = ' '
 truncation_length = 4
 repo_root_style = 'bold green'
 truncation_symbol = '…/'
-format = '[$path ]($style)'
+format = ' [$path]($style) '
 repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
 
 # Here is how you can shorten some long paths by text replacement
@@ -52,8 +52,8 @@ threshold = 30
 style = 'bold red'
 
 [character]
-success_symbol = '[❯](bold green)'
-error_symbol = '[✖](bold red) '
+success_symbol = ' [❯](bold green)'
+error_symbol = ' [✖](bold red) '
 
 [cmd_duration]
 show_milliseconds = false

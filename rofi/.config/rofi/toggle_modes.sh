@@ -42,5 +42,8 @@ else
 		P) # powermenu mode
 			~/.config/rofi/scripts/powermenu.sh
 			;;
+		B) # Background (wallpaper) mode
+			~/.config/rofi/scripts/wallpaper.sh
+			;;
 	esac
 fi
