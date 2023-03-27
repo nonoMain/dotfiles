@@ -14,15 +14,3 @@ require "nonomain.lsp".setup({                    -- Language Server Protocol --
 	"jdtls",                                      -- • Java
 	"rust_analyzer"                               -- • Rust
 })
-
-require "nonomain.utilities.utils".disable({      -- disable builtin plugins
-	"2html_plugin",
-	"spellfile_plugin",
-	"fzf",
-	"gzip",
-	"getscriptPlugin",
-	"vimballPlugin",
-	"tarPlugin",
-	"zipPlugin",
-	"tutor_mode_plugin",
-})

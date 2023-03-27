@@ -3,22 +3,23 @@
 	"position": "top",
 	"height": 32,
 	"modules-left": [
-		"wlr/workspaces",
+		"wlr/workspaces"
 	],
 	"modules-center": [
 		"custom/active-prog-name",
-		"clock",
+		"clock"
 	],
 	"modules-right": [
 		"tray",
 		"custom/space",
 		"custom/updates",
+		//"idle_inhibitor",
 		"battery",
 		"network",
-		"pulseaudio",
+		"pulseaudio"
 	],
 	"custom/space": {
-		"format": " ",
+		"format": " "
 	},
 	// left modules
 	"wlr/workspaces": {
@@ -39,7 +40,7 @@
 		},
 		"on-scroll-up": "hyprctl dispatch workspace e+1",
 		"on-scroll-down": "hyprctl dispatch workspace e-1",
-		"on-click": "activate",
+		"on-click": "activate"
 	},
 
 	// center modules
@@ -67,21 +68,20 @@
 		"locale": "C", 
 		"format": "{:%H:%M:%S ~ %A, %d/%m}",
 	},
-
 	// right modules
 	"tray": {
 		"icon-size": 20,
 		"spacing": 6
 	},
-/*
+	/*
 	"idle_inhibitor": {
 		"format": "{icon}",
 		"format-icons": {
-			"activated": "",
-			"deactivated": ""
+			"activated": " ",
+			"deactivated": " "
 		}
 	},
-*/
+	*/
 	"battery": {
 		"states": {
 			"good": 95,
@@ -103,8 +103,8 @@
 		"format-ethernet": " ",
 		"format-linked": "{ifname} (No IP)",
 		"format-disconnected": "✈ Disconnected",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}",
-		"tooltip-format": "{essid} ({signalStrength}%): {ipaddr}"
+		"on-click": "nm-connection-editor",
+		"tooltip-format": "{ifname}: {essid} ({signalStrength}%): {ipaddr}/{cidr}"
 	},
 	"pulseaudio": {
 		"scroll-step": 2, // %, can be a float
@@ -130,5 +130,5 @@
 		"exec": "~/.config/waybar/scripts/updates.sh",
 		"interval": 7200,
 		"format": "{}"
-	},
+	}
 }
