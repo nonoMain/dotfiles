@@ -45,5 +45,8 @@ else
 		B) # Background (wallpaper) mode
 			~/.config/rofi/scripts/wallpaper.sh
 			;;
+		Q) # Query (Google, youtube, github etc) mode
+			~/.config/rofi/scripts/search_query.sh
+			;;
 	esac
 fi

@@ -2,7 +2,7 @@
 
 ROFI='rofi -theme ~/.config/rofi/themes/default'
 
-INPUT=`echo "" | $ROFI -dmenu -p "Spell Check"`
+INPUT=`echo "" | $ROFI -dmenu -p "Spell Check > "`
 SPCHECK=`echo "$INPUT" | aspell -a`
 
 SUGGESTIONS=`echo "$SPCHECK" | grep '^\*'`

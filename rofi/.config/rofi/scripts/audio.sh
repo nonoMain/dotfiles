@@ -2,7 +2,7 @@
 
 ROFI='rofi -theme ~/.config/rofi/themes/default'
 
-INPUT=`pactl list sinks | grep -ie "Description:" | cut -d: -f2 | $ROFI -dmenu -p "Audio out sink"`
+INPUT=`pactl list sinks | grep -ie "Description:" | cut -d: -f2 | $ROFI -dmenu -p "Audio out sink > "`
 desc=`echo "$INPUT" | xargs`
 
 device=$(pactl list sinks | grep -C2 "Description: $desc" | grep Name | cut -d: -f2 | xargs)

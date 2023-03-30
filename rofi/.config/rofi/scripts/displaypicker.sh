@@ -8,5 +8,5 @@ count=`echo $MONITORS | wc -l`
 
 [[ $count -eq 1 ]] && printf $MONITORS && exit
 
-choice=`echo $MONITORS | $ROFI -dmenu -p "Choose a display"`
+choice=`echo $MONITORS | $ROFI -dmenu -p "Choose a display > "`
 printf "$choice"
