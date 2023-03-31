@@ -1,3 +1,3 @@
 [Context]
 sockets=!fallback-x11;!x11
-filesystems=xdg-data/themes;/home/admin/projects
+filesystems=xdg-data/themes
