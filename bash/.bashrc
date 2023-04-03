@@ -245,7 +245,6 @@ export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 ## Alias
 # tools
 alias e='$EDITOR'
-alias lg='lazygit'
 alias less='less -R --use-color -Dd+r -Du+b'
 # colors
 alias tree='tree -AC'
@@ -284,6 +283,9 @@ alias ll='ls -alF'
 alias ls='ls --color=auto'
 alias la='ls -A'
 # lsd
+if does_command_exist "lazygit"; then
+	alias lg='lazygit'
+fi
 if does_command_exist "lsd"; then
 	alias ll='lsd -alF'
 	alias ls='lsd'
