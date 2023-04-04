@@ -27,6 +27,7 @@ setup.setup
 		'lua',
 		'bash',
 		'java',
+		'kotlin',
 	},
 	playground = {
 		enable = true,

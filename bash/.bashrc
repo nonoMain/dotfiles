@@ -211,6 +211,7 @@ extract () {
 				*.tar.gz)    tar xvzf $archive    ;;
 				*.bz2)       bunzip2 $archive     ;;
 				*.rar)       rar x $archive       ;;
+				*.xz)        unxz $archive        ;;
 				*.gz)        gunzip $archive      ;;
 				*.tar)       tar xvf $archive     ;;
 				*.tbz2)      tar xvjf $archive    ;;
