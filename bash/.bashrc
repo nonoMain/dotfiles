@@ -315,6 +315,7 @@ alias deleteJavaWorkspace='rm -rf ~/workspaces/java'
 # packages
 alias update-packages='sudo pacman -Syu --noconfirm'
 alias update-aurs='$aur_helper -Sua --noconfirm'
+alias update-all='update-packages; update-aurs'
 alias remove-unneeded-packages='sudo pacman -Rsn $(pacman -Qdtq)'
 # check memeory leaks of binary files
 if does_command_exist "valgrind"; then
