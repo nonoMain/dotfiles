@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local act = wezterm.action
 
 -- Font 1/2
 local font_name = "Caskaydia Cove Nerd Font"
@@ -31,6 +32,7 @@ local config = {
 	font_size = 11,
 
 	color_scheme = 'One Half Black (Gogh)',
+	bold_brightens_ansi_colors = true,
 
 	-- Cursor style
 	default_cursor_style = "SteadyBlock",
@@ -45,108 +47,45 @@ local config = {
 	window_background_opacity = 0.7,
 	window_close_confirmation = "NeverPrompt",
 	window_padding = {
-		left = 10,
-		right = 10,
-		top = 10,
-		bottom = 10,
+		left = 0,
+		right = 0,
+		top = 0,
+		bottom = 0,
 	},
 
 	-- Keybinds
+	disable_default_key_bindings = true,
 	keys = {
-		{
-			key = [[\]],
-			mods = "CTRL|ALT",
-			action = wezterm.action({
-				SplitHorizontal = { domain = "CurrentPaneDomain" },
-			}),
-		},
-		{
-			key = [[\]],
-			mods = "CTRL",
-			action = wezterm.action({
-				SplitVertical = { domain = "CurrentPaneDomain" },
-			}),
-		},
-		{
-			key = "q",
-			mods = "CTRL",
-			action = wezterm.action({ CloseCurrentPane = { confirm = false } }),
-		},
-		{
-			key = "h",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ ActivatePaneDirection = "Left" }),
-		},
-		{
-			key = "l",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ ActivatePaneDirection = "Right" }),
-		},
-		{
-			key = "k",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ ActivatePaneDirection = "Up" }),
-		},
-		{
-			key = "j",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ ActivatePaneDirection = "Down" }),
-		},
-		{
-			key = "h",
-			mods = "CTRL|SHIFT|ALT",
-			action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }),
-		},
-		{
-			key = "l",
-			mods = "CTRL|SHIFT|ALT",
-			action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }),
-		},
-		{
-			key = "k",
-			mods = "CTRL|SHIFT|ALT",
-			action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }),
-		},
-		{
-			key = "j",
-			mods = "CTRL|SHIFT|ALT",
-			action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }),
-		},
-		{ -- browser-like bindings for tabbing
-			key = "t",
-			mods = "CTRL",
-			action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
-		},
-		{
-			key = "w",
-			mods = "CTRL",
-			action = wezterm.action({ CloseCurrentTab = { confirm = false } }),
-		},
-		{
-			key = "Tab",
-			mods = "CTRL",
-			action = wezterm.action({ ActivateTabRelative = 1 }),
-		},
-		{
-			key = "Tab",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ ActivateTabRelative = -1 }),
-		}, -- standard copy/paste bindings
-		{
-			key = "x",
-			mods = "CTRL",
-			action = "ActivateCopyMode",
-		},
-		{
-			key = "v",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ PasteFrom = "Clipboard" }),
-		},
-		{
-			key = "c",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }),
-		},
+		{ key = [[\]], mods = "CTRL|ALT", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" }, }), },
+		{ key = [[\]], mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" }, }), },
+		-- { key = "q", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }), },
+		{ key = "h", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Left" }), },
+		{ key = "l", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Right" }), },
+		{ key = "k", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Up" }), },
+		{ key = "j", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Down" }), },
+		{ key = "h", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Left", 1 } }), },
+		{ key = "l", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Right", 1 } }), },
+		{ key = "k", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Up", 1 } }), },
+		{ key = "j", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Down", 1 } }), },
+		-- browser-like bindings for tabbing
+		--[[
+		{ key = "t", mods = "CTRL", action = act({ SpawnTab = "CurrentPaneDomain" }), },
+		{ key = "w", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }), },
+		{ key = "Tab", mods = "CTRL", action = act({ ActivateTabRelative = 1 }), },
+		{ key = "Tab", mods = "CTRL|SHIFT", action = act({ ActivateTabRelative = -1 }), },
+		--]]
+		-- standard copy/paste bindings
+		{ key = "v", mods = "CTRL|SHIFT", action = act({ PasteFrom = "Clipboard" }), },
+		{ key = "c", mods = "CTRL|SHIFT", action = act({ CopyTo = "ClipboardAndPrimarySelection" }), },
+		-- font size
+		{ key = '0', mods = 'CTRL', action = act.ResetFontSize },
+		{ key = '0', mods = 'SHIFT|CTRL', action = act.ResetFontSize },
+		{ key = '+', mods = 'CTRL', action = act.IncreaseFontSize },
+		{ key = '+', mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
+		{ key = '=', mods = 'CTRL', action = act.IncreaseFontSize },
+		{ key = '=', mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
+		{ key = '-', mods = 'CTRL', action = act.DecreaseFontSize },
+		{ key = '-', mods = 'SHIFT|CTRL', action = act.DecreaseFontSize },
 	},
 }
 

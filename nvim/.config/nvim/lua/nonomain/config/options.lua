@@ -38,7 +38,8 @@ opt.timeoutlen = 200
 opt.foldmethod = 'indent'
 opt.colorcolumn = '100'
 opt.list = true
-opt.listchars = 'tab: ,eol:¬,trail:~,lead:~,extends:>,precedes:<,nbsp:⨷'
+-- opt.listchars = 'tab: ,eol:¬,trail:~,lead:~,extends:>,precedes:<,nbsp:⨷'
+opt.listchars = 'tab:│ ,eol:¬,trail:~,lead:~,extends:>,precedes:<,nbsp:⨷'
 opt.fillchars = 'stlnc: ,stl: ,vert:│,fold:-,diff:-,eob:~'
 -- only losers use the mouse but if you want to put:
 -- opt.mouse = 'a'
