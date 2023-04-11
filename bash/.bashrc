@@ -248,6 +248,7 @@ export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias e='$EDITOR'
 alias less='less -R --use-color -Dd+r -Du+b'
 # colors
+alias grep='grep --color=auto'
 alias tree='tree -AC'
 # don't overwrite without notice
 alias cp="cp -i"
@@ -259,14 +260,14 @@ alias dotfiles='cd ~/dotfiles'
 alias rewaybar='killall waybar; waybar &'
 
 # shorts
+# copy with progress info using rsync
+alias copywithprogress='rsync -r --info=progress2 --info=name0'
 # e.g r ssh will repeat the last command that started with 'ssh'
 alias r='fc -s'
 # Search command line history
 alias h="history | grep "
 # Find files in current folder
 alias f="find . | grep "
-
-alias grep='grep --color=auto'
 
 # Alias's for archives
 alias mktar='tar -cvf'
