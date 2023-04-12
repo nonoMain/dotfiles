@@ -1,0 +1,5 @@
+[Context]
+filesystems=!xdg-run/app/com.discordapp.Discord;~/ObsidianVault
+
+[Environment]
+OBSIDIAN_USE_WAYLAND=1
