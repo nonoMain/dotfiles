@@ -438,7 +438,7 @@ ps1_fancy ()
 if does_command_exist "starship"; then
 	eval "$(starship init bash)"
 else
-	PROMPT_COMMAND='ps1_fancy'
+	PROMPT_COMMAND='ps1_simple'
 fi
 
 ## Other
