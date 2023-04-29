@@ -21,6 +21,7 @@ setup.setup
 -- formats
 		'yaml',
 		'json',
+		'toml',
 		'html',
 		'regex',
 		'sql',

@@ -1,3 +1,5 @@
 [user]
 	email = noam.e6102004@gmail.com
 	name = Noam Eliyahu
+[init]
+	defaultBranch = master
