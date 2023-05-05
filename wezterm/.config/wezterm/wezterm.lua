@@ -2,13 +2,21 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
+wezterm.on('toggle-ligature', function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	if not overrides.harfbuzz_features then
+		-- If we haven't overridden it yet, then override with ligatures disabled
+		overrides.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+	else
+		-- else we did already, and we should disable out override now
+		overrides.harfbuzz_features = nil
+	end
+	window:set_config_overrides(overrides)
+end)
+
 -- Font 1/2
 local font_name = "Caskaydia Cove Nerd Font"
 local generate_chosen_font = function (name, params)
-
-	-- disable / enable ligatures by uncommenting / commenting the next line
-	-- params.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-
 	return wezterm.font (name, params)
 end
 
@@ -56,6 +64,9 @@ local config = {
 	-- Keybinds
 	disable_default_key_bindings = true,
 	keys = {
+		-- toggle ligatures
+		{ key = "l", mods = "CTRL|SHIFT|ALT", action = act.EmitEvent 'toggle-ligature', },
+		-- split
 		{ key = [[\]], mods = "CTRL|ALT", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" }, }), },
 		{ key = [[\]], mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" }, }), },
 		-- { key = "q", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }), },
@@ -63,10 +74,10 @@ local config = {
 		{ key = "l", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Right" }), },
 		{ key = "k", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Up" }), },
 		{ key = "j", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Down" }), },
-		{ key = "h", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Left", 1 } }), },
-		{ key = "l", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Right", 1 } }), },
-		{ key = "k", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Up", 1 } }), },
-		{ key = "j", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Down", 1 } }), },
+		-- { key = "h", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Left", 1 } }), },
+		-- { key = "l", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Right", 1 } }), },
+		-- { key = "k", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Up", 1 } }), },
+		-- { key = "j", mods = "CTRL|SHIFT|ALT", action = act({ AdjustPaneSize = { "Down", 1 } }), },
 		-- browser-like bindings for tabbing
 		--[[
 		{ key = "t", mods = "CTRL", action = act({ SpawnTab = "CurrentPaneDomain" }), },
